@@ -11,6 +11,10 @@
 # production
 /build
 
+# storybook build
+/sb_build
+/storybook-static
+
 # misc
 .DS_Store
 .env.local
