@@ -1,2 +1,4 @@
 - [ ] eslint+prettier
 - [ ] lerna
+- [ ] 单元测试
+- [x] storybook
