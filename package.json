@@ -1,7 +1,10 @@
 {
   "name": "@3alan/ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "description": "Reusable React components",
   "author": "3Alan",
   "homepage": "https://alan-ui.vercel.app/",
@@ -23,7 +26,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "clean": "rimraf ./dist",
+    "build": "yarn clean && yarn build:ts && yarn build:sass",
+    "build:ts": "tsc -p tsconfig.build.json",
+    "build:sass": "sass ./src/components/style/index.scss ./dist/index.css",
     "test": "react-scripts test",
     "ci-test": "cross-env CI=true react-scripts test",
     "lint": "eslint --ext js,jsx,ts,tsx src",
@@ -32,7 +38,7 @@
     "build-storybook": "build-storybook -s public",
     "build-storybook-static": "build-storybook -o sb_build",
     "build-storybook-docs": "build-storybook --docs",
-    "prepublishOnly": "npm run ci-test && npm run lint"
+    "prepublishOnly": "yarn ci-test && yarn lint"
   },
   "eslintConfig": {
     "extends": [
@@ -78,10 +84,11 @@
     "@types/react-dom": "^17.0.0",
     "cross-env": "^7.0.3",
     "husky": "^7.0.1",
-    "node-sass": "5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "rimraf": "^3.0.2",
+    "sass": "^1.38.0",
     "typescript": "^4.1.2"
   }
 }

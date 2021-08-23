@@ -1,0 +1,22 @@
+// https://www.tslang.cn/docs/handbook/compiler-options.html
+
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "outDir": "dist",
+    "declaration": true,
+    // https://devblogs.microsoft.com/typescript/announcing-typescript-4-1-beta/#jsx-factories
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src"],
+  "exclude": [
+    "src/**/*.stories.*",
+    "src/**/stories",
+    "src/**/__tests__",
+    "src/components/style",
+    "src/setupTests.ts"
+  ]
+}
