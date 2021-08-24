@@ -1,6 +1,24 @@
+@import 'mixin';
 // pointer-events:none
 // sass内置lighten()
+$prefix-cls: btn;
 
-button {
-  background-color: red;
+.#{$prefix-cls} {
+  &-base {
+    @include button-base;
+  }
+
+  &-primary {
+    @include button-primary;
+  }
+
+  &-standard {
+    @include button-standard;
+  }
+
+  &-small {
+    min-width: initial;
+    height: 26px;
+    padding: 0 10px;
+  }
 }

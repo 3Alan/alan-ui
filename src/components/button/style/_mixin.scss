@@ -1,0 +1,73 @@
+// 提取出来方便其他组件使用
+@mixin button-base {
+  outline: transparent;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  font-weight: 400;
+  box-sizing: border-box;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  padding: 0px 16px;
+  border-radius: 2px;
+  min-width: 80px;
+  height: 32px;
+  user-select: none;
+
+  &:disabled {
+    border: 1px solid rgb(243, 242, 241);
+    background-color: rgb(243, 242, 241);
+    cursor: initial;
+  }
+
+  &:disabled:hover {
+    border: 1px solid rgb(243, 242, 241);
+    background-color: rgb(243, 242, 241);
+  }
+}
+
+
+
+@mixin button-primary {
+  border: 1px solid rgb(0, 120, 212);
+  background: rgb(0, 120, 212);
+  color: rgb(255, 255, 255);
+
+  &:hover {
+    background-color: rgb(16, 110, 190);
+    border: 1px solid rgb(16, 110, 190);
+    color: rgb(255, 255, 255);
+  }
+
+  &:active {
+    background-color: rgb(0, 90, 158);
+    border: 1px solid rgb(0, 90, 158);
+    color: rgb(255, 255, 255);
+  }
+
+  &:disabled {
+    color: rgb(210, 208, 206);
+  }
+}
+
+@mixin button-standard {
+  border: 1px solid rgb(138, 136, 134);
+  background: rgb(255, 255, 255);
+  color: rgb(50, 49, 48);
+
+  &:hover {
+    background-color: rgb(243, 242, 241);
+    color: rgb(32, 31, 30);
+  }
+
+  &:active {
+    background-color: rgb(237, 235, 233);
+    color: rgb(32, 31, 30);
+  }
+
+  &:disabled {
+    color: rgb(161, 159, 157);
+  }
+}
