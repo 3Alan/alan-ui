@@ -60,7 +60,7 @@ const Button: FC<
       ref={parentRef}
     >
       {children}
-      {/* TODO: 长宽根据父元素大小获取，撑满整个父元素 */}
+      {/* TODO: 长宽根据父元素大小获取，撑满整个父元素，抽象成一个组件，使用createElement */}
       <ReactRough width={canvasSize.width + 10} height={canvasSize.height + 10}>
         <Rectangle
           x={2}

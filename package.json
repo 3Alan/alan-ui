@@ -19,7 +19,8 @@
   ],
   "dependencies": {
     "classnames": "^2.3.1",
-    "roughjs": "^4.4.1"
+    "roughjs": "^4.4.1",
+    "use-deep-compare-effect": "^1.6.1"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
