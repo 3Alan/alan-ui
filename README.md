@@ -9,3 +9,9 @@
 
 ## 版本号规则
 https://semver.org/lang/zh-CN/
+
+## ✨✨
+https://github.com/rough-stuff
+https://github.com/timqian/chart.xkcd
+https://github.com/jwilber/roughViz
+https://github.com/MissThee/hand-drawn-component
