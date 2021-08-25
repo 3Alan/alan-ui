@@ -5,6 +5,7 @@
 - [ ] git hook husky
 - [ ] 打包方案，使用时不用手动引入css
       参考：fluentui-ui、material-ui、ant-design
+- [ ] 开源协议
 
 
 ## 版本号规则

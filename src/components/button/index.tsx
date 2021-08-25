@@ -1,5 +1,6 @@
-import { AnchorHTMLAttributes, ButtonHTMLAttributes, FC } from 'react';
+import { AnchorHTMLAttributes, ButtonHTMLAttributes, FC, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
+import ReactRough, { Rectangle } from '../rough';
 
 type NativeButtonProps = ButtonHTMLAttributes<HTMLElement>;
 type AnchorButtonProps = AnchorHTMLAttributes<HTMLElement>;
@@ -13,11 +14,24 @@ export interface ButtonProps {
 
 const cls = 'btn';
 
+export const typeStyle = {
+  primary: {
+    fill: '#60A5FA',
+    stroke: '#3B82F6'
+  },
+  standard: {
+    fill: '#9CA3AF',
+    stroke: '#6B7280'
+  }
+};
+
 // ts Partial
 const Button: FC<
   ButtonProps & Omit<React.ButtonHTMLAttributes<any>, 'onClick' | 'type'>
 > = props => {
-  const { children, type, className, size, ...restProps } = props;
+  const { children, type = 'primary', className, size, ...restProps } = props;
+  const parentRef = useRef<HTMLButtonElement>(null);
+  const [canvasSize, setCanvasSize] = useState({ width: 1, height: 1 });
 
   const classes = classNames(
     cls,
@@ -29,9 +43,34 @@ const Button: FC<
     className
   );
 
+  useEffect(() => {
+    if (parentRef && parentRef.current) {
+      setCanvasSize({
+        width: parentRef.current.offsetWidth,
+        height: parentRef.current.offsetHeight
+      });
+    }
+  }, [parentRef]);
+
   return (
-    <button className={classes} {...restProps}>
+    <button
+      className={classes}
+      style={{ color: typeStyle[type].stroke }}
+      {...restProps}
+      ref={parentRef}
+    >
       {children}
+      {/* TODO: 长宽根据父元素大小获取，撑满整个父元素 */}
+      <ReactRough width={canvasSize.width + 10} height={canvasSize.height + 10}>
+        <Rectangle
+          x={2}
+          y={2}
+          width={canvasSize.width}
+          height={canvasSize.height}
+          fill={typeStyle[type].fill}
+          stroke={typeStyle[type].stroke}
+        />
+      </ReactRough>
     </button>
   );
 };

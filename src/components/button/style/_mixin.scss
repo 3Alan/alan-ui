@@ -10,8 +10,10 @@
   text-decoration: none;
   text-align: center;
   cursor: pointer;
-  padding: 0px 16px;
-  border-radius: 2px;
+  position: relative;
+  border: none;
+  padding: 3px 8px;
+  background-color: #fff;
   min-width: 80px;
   height: 32px;
   user-select: none;
