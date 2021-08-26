@@ -73,7 +73,7 @@ export const Button: FC<
       onMouseLeave={onLeaveEffect}
       {...restProps}
     >
-      {children}
+      <div className={`${cls}-inner-wrap`}>{children}</div>
       {/* TODO: 长宽根据父元素大小获取，撑满整个父元素，抽象成一个组件，使用createElement */}
       <ReactRough width={canvasSize.width + 4} height={canvasSize.height + 4} renderer="svg">
         <Rectangle
