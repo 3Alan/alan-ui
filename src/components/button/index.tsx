@@ -12,7 +12,19 @@ export interface ButtonProps {
   /**
    * 手绘风格
    */
-  drawnStyle?: 'hachure' | 'solid' | 'zigzag' | 'cross-hatch' | 'dots' | 'dashed' | 'zigzag-line';
+  drawnStyle?:
+    | 'hachure'
+    | 'solid'
+    | 'zigzag'
+    | 'cross-hatch'
+    | 'dots'
+    | 'sunburst'
+    | 'dashed'
+    | 'zigzag-line';
+  /**
+   * 潦草程度 推荐：0-10
+   */
+  roughness?: number;
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
@@ -35,7 +47,16 @@ export const typeStyle = {
 export const Button: FC<
   ButtonProps & Omit<React.ButtonHTMLAttributes<HTMLElement>, 'onClick' | 'type' | 'disabled'>
 > = props => {
-  const { children, type = 'primary', className, size, disabled, drawnStyle, ...restProps } = props;
+  const {
+    children,
+    type = 'primary',
+    className,
+    size,
+    disabled,
+    drawnStyle,
+    roughness,
+    ...restProps
+  } = props;
   const parentRef = useRef<HTMLButtonElement>(null);
   const canvasSize = useSize(parentRef);
   const [fillStyle, setFillStyle] = useState(drawnStyle);
@@ -84,6 +105,7 @@ export const Button: FC<
           fill={disabled ? '#D1D5DB' : typeStyle[type].fill}
           stroke={disabled ? '#9CA3AF' : typeStyle[type].stroke}
           fillStyle={fillStyle}
+          roughness={roughness}
         />
       </ReactRough>
     </button>
@@ -94,6 +116,7 @@ Button.defaultProps = {
   type: 'primary',
   size: 'default',
   drawnStyle: 'hachure',
+  roughness: 1,
   disabled: false,
   className: ''
 };
