@@ -6,16 +6,19 @@ $prefix-cls: btn;
 .#{$prefix-cls} {
   &-base {
     @include button-base;
-    canvas {
+    canvas, svg {
       position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
+      left: -2px;
+      top: -2px;
+    }
+
+    &:active {
+      transform: scale(0.94);
     }
   }
 
   &-primary {
-    // @include button-primary;
+    @include button-primary;
   }
 
   &-standard {
@@ -25,6 +28,6 @@ $prefix-cls: btn;
   &-small {
     min-width: initial;
     height: 26px;
-    padding: 0 10px;
+    padding: 0 6px;
   }
 }

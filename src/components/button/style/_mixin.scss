@@ -1,7 +1,6 @@
 // 提取出来方便其他组件使用
 @mixin button-base {
   outline: transparent;
-  position: relative;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
   font-weight: 400;
@@ -12,21 +11,18 @@
   cursor: pointer;
   position: relative;
   border: none;
-  padding: 3px 8px;
+  padding: 3px 10px;
   background-color: #fff;
   min-width: 80px;
   height: 32px;
   user-select: none;
 
   &:disabled {
-    border: 1px solid rgb(243, 242, 241);
-    background-color: rgb(243, 242, 241);
-    cursor: initial;
+    cursor: not-allowed;
   }
 
-  &:disabled:hover {
-    border: 1px solid rgb(243, 242, 241);
-    background-color: rgb(243, 242, 241);
+  &:disabled:active {
+    transform: none;
   }
 }
 
