@@ -29,7 +29,7 @@ import '@3alan/ui/dist/index.css';
 
 
 ## TODO
-- [ ] cjs支持
+- [ ] cjs支持，由于`roughjs`中的bin文件里的内容都是es6语法的
 - [ ] eslint+prettier
 - [ ] lerna
 - [ ] 单元测试
