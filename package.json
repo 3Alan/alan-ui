@@ -1,10 +1,11 @@
 {
   "name": "@3alan/ui",
-  "version": "0.0.2",
+  "version": "0.1.4",
   "private": false,
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "license": "MIT",
   "description": "Reusable React components",
   "author": "3Alan",
   "homepage": "https://alan-ui.vercel.app/",
@@ -12,6 +13,9 @@
     "type": "git",
     "url": "https://github.com/3Alan/alan-ui"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "react",
     "component",
@@ -40,7 +44,7 @@
     "build-storybook": "build-storybook -s public",
     "build-storybook-static": "build-storybook -o sb_build",
     "build-storybook-docs": "build-storybook --docs",
-    "prepublishOnly": "yarn ci-test && yarn lint"
+    "prepublishOnly": "yarn ci-test && yarn lint && yarn build"
   },
   "eslintConfig": {
     "extends": [

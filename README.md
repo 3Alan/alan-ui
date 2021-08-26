@@ -1,3 +1,35 @@
+## 📦 Install
+
+```bash
+npm install @3alan/ui
+```
+
+```bash
+yarn add @3alan/ui
+```
+
+## 🔨 Usage
+
+```jsx
+import { Button } from '@3alan/ui';
+
+const App = () => (
+  <Button>awesome</Button>
+);
+```
+
+And import style manually:
+
+```jsx
+import '@3alan/ui/dist/index.css';
+```
+
+## Online Example
+[link](https://stackblitz.com/edit/react-hpui5v)
+
+
+## TODO
+- [ ] cjs支持
 - [ ] eslint+prettier
 - [ ] lerna
 - [ ] 单元测试
@@ -5,8 +37,6 @@
 - [ ] git hook husky
 - [ ] 打包方案，使用时不用手动引入css
       参考：fluentui-ui、material-ui、ant-design
-- [ ] 开源协议
-  
 
 ## Button
 - [ ] 支持尽可能多的`rough`的api

@@ -94,7 +94,7 @@ Button.defaultProps = {
   type: 'primary',
   size: 'default',
   drawnStyle: 'hachure',
-  disabled: true,
+  disabled: false,
   className: ''
 };
 
