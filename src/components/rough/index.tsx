@@ -60,8 +60,6 @@ export const ReactRoughComp: FC<RoughCompProps> = ({
     );
   }
 
-  console.log(width);
-
   return (
     <RoughContext.Provider
       value={{

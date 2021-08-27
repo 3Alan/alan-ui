@@ -6,11 +6,6 @@ $prefix-cls: btn;
 .#{$prefix-cls} {
   &-base {
     @include button-base;
-    canvas, svg {
-      position: absolute;
-      left: -2px;
-      top: -2px;
-    }
 
     &:active {
       transform: scale(0.94);

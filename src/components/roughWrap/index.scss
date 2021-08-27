@@ -1,0 +1,9 @@
+$prefix-cls: rough-wrap;
+
+.#{$prefix-cls} {
+  svg, canvas {
+    position: absolute;
+    left: -2px;
+    top: -2px;
+  }
+}

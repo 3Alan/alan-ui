@@ -1,8 +1,7 @@
-import { FC, useRef, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import classNames from 'classnames';
-import ReactRough, { Rectangle } from '../rough';
 import { useCallback } from 'react';
-import { useSize } from '../../hooks/useSize';
+import RoughWrap from '../roughWrap';
 
 export interface ButtonProps {
   size?: 'small' | 'default';
@@ -57,8 +56,6 @@ export const Button: FC<
     roughness,
     ...restProps
   } = props;
-  const parentRef = useRef<HTMLButtonElement>(null);
-  const canvasSize = useSize(parentRef);
   const [fillStyle, setFillStyle] = useState(drawnStyle);
 
   const classes = classNames(
@@ -68,6 +65,15 @@ export const Button: FC<
       [`${cls}-${size}`]: size !== 'default'
     },
     className
+  );
+
+  const shapProps = useMemo(
+    () => ({
+      fill: disabled ? '#D1D5DB' : typeStyle[type].fill,
+      stroke: disabled ? '#9CA3AF' : typeStyle[type].stroke,
+      fillStyle
+    }),
+    [type, fillStyle, disabled]
   );
 
   const onEnterEffect = useCallback(() => {
@@ -85,30 +91,19 @@ export const Button: FC<
   }, [disabled, drawnStyle]);
 
   return (
-    <button
+    <RoughWrap
+      customElement="button"
+      shap="rectTangle"
+      shapProps={shapProps}
       className={classes}
       style={{ color: disabled ? '#9CA3AF' : typeStyle[type].stroke }}
-      ref={parentRef}
       disabled={disabled}
       onMouseEnter={onEnterEffect}
       onMouseLeave={onLeaveEffect}
       {...restProps}
     >
       <div className={`${cls}-inner-wrap`}>{children}</div>
-      {/* TODO: 长宽根据父元素大小获取，撑满整个父元素，抽象成一个组件，使用createElement */}
-      <ReactRough width={canvasSize.width + 4} height={canvasSize.height + 4} renderer="svg">
-        <Rectangle
-          x={2}
-          y={2}
-          width={canvasSize.width}
-          height={canvasSize.height}
-          fill={disabled ? '#D1D5DB' : typeStyle[type].fill}
-          stroke={disabled ? '#9CA3AF' : typeStyle[type].stroke}
-          fillStyle={fillStyle}
-          roughness={roughness}
-        />
-      </ReactRough>
-    </button>
+    </RoughWrap>
   );
 };
 
