@@ -1,15 +1,17 @@
 import typescript from '@rollup/plugin-typescript';
+// 用来除了import 'xxx.scss'问题
+import postcss from 'rollup-plugin-postcss';
+// 压缩代码
+import { terser } from 'rollup-plugin-terser';
+// 类似webpack-bundle-analyzer
+import { visualizer } from 'rollup-plugin-visualizer';
+// 不对peerDependencies打包
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import pkg from './package.json';
 
-// 为了将引入的 npm 包，也打包进最终结果中
+// 将package.json中的依赖打包
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-
-// 一段自定义的内容，以下内容会添加到打包结果中
-const footer = `
-if(typeof window !== 'undefined') {
-  window._Dry_VERSION_ = '${pkg.version}'
-}`;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -17,14 +19,25 @@ export default {
   output: [
     {
       file: pkg.main,
-      format: 'cjs',
-      footer
+      format: 'cjs'
     },
     {
       file: pkg.module,
-      format: 'esm',
-      footer
+      format: 'esm'
     }
   ],
-  plugins: [typescript(), commonjs(), resolve()]
+  plugins: [
+    peerDepsExternal(),
+    resolve(),
+    commonjs(),
+    typescript({
+      tsconfig: './tsconfig.build.json',
+      // 生成d.ts文件以及生成路径
+      declaration: true,
+      declarationDir: 'types'
+    }),
+    postcss(),
+    terser(),
+    visualizer()
+  ]
 };
