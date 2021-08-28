@@ -28,6 +28,6 @@ $prefix-cls: btn;
 
   &-inner-wrap {
     position: relative;
-    z-index: 2;
+    z-index: $z-10;
   }
 }

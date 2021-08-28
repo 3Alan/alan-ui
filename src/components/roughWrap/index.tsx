@@ -1,12 +1,13 @@
-import { AllHTMLAttributes, createElement, FC, useRef } from 'react';
+import { AllHTMLAttributes, createElement, FC, memo, useRef } from 'react';
 import ReactRough, { Rectangle, Circle, Ellipse } from '../rough';
 import { useSize } from '../../hooks/useSize';
 import classNames from 'classnames';
+import useWhyDidYouUpdate from '../../hooks/useWhyDidYouUpdate';
 
 export interface RoughWrapProps extends AllHTMLAttributes<HTMLElement> {
   customElement: string;
   shap: 'rectTangle' | 'circle' | 'ellipse';
-  shapProps: any;
+  shapProps?: any;
   className?: string;
 }
 
@@ -24,9 +25,13 @@ export const RoughWrap: FC<RoughWrapProps> = props => {
   const canvasSize = useSize(element);
   const ShapeComponent = Shapes[shap];
 
+  useWhyDidYouUpdate('RoughWrap', props);
+
   const childrenElement = (
     <>
       {children}
+
+      {/* 问题所在 */}
       <ReactRough width={canvasSize.width + 4} height={canvasSize.height + 4} renderer="svg">
         <ShapeComponent
           x={2}
@@ -39,16 +44,20 @@ export const RoughWrap: FC<RoughWrapProps> = props => {
     </>
   );
 
-  return createElement(customElement, {
-    ref: element,
-    children: childrenElement,
-    className: classNames(cls, className),
-    ...resetProps
-  });
+  return createElement(
+    customElement,
+    {
+      ref: element,
+      className: classNames(cls, className),
+      ...resetProps
+    },
+    childrenElement
+  );
 };
 
 RoughWrap.defaultProps = {
-  className: ''
+  className: '',
+  shapProps: {}
 };
 
 export default RoughWrap;

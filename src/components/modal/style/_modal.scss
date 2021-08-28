@@ -1,0 +1,23 @@
+$prefix-cls: modal;
+
+.#{$prefix-cls} {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  outline: 0;
+  z-index: $z-60;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+
+  &-content {
+    width: 200px;
+    height: 100px;
+    position: relative;
+    top: 150px;
+    background-color: #fff;
+  }
+}
