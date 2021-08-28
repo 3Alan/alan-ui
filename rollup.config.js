@@ -1,5 +1,5 @@
 import typescript from '@rollup/plugin-typescript';
-// 用来除了import 'xxx.scss'问题
+// 用来处理import 'xxx.scss'问题
 import postcss from 'rollup-plugin-postcss';
 // 压缩代码
 import { terser } from 'rollup-plugin-terser';
