@@ -1,7 +1,6 @@
 import { AllHTMLAttributes, createElement, FC, useRef } from 'react';
 import ReactRough, { Rectangle, Circle, Ellipse } from '../rough';
 import { useSize } from '../../hooks/useSize';
-import './index.scss';
 import classNames from 'classnames';
 
 export interface RoughWrapProps extends AllHTMLAttributes<HTMLElement> {

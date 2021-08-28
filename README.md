@@ -24,25 +24,16 @@ And import style manually:
 import '@3alan/ui/dist/index.css';
 ```
 
-## Online Example
-[link](https://stackblitz.com/edit/react-hpui5v)
-
-
 ## TODO
-- [ ] cjs支持，由于`roughjs`中的bin文件里的内容都是es6语法的
+- [x] support `cjs` and `esm`
 - [ ] eslint+prettier
 - [ ] lerna
-- [ ] 单元测试
+- [ ] unit test
 - [x] storybook
 - [ ] git hook husky
-- [ ] 打包方案，使用时不用手动引入css
-      参考：fluentui-ui、material-ui、ant-design
+- [ ] support more `roughjs` api
+- [x] Button
 
-## Button
-- [ ] 支持尽可能多的`rough`的api
-
-## 版本号规则
-https://semver.org/lang/zh-CN/
 
 ## ✨✨
 https://github.com/rough-stuff
