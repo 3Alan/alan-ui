@@ -1,7 +1,7 @@
 import { FC, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { canUseDom } from '../../utils';
-import Mask from './Mask';
+import Mask from '../mask';
 import classNames from 'classnames';
 import RoughWrap from '../roughWrap';
 import Button from '../button';

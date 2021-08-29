@@ -1,10 +1,16 @@
 // sass Partials用法
 @import './themes';
 
+@import './utils';
+
 @import './core';
 
 @import '../button/style';
 
 @import '../roughWrap';
 
-@import '../modal/style';
+@import '../modal';
+
+@import '../spin';
+
+@import '../mask';

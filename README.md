@@ -34,6 +34,7 @@ import '@3alan/ui/dist/index.css';
 - [ ] support more `roughjs` api
 - [x] Button
 - [ ] Modal
+- [ ] awesome icon
 
 
 ## ✨✨

@@ -32,7 +32,7 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props, ref) => {
       <div className={`${cls}-child`}>{children}</div>
 
       {/* 注意childre和ReactRough的层级（z-index）关系 */}
-      <ReactRough width={canvasSize.width + 10} height={canvasSize.height + 10}>
+      <ReactRough width={canvasSize.width + 4} height={canvasSize.height + 4} renderer="svg">
         <ShapeComponent
           x={2}
           y={2}

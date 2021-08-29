@@ -9,7 +9,6 @@ export default {
 
 export const Default = () => {
   const [visible, setVisible] = useState(false);
-  console.log(visible);
 
   return (
     <>
