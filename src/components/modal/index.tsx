@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { canUseDom } from '../../utils';
 import Mask from './Mask';
 import classNames from 'classnames';
 import RoughWrap from '../roughWrap';
 import Button from '../button';
+import useOnClickOutside from '../../utils/hooks/useOnClickOutside';
 
 const cls = 'modal';
 
@@ -15,6 +16,10 @@ export interface ModalProps {
    */
   mask?: boolean;
   /**
+   * 点击弹框外区域是否关闭弹窗
+   */
+  maskClosable?: boolean;
+  /**
    * 关闭弹窗函数
    */
   onClose: () => void;
@@ -24,7 +29,10 @@ export interface ModalProps {
  * 弹窗组件
  */
 export const Modal: FC<ModalProps> = props => {
-  const { mask, visible, children, onClose } = props;
+  const { mask, visible, children, maskClosable, onClose } = props;
+  const modalRef = useRef<HTMLElement>();
+  const maskCloseHandler = maskClosable ? onClose : () => {};
+  useOnClickOutside(modalRef, () => maskCloseHandler());
 
   const ModalWrap = () => {
     if (!visible) return null;
@@ -33,9 +41,14 @@ export const Modal: FC<ModalProps> = props => {
       <>
         {mask && <Mask />}
         <div className={classNames(cls, `${cls}-wrap`)}>
-          <RoughWrap customElement="div" shap="rectTangle" className={classNames(`${cls}-content`)}>
+          <RoughWrap
+            ref={modalRef}
+            customElement="div"
+            shap="rectTangle"
+            className={classNames(`${cls}-content`)}
+          >
             {children}
-            <Button onClick={() => alert('888')} type="standard">
+            <Button onClick={() => onClose()} type="standard">
               Close
             </Button>
           </RoughWrap>
@@ -50,7 +63,8 @@ export const Modal: FC<ModalProps> = props => {
 };
 
 Modal.defaultProps = {
-  mask: true
+  mask: true,
+  maskClosable: true
 };
 
 export default Modal;

@@ -1,8 +1,8 @@
-import { AllHTMLAttributes, createElement, FC, memo, useRef } from 'react';
+import { AllHTMLAttributes, createElement, forwardRef, MutableRefObject, useRef } from 'react';
 import ReactRough, { Rectangle, Circle, Ellipse } from '../rough';
-import { useSize } from '../../hooks/useSize';
+import { useSize } from '../../utils/hooks/useSize';
 import classNames from 'classnames';
-import useWhyDidYouUpdate from '../../hooks/useWhyDidYouUpdate';
+import { Polygon } from '../rough/RoughComponents';
 
 export interface RoughWrapProps extends AllHTMLAttributes<HTMLElement> {
   customElement: string;
@@ -14,25 +14,25 @@ export interface RoughWrapProps extends AllHTMLAttributes<HTMLElement> {
 const Shapes = {
   rectTangle: Rectangle,
   circle: Circle,
-  ellipse: Ellipse
+  ellipse: Ellipse,
+  polygon: Polygon
 };
 
 const cls = 'rough-wrap';
 
-export const RoughWrap: FC<RoughWrapProps> = props => {
+export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props, ref) => {
   const { children, customElement, shap, shapProps, className, ...resetProps } = props;
-  const element = useRef<HTMLElement>(null);
+  const innerElement = useRef<HTMLElement>();
+  const element = (ref || innerElement) as MutableRefObject<HTMLElement>;
   const canvasSize = useSize(element);
   const ShapeComponent = Shapes[shap];
 
-  useWhyDidYouUpdate('RoughWrap', props);
-
   const childrenElement = (
     <>
-      {children}
+      <div className={`${cls}-child`}>{children}</div>
 
-      {/* 问题所在 */}
-      <ReactRough width={canvasSize.width + 4} height={canvasSize.height + 4} renderer="svg">
+      {/* 注意childre和ReactRough的层级（z-index）关系 */}
+      <ReactRough width={canvasSize.width + 10} height={canvasSize.height + 10}>
         <ShapeComponent
           x={2}
           y={2}
@@ -53,7 +53,7 @@ export const RoughWrap: FC<RoughWrapProps> = props => {
     },
     childrenElement
   );
-};
+});
 
 RoughWrap.defaultProps = {
   className: '',

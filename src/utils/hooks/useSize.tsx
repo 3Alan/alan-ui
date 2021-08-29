@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useState } from 'react';
 
-export function useSize(target: MutableRefObject<any>) {
+export function useSize(target: MutableRefObject<HTMLElement | null | undefined>) {
   const [state, setState] = useState({ width: 1, height: 1 });
 
   useEffect(() => {

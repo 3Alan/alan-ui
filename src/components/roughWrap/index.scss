@@ -5,5 +5,11 @@ $prefix-cls: rough-wrap;
     position: absolute;
     left: -2px;
     top: -2px;
+    z-index: 0;
+  }
+
+  &-child {
+    position: relative;
+    z-index: $z-10;
   }
 }
