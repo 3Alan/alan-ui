@@ -31,12 +31,12 @@ const cls = 'btn';
 
 export const typeStyle = {
   primary: {
-    fill: '#93C5FD',
+    fill: '#BFDBFE',
     stroke: '#3B82F6'
   },
   standard: {
-    fill: '#6B7280',
-    stroke: '#4B5563'
+    fill: '#9CA3AF',
+    stroke: '#1F2937'
   }
 };
 
@@ -102,7 +102,7 @@ export const Button: FC<
       onMouseLeave={onLeaveEffect}
       {...restProps}
     >
-      <div className={`${cls}-inner-wrap`}>{children}</div>
+      {children}
     </RoughWrap>
   );
 };

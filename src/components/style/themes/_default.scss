@@ -289,3 +289,11 @@ $progress-bg: $gray-200 !default;
 $progress-border-radius: $border-radius !default;
 $progress-bar-color: $white !default;
 $progress-bar-transition: width 0.6s ease !default;
+
+// stack order
+$z-0: 0;
+$z-10: 10;
+$z-20: 20;
+$z-50: 50;
+$z-60: 60;
+$z-70: 70;
