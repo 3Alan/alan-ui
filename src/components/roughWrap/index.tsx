@@ -1,21 +1,19 @@
 import { AllHTMLAttributes, createElement, forwardRef, MutableRefObject, useRef } from 'react';
-import ReactRough, { Rectangle, Circle, Ellipse } from '../rough';
+import ReactRough, { Rectangle, Ellipse } from '../rough';
 import { useSize } from '../../utils/hooks/useSize';
 import classNames from 'classnames';
-import { Polygon } from '../rough/RoughComponents';
 
 export interface RoughWrapProps extends AllHTMLAttributes<HTMLElement> {
   customElement: string;
-  shap: 'rectTangle' | 'circle' | 'ellipse';
+  shap: 'rectTangle' | 'ellipse';
   shapProps?: any;
   className?: string;
 }
 
+// 适用于矩形和椭圆（靠长宽和起点确定形状的图形）
 const Shapes = {
   rectTangle: Rectangle,
-  circle: Circle,
-  ellipse: Ellipse,
-  polygon: Polygon
+  ellipse: Ellipse
 };
 
 const cls = 'rough-wrap';

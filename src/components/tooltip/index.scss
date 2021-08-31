@@ -1,0 +1,12 @@
+$prefix-cls: tooltip;
+
+.#{$prefix-cls} {
+
+  &-content {
+    padding: 4px;
+  }
+
+  &-popup {
+    position: absolute;
+  }
+}

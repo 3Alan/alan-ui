@@ -1,13 +1,13 @@
 import Button from '../button';
 import { useState } from 'react';
-import Spin from './index';
+import SpinComponent from './index';
 
 export default {
   title: 'Components/Spin',
-  component: Spin
+  component: SpinComponent
 };
 
-export const Default = () => {
+export const Spin = () => {
   const [spining, setSpining] = useState(false);
 
   const onSpin = () => {
@@ -20,9 +20,7 @@ export const Default = () => {
   return (
     <>
       <Button onClick={onSpin}>open 6s自动关闭</Button>
-      <Spin spinning={spining}></Spin>
+      <SpinComponent spinning={spining}></SpinComponent>
     </>
   );
 };
-
-Default.storyName = 'awesome spin';
