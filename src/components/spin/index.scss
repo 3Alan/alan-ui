@@ -15,6 +15,7 @@ $prefix-cls: spin;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: $gray-500;
   }
 
   @keyframes spin {
