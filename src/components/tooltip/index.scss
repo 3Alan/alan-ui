@@ -1,9 +1,8 @@
 $prefix-cls: tooltip;
 
 .#{$prefix-cls} {
-
   &-content {
-    padding: 4px;
+    padding: 6px;
   }
 
   &-popup {

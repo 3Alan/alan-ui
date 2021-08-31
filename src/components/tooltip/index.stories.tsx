@@ -8,8 +8,10 @@ export default {
 
 export const tooltip = () => {
   return (
-    <Tooltip content="tooltip图形待完成...">
-      <Button>hover me</Button>
-    </Tooltip>
+    <div style={{ paddingTop: 50 }}>
+      <Tooltip content="tooltip">
+        <Button>hover me</Button>
+      </Tooltip>
+    </div>
   );
 };

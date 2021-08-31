@@ -1,24 +1,17 @@
 import { FC } from 'react';
 import Trigger from 'rc-trigger';
-import RoughWrap from '../roughWrap';
+import PopoverWrap from '../roughWrap/PopoverWrap';
 
 const cls = 'tooltip';
 
 export interface ToolTipProps {
   content: string;
   placement?: string;
+  children: React.ReactElement;
 }
 
 export const ToolTip: FC<ToolTipProps> = props => {
   const { children, placement, content } = props;
-
-  const renderPopupContent = () => {
-    return (
-      <RoughWrap customElement="div" shap="rectTangle" className={`${cls}-content`}>
-        {content}
-      </RoughWrap>
-    );
-  };
 
   return (
     <Trigger
@@ -29,13 +22,13 @@ export const ToolTip: FC<ToolTipProps> = props => {
       mouseLeaveDelay={0.3}
       popupAlign={{
         // [popup元素对齐方式,目标元素对齐方式]
-        points: ['tl', 'bl'],
+        points: ['bl', 'tl'],
         // popup内容相对目标元素的偏移量[x,y]
-        offset: [0, 5]
+        offset: [0, -10]
       }}
-      popup={renderPopupContent}
+      popup={<PopoverWrap className={`${cls}-content`}>{content}</PopoverWrap>}
     >
-      <div>{children}</div>
+      {children}
     </Trigger>
   );
 };
