@@ -35,7 +35,7 @@ import '@3alan/ui/dist/index.css';
 - [x] Button
 - [ ] Modal
 - [ ] awesome icon
-- [ ] Tooltip
+- [x] Tooltip
 
 
 ## ✨✨
