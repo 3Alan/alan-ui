@@ -1,22 +1,21 @@
-import Modal from './index';
+import ModalComponent from './index';
 import Button from '../button';
 import { useState } from 'react';
 
 export default {
   title: 'Components/Modal',
-  component: Modal
+  component: ModalComponent
 };
 
-export const Default = () => {
+export const Modal = () => {
   const [visible, setVisible] = useState(false);
 
   return (
     <>
       <Button onClick={() => setVisible(true)}>open</Button>
-      <Modal visible={visible} onClose={() => setVisible(false)}>
+      <ModalComponent visible={visible} onClose={() => setVisible(false)}>
         awesome modal
-      </Modal>
+      </ModalComponent>
     </>
   );
 };
-Default.storyName = 'awesome modal';
