@@ -76,7 +76,7 @@ const PopoverWrap: FC<PopoverWrapProps> = props => {
     >
       <div className={classNames(`${cls}-child`, className)}>{children}</div>
 
-      {/* TODO: 根据align 计算关键小箭头的三个关键点位，小箭头为一个等腰三角形，宽度固定为8，高度8 */}
+      {/* TODO: 根据align 计算小箭头的三个关键点位，小箭头为一个等腰三角形，宽度/高度均固定为8 */}
       {/* +15为小箭头的安全大小 */}
       <ReactRough width={width + 15} height={height + 15} renderer="svg">
         <LinearPath points={placementPath} />
