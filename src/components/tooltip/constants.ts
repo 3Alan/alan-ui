@@ -11,20 +11,19 @@ export const placements: BuildInPlacements = {
   left: {
     points: ['cr', 'cl'],
     overflow: autoAdjustOverflow,
-    offset: [-10, 0],
+    offset: [-6, 0],
     targetOffset
   },
   right: {
     points: ['cl', 'cr'],
     overflow: autoAdjustOverflow,
-    // right由于左边的小箭头需要像右偏移一点
-    offset: [12, 0],
+    offset: [8, 0],
     targetOffset
   },
   top: {
     points: ['bc', 'tc'],
     overflow: autoAdjustOverflow,
-    offset: [0, -10],
+    offset: [0, -5],
     targetOffset
   },
   bottom: {

@@ -8,14 +8,24 @@ $prefix-cls: rough-wrap;
     z-index: 0;
   }
 
-  &-child {
+  &-child, &-popover {
     position: relative;
     z-index: $z-10;
   }
 
+  &-popover {
+    color: #F9FAFB;
+  }
+
   &-right {
     svg, canvas {
-      left: -8px;
+      left: -5px;
+    }
+  }
+
+  &-bottom {
+    svg, canvas {
+      top: -5px;
     }
   }
 }

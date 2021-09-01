@@ -30,7 +30,13 @@ export const ToolTip: FC<ToolTipProps> = props => {
       popupClassName={`${cls}-popup`}
       mouseLeaveDelay={0.3}
       popup={
-        <PopoverWrap placement={placement} className={`${cls}-content`}>
+        <PopoverWrap
+          placement={placement}
+          roughness={0.4}
+          fill="#1F2937"
+          fillStyle="solid"
+          className={`${cls}-content`}
+        >
           {content}
         </PopoverWrap>
       }
