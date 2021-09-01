@@ -1,7 +1,7 @@
 @import 'mixin';
 // pointer-events:none
 // sass内置lighten()
-$prefix-cls: btn;
+$prefix-cls: alan-btn;
 
 .#{$prefix-cls} {
   &-base {

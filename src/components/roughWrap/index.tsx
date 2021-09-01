@@ -16,7 +16,7 @@ const Shapes = {
   ellipse: Ellipse
 };
 
-const cls = 'rough-wrap';
+const cls = 'alan-rough-wrap';
 
 export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props, ref) => {
   const { children, customElement, shap, shapProps, className, ...resetProps } = props;

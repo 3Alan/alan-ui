@@ -7,7 +7,7 @@ import RoughWrap from '../roughWrap';
 import Button from '../button';
 import useOnClickOutside from '../../utils/hooks/useOnClickOutside';
 
-const cls = 'modal';
+const cls = 'alan-modal';
 
 export interface ModalProps {
   visible: boolean;
@@ -34,6 +34,8 @@ export const Modal: FC<ModalProps> = props => {
   const maskCloseHandler = maskClosable ? onClose : () => {};
   useOnClickOutside(modalRef, () => maskCloseHandler());
 
+  if (!canUseDom) return null;
+
   const ModalWrap = () => {
     if (!visible) return null;
 
@@ -56,8 +58,6 @@ export const Modal: FC<ModalProps> = props => {
       </>
     );
   };
-
-  if (!canUseDom) return null;
 
   return createPortal(<ModalWrap />, document.body);
 };

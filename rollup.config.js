@@ -7,11 +7,17 @@ import { terser } from 'rollup-plugin-terser';
 import { visualizer } from 'rollup-plugin-visualizer';
 // 不对peerDependencies打包
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 
 // 将package.json中的依赖打包
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+
+const copyRight = `/*!
+Copyright (c) 2021 3Alan.
+Licensed under the MIT License (MIT)
+*/`;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -19,11 +25,13 @@ export default {
   output: [
     {
       file: pkg.main,
-      format: 'cjs'
+      format: 'cjs',
+      footer: copyRight
     },
     {
       file: pkg.module,
-      format: 'esm'
+      format: 'esm',
+      footer: copyRight
     }
   ],
   plugins: [
@@ -35,6 +43,9 @@ export default {
       // 生成d.ts文件以及生成路径
       declaration: true,
       declarationDir: 'types'
+    }),
+    copy({
+      targets: [{ src: 'src/components/style/*.ttf', dest: 'dist' }]
     }),
     postcss(),
     terser(),

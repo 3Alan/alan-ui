@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 
-const cls = 'mask';
+const cls = 'alan-mask';
 
 export interface MaskProps {
   color?: string;

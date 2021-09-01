@@ -3,7 +3,7 @@ import Trigger from 'rc-trigger';
 import PopoverWrap from '../roughWrap/PopoverWrap';
 import placements, { PlacementsType, TriggerType } from './constants';
 
-const cls = 'tooltip';
+const cls = 'alan-tooltip';
 
 export interface ToolTipProps {
   content: string;

@@ -6,7 +6,7 @@ import { useSize } from '../../utils/hooks/useSize';
 import ReactRough, { Polygon } from '../rough';
 import { PlacementsType } from '../tooltip/constants';
 
-const cls = 'rough-wrap';
+const cls = 'alan-rough-wrap';
 
 interface PopoverWrapProps extends Options {
   placement?: PlacementsType;

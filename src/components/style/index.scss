@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Stanberry;
+  src: url('./Stanberry.ttf');
+}
+
+[class^="alan-"], [class="alan"] {
+  box-sizing: border-box;
+  font-family: Stanberry;
+}
+
 // sass Partials用法
 @import './themes';
 

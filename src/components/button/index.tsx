@@ -27,7 +27,7 @@ export interface ButtonProps {
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
-const cls = 'btn';
+const cls = 'alan-btn';
 
 export const typeStyle = {
   primary: {

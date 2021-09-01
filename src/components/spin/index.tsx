@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Mask from '../mask';
 import ReactRough, { Path } from '../rough';
 
-const cls = 'spin';
+const cls = 'alan-spin';
 
 interface SpinProps {
   /**
