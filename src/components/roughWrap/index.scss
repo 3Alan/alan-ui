@@ -12,4 +12,10 @@ $prefix-cls: rough-wrap;
     position: relative;
     z-index: $z-10;
   }
+
+  &-right {
+    svg, canvas {
+      left: -8px;
+    }
+  }
 }

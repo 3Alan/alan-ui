@@ -1,32 +1,39 @@
 import { FC } from 'react';
 import Trigger from 'rc-trigger';
 import PopoverWrap from '../roughWrap/PopoverWrap';
+import placements, { PlacementsType, TriggerType } from './constants';
 
 const cls = 'tooltip';
 
 export interface ToolTipProps {
   content: string;
-  placement?: string;
+  /**
+   * 悬浮框位置
+   */
+  placement?: PlacementsType;
+  /**
+   * 触发事件
+   */
+  trigger?: TriggerType;
   children: React.ReactElement;
 }
 
 export const ToolTip: FC<ToolTipProps> = props => {
-  const { children, placement, content } = props;
+  const { children, placement, content, trigger = 'hover' } = props;
 
   return (
     <Trigger
       popupPlacement={placement}
-      action={['hover']}
+      builtinPlacements={placements}
+      action={[trigger]}
       destroyPopupOnHide
       popupClassName={`${cls}-popup`}
       mouseLeaveDelay={0.3}
-      popupAlign={{
-        // [popup元素对齐方式,目标元素对齐方式]
-        points: ['bl', 'tl'],
-        // popup内容相对目标元素的偏移量[x,y]
-        offset: [0, -10]
-      }}
-      popup={<PopoverWrap className={`${cls}-content`}>{content}</PopoverWrap>}
+      popup={
+        <PopoverWrap placement={placement} className={`${cls}-content`}>
+          {content}
+        </PopoverWrap>
+      }
     >
       {children}
     </Trigger>
@@ -34,7 +41,8 @@ export const ToolTip: FC<ToolTipProps> = props => {
 };
 
 ToolTip.defaultProps = {
-  placement: 'top'
+  placement: 'top',
+  trigger: 'hover'
 };
 
 export default ToolTip;
