@@ -1,6 +1,5 @@
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { canUseDom } from '../../utils';
 import Mask from '../mask';
 import classNames from 'classnames';
 import RoughWrap from '../roughWrap';
@@ -31,10 +30,13 @@ export interface ModalProps {
 export const Modal: FC<ModalProps> = props => {
   const { mask, visible, children, maskClosable, onClose } = props;
   const modalRef = useRef<HTMLElement>();
+  const targetRef = useRef<HTMLElement>();
   const maskCloseHandler = maskClosable ? onClose : () => {};
   useOnClickOutside(modalRef, () => maskCloseHandler());
 
-  if (!canUseDom) return null;
+  useEffect(() => {
+    targetRef.current = document.body;
+  }, []);
 
   const ModalWrap = () => {
     if (!visible) return null;
@@ -59,7 +61,7 @@ export const Modal: FC<ModalProps> = props => {
     );
   };
 
-  return createPortal(<ModalWrap />, document.body);
+  return targetRef.current ? createPortal(<ModalWrap />, targetRef.current) : null;
 };
 
 Modal.defaultProps = {
