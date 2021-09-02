@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC, useRef } from 'react';
 import { Options } from 'roughjs/bin/core';
 import { Point } from 'roughjs/bin/geometry';
-import { useSize } from '../../utils/hooks/useSize';
+import useSize from '../../utils/hooks/useSize';
 import ReactRough, { Polygon } from '../rough';
 import { PlacementsType } from '../tooltip/constants';
 

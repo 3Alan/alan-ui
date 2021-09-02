@@ -8,11 +8,11 @@ import { visualizer } from 'rollup-plugin-visualizer';
 // 不对peerDependencies打包
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import copy from 'rollup-plugin-copy';
-import pkg from './package.json';
 
 // 将package.json中的依赖打包
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import pkg from './package.json';
 
 const copyRight = `/*!
 Copyright (c) 2021 3Alan.
