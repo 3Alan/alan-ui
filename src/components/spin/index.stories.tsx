@@ -1,5 +1,5 @@
-import Button from '../button';
 import { useState } from 'react';
+import Button from '../button';
 import SpinComponent from './index';
 
 export default {
@@ -20,7 +20,7 @@ export const Spin = () => {
   return (
     <>
       <Button onClick={onSpin}>open 6s自动关闭</Button>
-      <SpinComponent spinning={spining}></SpinComponent>
+      <SpinComponent spinning={spining} />
     </>
   );
 };

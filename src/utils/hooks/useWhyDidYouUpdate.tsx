@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useEffect } from 'react';
 
 export default function useWhyDidYouUpdate(name: string, props: any) {
@@ -11,7 +12,7 @@ export default function useWhyDidYouUpdate(name: string, props: any) {
       // Use this object to keep track of changed props
       const changesObj: any = {};
       // Iterate through keys
-      allKeys.forEach(key => {
+      allKeys.forEach((key) => {
         // If previous is different from current
         if (previousProps.current[key] !== props[key]) {
           // Add to changesObj
@@ -23,6 +24,7 @@ export default function useWhyDidYouUpdate(name: string, props: any) {
       });
       // If changesObj not empty then output to console
       if (Object.keys(changesObj).length) {
+        // eslint-disable-next-line no-console
         console.log('[why-did-you-update]', name, changesObj);
       }
     }

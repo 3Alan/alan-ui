@@ -1,10 +1,13 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable react/prop-types */
 import useDeepCompareEffect from 'use-deep-compare-effect';
-import * as Props from './RoughComponentProps';
-import RoughContext from './RoughContext';
 import React, { useContext, FC, memo } from 'react';
 import { RoughSVG } from 'roughjs/bin/svg';
 import { Drawable } from 'roughjs/bin/core';
 import { RoughCanvas } from 'roughjs/bin/canvas';
+import RoughContext from './RoughContext';
+import * as Props from './RoughComponentProps';
 
 type RoughRenderer = RoughSVG | RoughCanvas;
 type RoughOutput = Node | Drawable;
@@ -38,10 +41,9 @@ const Renderer: FC<RendererProps> = ({ render }) => {
       return (): void => {
         rendererElement.removeChild(node);
       };
-    } else {
-      const roughCanvas = new RoughCanvas(rendererElement as HTMLCanvasElement, config);
-      render(roughCanvas);
     }
+    const roughCanvas = new RoughCanvas(rendererElement as HTMLCanvasElement, config);
+    render(roughCanvas);
   }, [ref, config, render, type, width, height]);
 
   if (type === 'canvas') clearCanvas();
@@ -49,13 +51,7 @@ const Renderer: FC<RendererProps> = ({ render }) => {
 };
 
 export const Line: FC<Props.LineProps> = memo(({ x1, y1, x2, y2, ...props }) => {
-  const renderProps = React.useCallback((rc: RoughRenderer) => rc.line(x1, y1, x2, y2, props), [
-    x1,
-    y1,
-    x2,
-    y2,
-    props
-  ]);
+  const renderProps = React.useCallback((rc: RoughRenderer) => rc.line(x1, y1, x2, y2, props), [x1, y1, x2, y2, props]);
 
   return <Renderer render={(rc: RoughRenderer): RoughOutput => renderProps(rc)} />;
 });
@@ -82,54 +78,41 @@ export const Ellipse: FC<Props.EllipseProps> = memo(({ x, y, width, height, ...p
 Ellipse.displayName = 'Ellipse';
 
 export const Circle: FC<Props.CircleProps> = memo(({ x, y, diameter, ...props }) => {
-  const renderProps = React.useCallback((rc: RoughRenderer) => rc.circle(x, y, diameter, props), [
-    x,
-    y,
-    diameter,
-    props
-  ]);
+  const renderProps = React.useCallback(
+    (rc: RoughRenderer) => rc.circle(x, y, diameter, props),
+    [x, y, diameter, props]
+  );
 
   return <Renderer render={(rc: RoughRenderer): RoughOutput => renderProps(rc)} />;
 });
 Circle.displayName = 'Circle';
 
 export const LinearPath: FC<Props.LinearPathProps> = memo(({ points, ...props }) => {
-  const renderProps = React.useCallback((rc: RoughRenderer) => rc.linearPath(points, props), [
-    points,
-    props
-  ]);
+  const renderProps = React.useCallback((rc: RoughRenderer) => rc.linearPath(points, props), [points, props]);
 
   return <Renderer render={(rc: RoughRenderer): RoughOutput => renderProps(rc)} />;
 });
 LinearPath.displayName = 'LinearPath';
 
 export const Polygon: FC<Props.PolygonProps> = memo(({ points, ...props }) => {
-  const renderProps = React.useCallback((rc: RoughRenderer) => rc.polygon(points, props), [
-    points,
-    props
-  ]);
+  const renderProps = React.useCallback((rc: RoughRenderer) => rc.polygon(points, props), [points, props]);
 
   return <Renderer render={(rc: RoughRenderer): RoughOutput => renderProps(rc)} />;
 });
 Polygon.displayName = 'Polygon';
 
-export const Arc: FC<Props.ArcProps> = memo(
-  ({ x, y, width, height, start, stop, closed, ...props }) => {
-    const renderProps = React.useCallback(
-      (rc: RoughRenderer) => rc.arc(x, y, width, height, start, stop, closed, props),
-      [x, y, width, height, start, stop, closed, props]
-    );
+export const Arc: FC<Props.ArcProps> = memo(({ x, y, width, height, start, stop, closed, ...props }) => {
+  const renderProps = React.useCallback(
+    (rc: RoughRenderer) => rc.arc(x, y, width, height, start, stop, closed, props),
+    [x, y, width, height, start, stop, closed, props]
+  );
 
-    return <Renderer render={(rc: RoughRenderer): RoughOutput => renderProps(rc)} />;
-  }
-);
+  return <Renderer render={(rc: RoughRenderer): RoughOutput => renderProps(rc)} />;
+});
 Arc.displayName = 'Arc';
 
 export const Curve: FC<Props.CurveProps> = memo(({ points, ...props }) => {
-  const renderProps = React.useCallback((rc: RoughRenderer) => rc.curve(points, props), [
-    points,
-    props
-  ]);
+  const renderProps = React.useCallback((rc: RoughRenderer) => rc.curve(points, props), [points, props]);
 
   return <Renderer render={(rc: RoughRenderer): RoughOutput => renderProps(rc)} />;
 });

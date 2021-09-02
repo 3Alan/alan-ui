@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import Mask from '../mask';
 import classNames from 'classnames';
+import Mask from '../mask';
 import RoughWrap from '../roughWrap';
 import Button from '../button';
 import useOnClickOutside from '../../utils/hooks/useOnClickOutside';
@@ -27,7 +27,7 @@ export interface ModalProps {
 /**
  * 弹窗组件
  */
-export const Modal: FC<ModalProps> = props => {
+export const Modal: FC<ModalProps> = (props) => {
   const { mask, visible, children, maskClosable, onClose } = props;
   const modalRef = useRef<HTMLElement>();
   const targetRef = useRef<HTMLElement>();
@@ -45,12 +45,7 @@ export const Modal: FC<ModalProps> = props => {
       <>
         {mask && <Mask />}
         <div className={classNames(cls, `${cls}-wrap`)}>
-          <RoughWrap
-            ref={modalRef}
-            customElement="div"
-            shap="rectTangle"
-            className={classNames(`${cls}-content`)}
-          >
+          <RoughWrap ref={modalRef} customElement="div" shap="rectTangle" className={classNames(`${cls}-content`)}>
             {children}
             <Button onClick={() => onClose()} type="standard">
               Close

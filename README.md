@@ -30,7 +30,7 @@ import '@3alan/ui/dist/index.css';
 - [ ] lerna
 - [ ] unit test
 - [x] storybook
-- [ ] git hook husky
+- [x] git hook husky
 - [ ] support more `roughjs` api
 - [x] Button
 - [ ] Modal

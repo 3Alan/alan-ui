@@ -58,7 +58,7 @@ function getPath(width: number, height: number, placement: PlacementsType): Poin
   return pathMap[placement] as Point[];
 }
 
-const PopoverWrap: FC<PopoverWrapProps> = props => {
+const PopoverWrap: FC<PopoverWrapProps> = (props) => {
   const { children, className, placement = 'top', ...roughOptions } = props;
   const element = useRef<HTMLDivElement>(null);
   const { width, height } = useSize(element);

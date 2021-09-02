@@ -1,5 +1,5 @@
-import Button from './index';
 import { ComponentStory } from '@storybook/react';
+import Button from './index';
 
 export default {
   title: 'Components/Button',
@@ -16,16 +16,7 @@ export default {
       }
     },
     drawnStyle: {
-      options: [
-        'hachure',
-        'solid',
-        'zigzag',
-        'cross-hatch',
-        'dots',
-        'sunburst',
-        'dashed',
-        'zigzag-line'
-      ],
+      options: ['hachure', 'solid', 'zigzag', 'cross-hatch', 'dots', 'sunburst', 'dashed', 'zigzag-line'],
       control: { type: 'select' }
     },
     roughness: {
@@ -34,7 +25,7 @@ export default {
   }
 };
 
-const Template: ComponentStory<typeof Button> = args => <Button {...args}>awesome</Button>;
+const Template: ComponentStory<typeof Button> = (args) => <Button {...args}>awesome</Button>;
 
 export const DefaultSize = Template.bind({});
 DefaultSize.args = {
