@@ -1,16 +1,18 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/require-default-props */
 import React, { FC, MutableRefObject, RefObject } from 'react';
 import { Config } from 'roughjs/bin/core';
 import RoughContext from './RoughContext';
 
 type SvgRef = MutableRefObject<SVGSVGElement>;
 type CanvasRef = MutableRefObject<HTMLCanvasElement>;
-type renderer = 'canvas' | 'svg';
+type Renderer = 'canvas' | 'svg';
 
 interface RoughProps {
   width?: number;
   height?: number;
   config?: Config;
-  renderer?: renderer;
+  renderer?: Renderer;
 }
 
 interface RoughCompProps extends RoughProps {

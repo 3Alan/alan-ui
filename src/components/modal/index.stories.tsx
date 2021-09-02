@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import ModalComponent from './index';
 import Button from '../button';
-import { useState } from 'react';
 
 export default {
   title: 'Components/Modal',

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import Trigger from 'rc-trigger';
 import PopoverWrap from '../roughWrap/PopoverWrap';
 import placements, { PlacementsType, TriggerType } from './constants';
@@ -18,7 +18,7 @@ export interface ToolTipProps {
   children: React.ReactElement;
 }
 
-export const ToolTip: FC<ToolTipProps> = props => {
+export const ToolTip: FC<ToolTipProps> = (props) => {
   const { children, placement, content, trigger = 'hover' } = props;
 
   return (
