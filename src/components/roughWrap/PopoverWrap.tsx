@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC, useRef } from 'react';
+import { forwardRef, CSSProperties, useRef, MutableRefObject, LegacyRef } from 'react';
 import { Options } from 'roughjs/bin/core';
 import { Point } from 'roughjs/bin/geometry';
 import useSize from '../../utils/hooks/useSize';
@@ -10,6 +10,7 @@ const cls = 'alan-rough-wrap';
 
 interface PopoverWrapProps extends Options {
   placement?: PlacementsType;
+  style?: CSSProperties;
   className?: string;
 }
 
@@ -58,14 +59,19 @@ function getPath(width: number, height: number, placement: PlacementsType): Poin
   return pathMap[placement] as Point[];
 }
 
-const PopoverWrap: FC<PopoverWrapProps> = (props) => {
-  const { children, className, placement = 'top', ...roughOptions } = props;
-  const element = useRef<HTMLDivElement>(null);
+export const PopoverWrap = forwardRef<unknown, PopoverWrapProps>((props, ref) => {
+  const { children, className, placement = 'top', style, ...roughOptions } = props;
+  const innerElement = useRef<HTMLElement>();
+  const element = (ref || innerElement) as MutableRefObject<HTMLElement>;
   const { width, height } = useSize(element);
   const placementPath = getPath(width, height, placement);
 
   return (
-    <div className={classNames(cls, `${cls}-${placement}`)} ref={element}>
+    <div
+      ref={element as LegacyRef<HTMLDivElement>}
+      className={classNames(cls, `${cls}-popover-wrap`, `${cls}-${placement}`)}
+      style={style}
+    >
       <div className={classNames(`${cls}-popover`, className)}>{children}</div>
 
       {/* TODO: 根据align 计算小箭头的三个关键点位，小箭头为一个等腰三角形，宽度/高度固定为8/3 */}
@@ -75,10 +81,11 @@ const PopoverWrap: FC<PopoverWrapProps> = (props) => {
       </ReactRough>
     </div>
   );
-};
+});
 
 PopoverWrap.defaultProps = {
   placement: 'top',
+  style: {},
   className: ''
 };
 

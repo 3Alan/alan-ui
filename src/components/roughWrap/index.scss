@@ -1,6 +1,8 @@
 $prefix-cls: alan-rough-wrap;
 
 .#{$prefix-cls} {
+  position: relative;
+
   svg, canvas {
     position: absolute;
     left: -2px;
@@ -13,19 +15,19 @@ $prefix-cls: alan-rough-wrap;
     z-index: $z-10;
   }
 
-  &-popover {
-    color: #F9FAFB;
-  }
-
   &-right {
-    svg, canvas {
+    &>svg, &>canvas {
       left: -5px;
     }
   }
 
   &-bottom {
-    svg, canvas {
+    &>svg, &>canvas {
       top: -5px;
     }
+  }
+
+  &-popover-wrap {
+    z-index: $z-60;
   }
 }

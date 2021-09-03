@@ -1,0 +1,20 @@
+$prefix-cls: alan-guide;
+
+.#{$prefix-cls} {
+  &-container {
+    padding: 6px 10px;
+    min-width: 60px;
+    min-height: 24px;
+    font-size: 12px;
+    display: flex;
+  }
+
+  &-inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-content {
+    padding-bottom: 10px;
+  }
+}
