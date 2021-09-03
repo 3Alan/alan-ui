@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { forwardRef, CSSProperties, useRef, MutableRefObject, LegacyRef } from 'react';
+import { AllHTMLAttributes, forwardRef, CSSProperties, useRef, MutableRefObject, LegacyRef } from 'react';
 import { Options } from 'roughjs/bin/core';
 import { Point } from 'roughjs/bin/geometry';
 import useSize from '../../utils/hooks/useSize';
@@ -8,7 +8,7 @@ import { PlacementsType } from '../tooltip/constants';
 
 const cls = 'alan-rough-wrap';
 
-interface PopoverWrapProps extends Options {
+interface PopoverWrapProps extends Options, AllHTMLAttributes<HTMLElement> {
   placement?: PlacementsType;
   style?: CSSProperties;
   className?: string;
