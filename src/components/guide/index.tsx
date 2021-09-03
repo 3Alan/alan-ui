@@ -37,7 +37,7 @@ export const Guide: FC<GuideProps> = (props) => {
   });
 
   useEffect(() => {
-    const { selector, spotType } = steps[0];
+    const { selector, spotType = 'box' } = steps[0];
     const e = document.querySelector(selector) as HTMLElement;
     annotation.current = annotate(e, { type: spotType });
 
@@ -48,7 +48,7 @@ export const Guide: FC<GuideProps> = (props) => {
 
   useEffect(() => {
     annotation.current?.remove();
-    const { selector, spotType, content, spotColor = 'black' } = steps[currentIndex];
+    const { selector, spotType = 'box', content, spotColor = 'black' } = steps[currentIndex];
     const e = document.querySelector(selector) as HTMLElement;
 
     const { bottom, left } = getPoverPostionBySelector(selector, popoverRef);
