@@ -53,9 +53,7 @@ export const Guide: FC<GuideProps> = (props) => {
   useEffect(() => {
     const { selector, spotType = 'box' } = steps[0];
     const e = document.querySelector(selector) as HTMLElement;
-
     annotation.current = annotate(e, { type: spotType });
-
     return () => {
       annotation.current?.remove();
     };
@@ -100,7 +98,7 @@ export const Guide: FC<GuideProps> = (props) => {
         onClose={handleClose}
         placement="bottom"
         style={popoverStyle}
-        roughness={0.4}
+        roughness={0.5}
         fill="#fff"
         fillStyle="solid"
         wrapClassName={`${cls}-wrap`}
@@ -113,17 +111,20 @@ export const Guide: FC<GuideProps> = (props) => {
               {currentIndex + 1}/{steps.length}
             </span>
 
-            <Button
-              type="standard"
-              size="small"
-              onClick={() => {
-                if (currentIndex < steps.length && currentIndex > 0) {
-                  setCurrentIndex(currentIndex - 1);
-                }
-              }}
-            >
-              Prev
-            </Button>
+            {currentIndex !== 0 && (
+              <Button
+                type="standard"
+                size="small"
+                onClick={() => {
+                  if (currentIndex < steps.length && currentIndex > 0) {
+                    setCurrentIndex(currentIndex - 1);
+                  }
+                }}
+              >
+                Prev
+              </Button>
+            )}
+
             {currentIndex !== steps.length - 1 && (
               <Button
                 type="standard"
