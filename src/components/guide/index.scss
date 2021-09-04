@@ -1,12 +1,16 @@
 $prefix-cls: alan-guide;
 
 .#{$prefix-cls} {
-  &-container {
-    padding: 6px 10px;
-    min-width: 60px;
+  &-popover-content {
+    padding: 20px 10px 10px;
+    min-width: 100px;
     min-height: 24px;
     font-size: 12px;
     display: flex;
+  }
+
+  &-wrap {
+    position: absolute;
   }
 
   &-inner {
@@ -16,5 +20,16 @@ $prefix-cls: alan-guide;
 
   &-content {
     padding-bottom: 10px;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+
+    button {
+      font-size: 12px;
+    }
   }
 }

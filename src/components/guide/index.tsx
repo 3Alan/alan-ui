@@ -1,44 +1,59 @@
 import { FC, useEffect, useRef, useState } from 'react';
+
 import { createPortal } from 'react-dom';
 
 import { Annotation } from 'react-rough-notation/dist/RoughNotation/types';
 import { annotate } from 'rough-notation';
-import { getPoverPostionBySelector } from '../../utils';
-import useOnClickOutside from '../../utils/hooks/useOnClickOutside';
+import { getPoverPostionBySelector, isElementVisible } from '../../utils';
 import Button from '../button';
+import Mask from '../mask';
 import PopoverWrap from '../roughWrap/PopoverWrap';
 
 const cls = 'alan-guide';
 
 export interface StepItem {
   selector: string;
+  /**
+   * 高亮效果
+   */
   spotType?: 'underline' | 'box' | 'circle' | 'highlight' | 'strike-through' | 'crossed-off' | 'bracket';
   spotColor?: string;
+  multiline?: boolean;
   content: any;
 }
 
-interface GuideProps {
+export interface GuideProps {
+  /**
+   * 步骤
+   */
   steps: StepItem[];
+  /**
+   * 是否显示遮罩层（透明的看不出效果，主要为了防止点击页面上的元素），
+   */
+  mask?: boolean;
+  /**
+   * skip/finish都会触发，回调参数为“是否完成”
+   */
+  onClose?: (finished: boolean) => void;
 }
 
 /**
  * 新手引导组件
  */
 export const Guide: FC<GuideProps> = (props) => {
-  const { steps } = props;
+  const { steps, mask, onClose } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [show, setShow] = useState(true);
   const [popoverStyle, setPopoverStyle] = useState({});
   const [currentContent, setCurrentContent] = useState(null);
   const annotation = useRef<Annotation>();
   const popoverRef = useRef();
-  useOnClickOutside(popoverRef, () => {
-    console.log('hahah');
-  });
+  const [parentEl, setParentEl] = useState<Element>(document.body);
 
   useEffect(() => {
     const { selector, spotType = 'box' } = steps[0];
     const e = document.querySelector(selector) as HTMLElement;
+
     annotation.current = annotate(e, { type: spotType });
 
     return () => {
@@ -48,40 +63,56 @@ export const Guide: FC<GuideProps> = (props) => {
 
   useEffect(() => {
     annotation.current?.remove();
-    const { selector, spotType = 'box', content, spotColor = 'black' } = steps[currentIndex];
+    const { selector, spotType = 'box', content, spotColor = 'black', multiline } = steps[currentIndex];
     const e = document.querySelector(selector) as HTMLElement;
+
+    const parent = e.offsetParent || document.body;
+
+    setParentEl(parent);
 
     const { bottom, left } = getPoverPostionBySelector(selector, popoverRef);
 
-    annotation.current = annotate(e, { type: spotType, color: spotColor });
+    annotation.current = annotate(e, { type: spotType, color: spotColor, multiline });
     annotation.current.show();
 
-    console.log(bottom, left);
-
-    setPopoverStyle({ top: bottom + 20, left, position: 'absolute' });
+    setPopoverStyle({ top: bottom + 20, left });
     setCurrentContent(content);
-  }, [currentIndex, popoverRef]);
 
-  const close = () => {
+    const isVisible = isElementVisible(selector);
+
+    if (!isVisible) {
+      e.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [currentIndex]);
+
+  const handleClose = () => {
+    const finished = currentIndex === steps.length - 1;
     setShow(false);
     annotation.current?.remove();
+    onClose?.(finished);
   };
 
   const PopoverContent = () => {
     return (
       <PopoverWrap
         ref={popoverRef}
+        closeable
+        onClose={handleClose}
         placement="bottom"
         style={popoverStyle}
         roughness={0.4}
         fill="#fff"
         fillStyle="solid"
-        className={`${cls}-container`}
+        wrapClassName={`${cls}-wrap`}
+        className={`${cls}-popover-content`}
       >
         <div className={`${cls}-inner`}>
           <div className={`${cls}-content`}>{currentContent}</div>
-          <div>
-            {currentIndex + 1}/{steps.length}
+          <div className={`${cls}-footer`}>
+            <span>
+              {currentIndex + 1}/{steps.length}
+            </span>
+
             <Button
               type="standard"
               size="small"
@@ -93,24 +124,22 @@ export const Guide: FC<GuideProps> = (props) => {
             >
               Prev
             </Button>
-            <Button
-              type="standard"
-              size="small"
-              onClick={() => {
-                if (currentIndex < steps.length - 1) {
-                  setCurrentIndex(currentIndex + 1);
-                }
-              }}
-            >
-              Next
-            </Button>
-            {currentIndex === steps.length - 1 ? (
-              <Button size="small" onClick={close}>
-                finish
+            {currentIndex !== steps.length - 1 && (
+              <Button
+                type="standard"
+                size="small"
+                onClick={() => {
+                  if (currentIndex < steps.length - 1) {
+                    setCurrentIndex(currentIndex + 1);
+                  }
+                }}
+              >
+                Next
               </Button>
-            ) : (
-              <Button size="small" onClick={close}>
-                skip
+            )}
+            {currentIndex === steps.length - 1 && (
+              <Button size="small" onClick={handleClose}>
+                finish
               </Button>
             )}
           </div>
@@ -119,9 +148,20 @@ export const Guide: FC<GuideProps> = (props) => {
     );
   };
 
-  return <>{show && createPortal(<PopoverContent />, document.body)}</>;
+  return (
+    <>
+      {show && (
+        <>
+          {mask && <Mask color="rgba(0,0,0, 0)" />}
+          {createPortal(<PopoverContent />, parentEl)}
+        </>
+      )}
+    </>
+  );
 };
 
-Guide.defaultProps = {};
+Guide.defaultProps = {
+  mask: true
+};
 
 export default Guide;

@@ -33,18 +33,15 @@ import '@3alan/ui/dist/index.css';
 - [x] git hook husky
 - [ ] support more `roughjs` api
 - [x] Button
-- [ ] Modal
+- [x] Modal
 - [ ] awesome icon
 - [x] Tooltip
+- [ ] Guide
 
 
 ## ✨✨
 https://github.com/rough-stuff
 
-https://github.com/timqian/chart.xkcd
-
-https://github.com/jwilber/roughViz
-
-https://github.com/MissThee/hand-drawn-component
+https://github.com/ooade/react-rough
 
 https://github.com/excalidraw/excalidraw/tree/master/src/renderer

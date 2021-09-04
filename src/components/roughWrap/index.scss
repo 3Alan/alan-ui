@@ -30,4 +30,14 @@ $prefix-cls: alan-rough-wrap;
   &-popover-wrap {
     z-index: $z-60;
   }
+
+  &-close {
+    cursor: pointer;
+    z-index: $z-70;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 10px;
+    top: 10px;
+  }
 }
