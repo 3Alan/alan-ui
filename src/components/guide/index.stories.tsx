@@ -1,4 +1,6 @@
 import { ComponentStory, Meta } from '@storybook/react';
+import { useState } from 'react';
+import Button from '../button';
 import GuideComponent, { GuideProps } from './index';
 
 export default {
@@ -64,8 +66,11 @@ export default {
 } as Meta<GuideProps>;
 
 const Template: ComponentStory<typeof GuideComponent> = (args) => {
+  const [show, setShow] = useState(false);
   return (
     <div className="alan">
+      <p>To prevent the inability to view the docs, current example has mask props (default true) set to false</p>
+      <Button onClick={() => setShow(true)}>start</Button>
       <p>
         Hello, my name is <span id="one">Alan</span>
       </p>
@@ -85,7 +90,7 @@ const Template: ComponentStory<typeof GuideComponent> = (args) => {
         paragraph!It is a long paragraph!It is a long paragraph!
       </span>
 
-      <GuideComponent {...args} />
+      {show && <GuideComponent {...args} />}
     </div>
   );
 };

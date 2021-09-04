@@ -48,7 +48,7 @@ export const Guide: FC<GuideProps> = (props) => {
   const [currentContent, setCurrentContent] = useState(null);
   const annotation = useRef<Annotation>();
   const popoverRef = useRef();
-  const [parentEl, setParentEl] = useState<Element>(document.body);
+  const [parentEl, setParentEl] = useState<Element>();
 
   useEffect(() => {
     const { selector, spotType = 'box' } = steps[0];
@@ -81,7 +81,7 @@ export const Guide: FC<GuideProps> = (props) => {
     if (!isVisible) {
       e.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-  }, [currentIndex]);
+  }, [currentIndex, parentEl]);
 
   const handleClose = () => {
     const finished = currentIndex === steps.length - 1;
@@ -151,7 +151,7 @@ export const Guide: FC<GuideProps> = (props) => {
 
   return (
     <>
-      {show && (
+      {show && parentEl && (
         <>
           {mask && <Mask color="rgba(0,0,0, 0)" />}
           {createPortal(<PopoverContent />, parentEl)}

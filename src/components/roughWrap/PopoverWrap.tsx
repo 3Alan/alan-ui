@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { AllHTMLAttributes, forwardRef, CSSProperties, useRef, MutableRefObject, LegacyRef } from 'react';
+import { useImperativeHandle, AllHTMLAttributes, forwardRef, CSSProperties, useRef, LegacyRef } from 'react';
 import { Options } from 'roughjs/bin/core';
 import { getPopoverPath, getSafeSize } from '../../utils';
 import useSize from '../../utils/hooks/useSize';
@@ -20,11 +20,12 @@ interface PopoverWrapProps extends Options, AllHTMLAttributes<HTMLElement> {
 
 export const PopoverWrap = forwardRef<unknown, PopoverWrapProps>((props, ref) => {
   const { children, className, wrapClassName, placement = 'top', style, closeable, onClose, ...roughOptions } = props;
-  const innerElement = useRef<HTMLElement>();
-  const element = (ref || innerElement) as MutableRefObject<HTMLElement>;
+  const element = useRef<HTMLElement>();
   const { width, height } = useSize(element);
   const placementPath = getPopoverPath(width, height, placement);
   const { width: safeWidth, height: safeHeight } = getSafeSize(placement, width, height);
+
+  useImperativeHandle(ref, () => element.current);
 
   return (
     <div
