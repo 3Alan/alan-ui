@@ -65,9 +65,7 @@ export const Guide: FC<GuideProps> = (props) => {
     const e = document.querySelector(selector) as HTMLElement;
 
     const parent = e.offsetParent || document.body;
-
     setParentEl(parent);
-
     const { bottom, left } = getPoverPostionBySelector(selector, popoverRef);
 
     annotation.current = annotate(e, { type: spotType, color: spotColor, multiline });
@@ -77,7 +75,6 @@ export const Guide: FC<GuideProps> = (props) => {
     setCurrentContent(content);
 
     const isVisible = isElementVisible(selector);
-
     if (!isVisible) {
       e.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
