@@ -25,6 +25,7 @@
   "dependencies": {
     "classnames": "^2.3.1",
     "rc-trigger": "^5.2.10",
+    "rough-notation": "^0.5.1",
     "roughjs": "^4.4.1",
     "use-deep-compare-effect": "^1.6.1"
   },
