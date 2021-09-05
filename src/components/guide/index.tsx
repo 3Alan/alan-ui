@@ -1,9 +1,9 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 
 import { createPortal } from 'react-dom';
 
-import { Annotation } from 'react-rough-notation/dist/RoughNotation/types';
-import { annotate } from 'rough-notation';
+import { annotate } from 'rough-notation/';
+import { RoughAnnotation } from 'rough-notation/lib/model.d';
 import { getPoverPostionBySelector, isElementVisible } from '../../utils';
 import Button from '../button';
 import Mask from '../mask';
@@ -19,7 +19,7 @@ export interface StepItem {
   spotType?: 'underline' | 'box' | 'circle' | 'highlight' | 'strike-through' | 'crossed-off' | 'bracket';
   spotColor?: string;
   multiline?: boolean;
-  content: any;
+  content: ReactNode;
 }
 
 export interface GuideProps {
@@ -45,8 +45,8 @@ export const Guide: FC<GuideProps> = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [show, setShow] = useState(true);
   const [popoverStyle, setPopoverStyle] = useState({});
-  const [currentContent, setCurrentContent] = useState(null);
-  const annotation = useRef<Annotation>();
+  const [currentContent, setCurrentContent] = useState<ReactNode>();
+  const annotation = useRef<RoughAnnotation>();
   const popoverRef = useRef();
   const [parentEl, setParentEl] = useState<Element>();
 
