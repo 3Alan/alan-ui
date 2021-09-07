@@ -40,7 +40,7 @@
     "build": "yarn clean && rollup -c && yarn build:sass",
     "build:sass": "sass ./src/components/style/index.scss ./dist/index.css",
     "test": "react-scripts test",
-    "coverage": "yarn test -- --coverage",
+    "coverage": "yarn test --coverage --watchAll",
     "ci-test": "cross-env CI=true yarn test",
     "lint": "eslint --ext js,jsx,ts,tsx src",
     "lint:fix": "eslint --ext js,jsx,ts,tsx src --fix",
@@ -120,6 +120,12 @@
     },
     "transformIgnorePatterns": [
       "node_modules/(?!@roughjs)/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.stories.*",
+      "!src/utils/**",
+      "!src/components/style/**"
     ]
   }
 }
