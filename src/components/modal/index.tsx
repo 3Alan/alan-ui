@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import Mask from '../mask';
@@ -65,4 +65,4 @@ Modal.defaultProps = {
   maskClosable: true
 };
 
-export default memo(Modal);
+export default Modal;

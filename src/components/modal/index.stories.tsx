@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import ModalComponent from './index';
+import Modal from './index';
 import Button from '../button';
 
 export default {
   title: 'Components/Modal',
-  component: ModalComponent
+  component: Modal
 };
 
-export const Modal = () => {
+export const modal = () => {
   const [visible, setVisible] = useState(false);
 
   return (
     <>
       <Button onClick={() => setVisible(true)}>open</Button>
-      <ModalComponent visible={visible} onClose={() => setVisible(false)}>
+      <Modal visible={visible} onClose={() => setVisible(false)}>
         awesome modal
-      </ModalComponent>
+      </Modal>
     </>
   );
 };
