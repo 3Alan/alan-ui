@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import Trigger from 'rc-trigger';
 import PopoverWrap from '../roughWrap/PopoverWrap';
 import placements, { PlacementsType, TriggerType } from './constants';
@@ -51,4 +51,4 @@ ToolTip.defaultProps = {
   trigger: 'hover'
 };
 
-export default ToolTip;
+export default memo(ToolTip);

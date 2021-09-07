@@ -1,10 +1,10 @@
-import { FC, ReactNode, useEffect, useRef, useState } from 'react';
-
+import { FC, memo, ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useDebounceFn } from 'ahooks';
 
 import { annotate } from 'rough-notation/';
 import { RoughAnnotation } from 'rough-notation/lib/model.d';
-import { getPoverPostionBySelector, isElementVisible } from '../../utils';
+import { getPoverPostion, isElementVisible } from '../../utils';
 import Button from '../button';
 import Mask from '../mask';
 import PopoverWrap from '../roughWrap/PopoverWrap';
@@ -42,42 +42,59 @@ export interface GuideProps {
  */
 export const Guide: FC<GuideProps> = (props) => {
   const { steps, mask, onClose } = props;
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [show, setShow] = useState(true);
-  const [popoverStyle, setPopoverStyle] = useState({});
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [currentContent, setCurrentContent] = useState<ReactNode>();
+
   const annotation = useRef<RoughAnnotation>();
+
+  // popover挂载的位置
+  const [parentEl, setParentEl] = useState<HTMLElement>();
   const popoverRef = useRef();
-  const [parentEl, setParentEl] = useState<Element>();
+  const [popoverStyle, setPopoverStyle] = useState({});
 
-  useEffect(() => {
-    const { selector, spotType = 'box' } = steps[0];
-    const e = document.querySelector(selector) as HTMLElement;
-    annotation.current = annotate(e, { type: spotType });
-    return () => {
-      annotation.current?.remove();
-    };
-  }, []);
+  const computePopoverStyles = () => {
+    const { selector } = steps[currentIndex];
+    const { top, left } = getPoverPostion(selector, popoverRef);
+    setPopoverStyle({ top: top + 20, left });
+  };
 
-  useEffect(() => {
+  const { run: handleResize } = useDebounceFn(computePopoverStyles, { wait: 200 });
+
+  const handleStepChange = () => {
     annotation.current?.remove();
     const { selector, spotType = 'box', content, spotColor = 'black', multiline } = steps[currentIndex];
     const e = document.querySelector(selector) as HTMLElement;
-
-    const parent = e.offsetParent || document.body;
+    const parent = (e.offsetParent || document.body) as HTMLElement;
     setParentEl(parent);
-    const { bottom, left } = getPoverPostionBySelector(selector, popoverRef);
 
     annotation.current = annotate(e, { type: spotType, color: spotColor, multiline });
     annotation.current.show();
-
-    setPopoverStyle({ top: bottom + 20, left });
-    setCurrentContent(content);
 
     const isVisible = isElementVisible(selector);
     if (!isVisible) {
       e.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+
+    computePopoverStyles();
+    setCurrentContent(content);
+  };
+
+  useEffect(() => {
+    const { selector, spotType = 'box' } = steps[0];
+    const e = document.querySelector(selector) as HTMLElement;
+    annotation.current = annotate(e, { type: spotType });
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      annotation.current?.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    handleStepChange();
   }, [currentIndex, parentEl]);
 
   const handleClose = () => {
@@ -162,4 +179,4 @@ Guide.defaultProps = {
   mask: true
 };
 
-export default Guide;
+export default memo(Guide);

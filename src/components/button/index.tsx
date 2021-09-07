@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState, useCallback } from 'react';
+import React, { FC, useMemo, useState, useCallback, memo } from 'react';
 import classNames from 'classnames';
 
 import RoughWrap from '../roughWrap';
@@ -99,4 +99,4 @@ Button.defaultProps = {
   className: ''
 };
 
-export default Button;
+export default memo(Button);

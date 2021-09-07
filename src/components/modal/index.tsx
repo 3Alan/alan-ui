@@ -1,10 +1,10 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, memo, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import Mask from '../mask';
 import RoughWrap from '../roughWrap';
 import Button from '../button';
-import useOnClickOutside from '../../utils/hooks/useOnClickOutside';
+import { useOnClickOutside } from '../../utils/hooks';
 
 const cls = 'alan-modal';
 
@@ -32,6 +32,7 @@ export const Modal: FC<ModalProps> = (props) => {
   const modalRef = useRef<HTMLElement>();
   const targetRef = useRef<HTMLElement>();
   const maskCloseHandler = maskClosable ? onClose : () => {};
+
   useOnClickOutside(modalRef, () => maskCloseHandler());
 
   useEffect(() => {
@@ -64,4 +65,4 @@ Modal.defaultProps = {
   maskClosable: true
 };
 
-export default Modal;
+export default memo(Modal);

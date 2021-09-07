@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import Mask from '../mask';
 import ReactRough, { Path } from '../rough';
 
@@ -64,4 +64,4 @@ Spin.defaultProps = {
   showText: true
 };
 
-export default Spin;
+export default memo(Spin);

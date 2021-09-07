@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { useImperativeHandle, AllHTMLAttributes, forwardRef, CSSProperties, useRef, LegacyRef } from 'react';
+import { useImperativeHandle, AllHTMLAttributes, forwardRef, CSSProperties, useRef, LegacyRef, memo } from 'react';
 import { Options } from 'roughjs/bin/core';
+import { useSize } from 'ahooks';
 import { getPopoverPath, getSafeSize } from '../../utils';
-import useSize from '../../utils/hooks/useSize';
 import Icon from '../icon';
 import ReactRough, { Polygon } from '../rough';
 import { PlacementsType } from '../tooltip/constants';
@@ -37,7 +37,6 @@ export const PopoverWrap = forwardRef<unknown, PopoverWrapProps>((props, ref) =>
 
       <div className={classNames(`${cls}-popover`, className)}>{children}</div>
 
-      {/* TODO: 根据align 计算小箭头的三个关键点位，小箭头为一个等腰三角形，宽度/高度固定为8/3 */}
       {/* +15为小箭头的安全大小 */}
       <ReactRough width={safeWidth} height={safeHeight} renderer="svg">
         <Polygon points={placementPath} {...roughOptions} />
@@ -53,4 +52,4 @@ PopoverWrap.defaultProps = {
   className: ''
 };
 
-export default PopoverWrap;
+export default memo(PopoverWrap);

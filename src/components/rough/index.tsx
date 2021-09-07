@@ -19,14 +19,7 @@ interface RoughCompProps extends RoughProps {
   forwardedRef?: RefObject<unknown>;
 }
 
-export const ReactRoughComp: FC<RoughCompProps> = ({
-  config,
-  width = 300,
-  height = 150,
-  renderer = 'canvas',
-  forwardedRef,
-  children
-}) => {
+export const ReactRoughComp: FC<RoughCompProps> = ({ config, width, height, renderer, forwardedRef, children }) => {
   const svgRef = React.useRef<SVGSVGElement>();
   const canvasRef = React.useRef<HTMLCanvasElement>();
 
@@ -80,7 +73,16 @@ export const ReactRoughComp: FC<RoughCompProps> = ({
 };
 
 export const ReactRough: React.FC<RoughCompProps> = React.forwardRef((props, ref) => {
-  return <ReactRoughComp {...props} forwardedRef={ref as RefObject<unknown>} />;
+  const { width = 300, height = 150, renderer = 'svg', ...resetProps } = props;
+  return (
+    <ReactRoughComp
+      width={width}
+      height={height}
+      renderer={renderer}
+      {...resetProps}
+      forwardedRef={ref as RefObject<unknown>}
+    />
+  );
 });
 
 ReactRough.displayName = 'ReactRough';

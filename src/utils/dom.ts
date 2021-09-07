@@ -6,13 +6,11 @@ export const canUseDom = () => {
   return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 };
 
-export const getPoverPostionBySelector = (
-  targetEl: string,
-  popoverEl: MutableRefObject<HTMLElement | null | undefined>
-) => {
+// 返回guide组件中popover对应的位置
+export const getPoverPostion = (targetEl: string, popoverEl: MutableRefObject<HTMLElement | null | undefined>) => {
   if (!popoverEl || !popoverEl.current) {
     return {
-      bottom: 0,
+      top: 0,
       left: 0
     };
   }
@@ -21,7 +19,7 @@ export const getPoverPostionBySelector = (
   const popoverWidth = popoverEl.current.offsetWidth;
 
   return {
-    bottom: offsetTop + offsetHeight,
+    top: offsetTop + offsetHeight,
     left: offsetLeft - popoverWidth / 2 + offsetWidth / 2
   };
 };
@@ -35,7 +33,8 @@ export const isElementVisible = (selector: string) => {
   return !(top > visibleAreaHeight || bottom < 0);
 };
 
-export const getSafeSize = (placement: PlacementsType, width: number, height: number) => {
+// 获取安全区域大小，由于roughjs的roughness越大，canvas的区域也就越大
+export const getSafeSize = (placement: PlacementsType, width = 0, height = 0) => {
   if (placement === 'top' || placement === 'bottom') {
     return {
       width: width + 2,
@@ -48,7 +47,8 @@ export const getSafeSize = (placement: PlacementsType, width: number, height: nu
   };
 };
 
-export const getPopoverPath = (width: number, height: number, placement: PlacementsType) => {
+// 确认arrow的位置并返回svg对应的path
+export const getPopoverPath = (width = 0, height = 0, placement: PlacementsType) => {
   const minWidth = width > 60 ? width : 60;
   const minHeight = width > 30 ? height : 30;
 

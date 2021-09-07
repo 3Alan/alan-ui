@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, memo, useEffect } from 'react';
 
 const cls = 'alan-mask';
 
@@ -24,4 +24,4 @@ Mask.defaultProps = {
   color: '#00000073'
 };
 
-export default Mask;
+export default memo(Mask);

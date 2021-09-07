@@ -23,6 +23,7 @@
     "hand drawn"
   ],
   "dependencies": {
+    "ahooks": "^2.10.9",
     "classnames": "^2.3.1",
     "rc-trigger": "^5.2.10",
     "rough-notation": "^0.5.1",
