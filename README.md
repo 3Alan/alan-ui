@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/@3alan%2Fui.svg)](https://badge.fury.io/js/@3alan%2Fui)
+
 ## 📦 Install
 
 ```bash
