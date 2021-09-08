@@ -28,7 +28,7 @@ describe('Tooltip', () => {
   });
 
   it('content should display when click', () => {
-    const { getByText } = render(<TooltipTester trigger="click" />);
+    const { getByText } = render(<TooltipTester placement="top" trigger="click" />);
     fireEvent.click(getByText('tooltip'));
 
     const popover = document.querySelector('.alan-tooltip-content');

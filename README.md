@@ -36,12 +36,12 @@ import '@3alan/ui/dist/index.css';
 - [ ] unit test
 - [x] storybook
 - [x] git hook husky
-- [ ] support more `roughjs` api
 - [x] Button
 - [x] Modal
 - [ ] awesome icon
 - [x] Tooltip
-- [ ] Guide
+- [x] Guide
+- [ ] exclude third library in build file
 
 
 ## ✨✨

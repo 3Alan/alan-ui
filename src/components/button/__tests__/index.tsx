@@ -5,9 +5,15 @@ const mockClickFn = jest.fn();
 
 describe('Button', () => {
   it('should clickable when disabled set to false', () => {
-    const { container } = render(<Button onClick={mockClickFn}>awesome</Button>);
+    const { container } = render(
+      <Button onClick={mockClickFn} type="primary">
+        awesome
+      </Button>
+    );
     fireEvent.click(container.firstChild as HTMLButtonElement);
     expect(mockClickFn).toHaveBeenCalled();
+
+    fireEvent.mouseLeave(container.firstChild as HTMLButtonElement);
   });
 
   it('should disabled when disabled set to true', () => {
@@ -19,6 +25,10 @@ describe('Button', () => {
     expect(container.firstChild).toHaveAttribute('disabled');
     fireEvent.click(container.firstChild as HTMLButtonElement);
     expect(mockClickFn).not.toHaveBeenCalled();
+
+    fireEvent.mouseEnter(container.firstChild as HTMLButtonElement);
+    fireEvent.mouseLeave(container.firstChild as HTMLButtonElement);
+    expect(container.firstChild).toHaveStyle('color: #9CA3AF');
   });
 
   it('should change size when size changed', () => {
@@ -27,6 +37,15 @@ describe('Button', () => {
         small button
       </Button>
     );
+    expect(container.firstChild).toHaveClass('alan-btn-small');
+  });
+  it('shouldwhen size changed', () => {
+    const { container } = render(
+      <Button size="small" type="standard">
+        small button
+      </Button>
+    );
+    fireEvent.mouseEnter(container.firstChild as HTMLButtonElement);
     expect(container.firstChild).toHaveClass('alan-btn-small');
   });
 });
