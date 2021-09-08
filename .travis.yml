@@ -2,7 +2,5 @@ language: node_js
 node_js:
   - '14.17.0'
 install: yarn install
-env:
-  - CI=true
 script:
   - yarn coverage && coveralls < coverage/lcov.info
