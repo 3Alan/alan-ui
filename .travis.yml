@@ -1,8 +1,8 @@
 language: node_js
 node_js:
-  - 'stable'
+  - '14.17.0'
 install: yarn install
 env:
   - CI=true
 script:
-  - yarn ci-test && coveralls < coverage/lcov.info
+  - yarn coverage && coveralls < coverage/lcov.info
