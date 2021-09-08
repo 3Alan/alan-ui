@@ -31,10 +31,7 @@ import '@3alan/ui/dist/index.css';
 
 ## TODO
 - [x] support `cjs` and `esm`
-- [ ] eslint+prettier
 - [ ] lerna
-- [ ] unit test
-- [x] storybook
 - [x] git hook husky
 - [x] Button
 - [x] Modal
