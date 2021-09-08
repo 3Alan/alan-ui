@@ -1,5 +1,7 @@
-[![npm version](https://badge.fury.io/js/@3alan%2Fui.svg)](https://badge.fury.io/js/@3alan%2Fui)
+[![Build Status](https://travis-ci.org/3Alan/alan-ui.svg?branch=main)](https://travis-ci.org/3Alan/alan-ui)
 [![Coverage Status](https://coveralls.io/repos/github/3Alan/alan-ui/badge.svg?branch=main)](https://coveralls.io/github/3Alan/alan-ui?branch=main)
+[![npm version](https://badge.fury.io/js/@3alan%2Fui.svg)](https://badge.fury.io/js/@3alan%2Fui)
+
 
 ## 📦 Install
 
