@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/@3alan%2Fui.svg)](https://badge.fury.io/js/@3alan%2Fui)
+[![Coverage Status](https://coveralls.io/repos/github/3Alan/alan-ui/badge.svg?branch=main)](https://coveralls.io/github/3Alan/alan-ui?branch=main)
 
 ## 📦 Install
 
