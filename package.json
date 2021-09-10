@@ -50,7 +50,7 @@
     "build-storybook": "build-storybook -s public",
     "build-storybook-static": "build-storybook -o sb_build",
     "build-storybook-docs": "build-storybook --docs",
-    "prepublishOnly": "yarn ci-test && yarn lint && yarn build",
+    "prepublishOnly": "yarn test:ci && yarn lint && yarn build",
     "prepare": "husky install"
   },
   "browserslist": {
