@@ -5,8 +5,7 @@ import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 // 类似webpack-bundle-analyzer
 import { visualizer } from 'rollup-plugin-visualizer';
-// 不对peerDependencies打包
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+// 拷贝静态资源
 import copy from 'rollup-plugin-copy';
 
 // 将package.json中的依赖打包
@@ -35,8 +34,8 @@ export default {
     }
   ],
   plugins: [
-    peerDepsExternal(),
-    resolve(),
+    // 由于roughjs只有es模块
+    resolve({ resolveOnly: ['roughjs'] }),
     commonjs(),
     typescript({
       tsconfig: './tsconfig.build.json',
