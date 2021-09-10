@@ -4,3 +4,5 @@ node_js:
 install: yarn install
 script:
   - yarn coverage && coveralls < coverage/lcov.info
+branches:
+  only: main
