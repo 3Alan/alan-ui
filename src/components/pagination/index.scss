@@ -1,0 +1,28 @@
+$prefix-cls: alan-pagination;
+
+.#{$prefix-cls} {
+  display: flex;
+
+  li {
+    font-size: 12px;
+    list-style: none;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px;
+    user-select: none;
+    color: #4b5563;
+
+    &.#{$prefix-cls}-active {
+      color: #3b82f6;
+    }
+
+    &.#{$prefix-cls}-disabled {
+      color: #e5e7eb;
+      cursor: not-allowed;
+    }
+  }
+}

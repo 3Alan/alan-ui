@@ -3,7 +3,8 @@
   src: url('./Stanberry.ttf');
 }
 
-[class^="alan-"], [class="alan"] {
+[class^='alan-'],
+[class='alan'] {
   box-sizing: border-box;
   font-family: Stanberry;
 }
@@ -28,3 +29,5 @@
 @import '../tooltip';
 
 @import '../guide';
+
+@import '../pagination';
