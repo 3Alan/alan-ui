@@ -21,8 +21,17 @@ $prefix-cls: alan-pagination;
     }
 
     &.#{$prefix-cls}-disabled {
-      color: #e5e7eb;
+      color: #9CA3AF;
       cursor: not-allowed;
+    }
+
+    &.#{$prefix-cls}-active-disabled {
+      color: #6B7280;
+    }
+
+    &.#{$prefix-cls}-jump {
+      width: 15px;
+      color: #9CA3AF;
     }
   }
 }

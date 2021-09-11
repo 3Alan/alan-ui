@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { FC, useCallback, useMemo } from 'react';
+import { generateRange, uniqueArray } from '../../utils';
 import { RoughWrap } from '../roughWrap';
 
 const cls = 'alan-pagination';
@@ -25,15 +26,62 @@ export const Pagination: FC<PaginationProps> = (props) => {
 
   const totalPage = useMemo(() => Math.ceil(total / pageSize), [total, pageSize]);
 
+  const showJumpPre = useMemo(() => current > 5, [current]);
+  const showJumpNext = useMemo(() => totalPage > 7 && (current < totalPage - 3 || current < 6), [current, totalPage]);
+
   const pagerList = useMemo(() => {
-    const numList = Array.from(Array(totalPage + 1).keys()).slice(1);
+    let numList;
+
+    if (showJumpPre) {
+      if (showJumpNext) {
+        numList = [1, '<<', current - 1, current, current + 1, '>>', totalPage];
+      } else {
+        let arr;
+        if (totalPage - current < 5) {
+          arr = [...generateRange(totalPage - 4, current), ...generateRange(current, totalPage)];
+        } else {
+          arr = generateRange(current, totalPage);
+        }
+        numList = [1, '<<', ...uniqueArray(arr)];
+      }
+    } else if (showJumpNext) {
+      const arr = generateRange(1, 5);
+      numList = [...arr, '>>', totalPage];
+    } else {
+      numList = generateRange(1, totalPage);
+    }
+
     return numList;
   }, [current]);
 
   const activeProps = useCallback(
     (item) => {
-      if (!disabled && item === current) {
+      if (item === '<<' || item === '>>') {
+        return { stroke: '' };
+      }
+
+      if (disabled) {
+        if (item === current) {
+          return { stroke: '#6B7280', fillStyle: 'hachure', fill: '#9CA3AF' };
+        }
+        return { stroke: '#9CA3AF', fillStyle: 'hachure', fill: '#D1D5DB' };
+      }
+
+      if (item === current) {
         return { stroke: '#3B82F6' };
+      }
+      return { stroke: '#9CA3AF' };
+    },
+    [current]
+  );
+
+  const buttonProps = useCallback(
+    (condition) => {
+      if (disabled) {
+        return { stroke: '#9CA3AF', fillStyle: 'hachure', fill: '#D1D5DB' };
+      }
+      if (condition) {
+        return { stroke: '#E5E7EB' };
       }
       return { stroke: '#9CA3AF' };
     },
@@ -48,8 +96,16 @@ export const Pagination: FC<PaginationProps> = (props) => {
     if (!disabled && current !== totalPage) onChange(current + 1);
   };
 
-  const onPagerClick = (item: number) => {
-    if (!disabled) onChange(item);
+  const onPagerClick = (item: number | string) => {
+    let onChangePageSize;
+    if (item === '<<') {
+      onChangePageSize = current - 5 > 0 ? current - 5 : 1;
+    } else if (item === '>>') {
+      onChangePageSize = current + 5 > totalPage ? totalPage : current + 5;
+    } else {
+      onChangePageSize = item;
+    }
+    if (!disabled) onChange(onChangePageSize as number);
   };
 
   return (
@@ -57,28 +113,35 @@ export const Pagination: FC<PaginationProps> = (props) => {
       <RoughWrap
         className={classNames({ [`${cls}-disabled`]: disabled || current === 1 })}
         onClick={onPrev}
-        shapProps={disabled || current === 1 ? { stroke: '#E5E7EB' } : { stroke: '#9CA3AF' }}
+        shapProps={{ ...buttonProps(current === 1), roughness: 0.5 }}
         customElement="li"
         shap="rectTangle"
       >
         {'<'}
       </RoughWrap>
+
       {pagerList.map((item) => (
         <RoughWrap
-          className={classNames({ [`${cls}-active`]: !disabled && item === current })}
+          className={classNames({
+            [`${cls}-active`]: !disabled && item === current,
+            [`${cls}-disabled`]: disabled,
+            [`${cls}-active-disabled`]: disabled && item === current,
+            [`${cls}-jump`]: item === '<<' || item === '>>'
+          })}
           key={item}
           customElement="li"
           shap="rectTangle"
-          shapProps={activeProps(item)}
+          shapProps={{ ...activeProps(item), roughness: 0.5 }}
           onClick={() => onPagerClick(item)}
         >
           {item}
         </RoughWrap>
       ))}
+
       <RoughWrap
         onClick={onNext}
         className={classNames({ [`${cls}-disabled`]: disabled || current === totalPage })}
-        shapProps={disabled || current === totalPage ? { stroke: '#E5E7EB' } : { stroke: '#9CA3AF' }}
+        shapProps={{ ...buttonProps(current === totalPage), roughness: 0.5 }}
         customElement="li"
         shap="rectTangle"
       >
