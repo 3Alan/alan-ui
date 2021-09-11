@@ -38,7 +38,7 @@
     "start": "react-scripts start",
     "clean": "rimraf ./dist",
     "build": "yarn clean && rollup -c && yarn build:sass",
-    "build:sass": "sass ./src/components/style/index.scss ./dist/index.css",
+    "build:sass": "sass ./src/components/style/index.scss ./dist/index.css --style compressed",
     "test": "react-scripts test",
     "coverage": "yarn test --coverage --watchAll=false",
     "coverage:dev": "yarn test --coverage --watchAll",
