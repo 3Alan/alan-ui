@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, memo, useCallback, useMemo } from 'react';
 import { generateRange, uniqueArray } from '../../utils';
 import { RoughWrap } from '../roughWrap';
 
 const cls = 'alan-pagination';
 
-interface PaginationProps {
+export interface PaginationProps {
   /**
    * 总页数
    */
@@ -19,6 +19,11 @@ interface PaginationProps {
   onChange: (currentPage: number) => void;
 }
 
+/**
+ * 分页组件
+ *
+ * 超过6页才会显示快速跳页按钮
+ */
 export const Pagination: FC<PaginationProps> = (props) => {
   const { disabled = false, current, pageSize, total, onChange } = props;
 
@@ -26,8 +31,8 @@ export const Pagination: FC<PaginationProps> = (props) => {
 
   const totalPage = useMemo(() => Math.ceil(total / pageSize), [total, pageSize]);
 
-  const showJumpPre = useMemo(() => current > 5, [current]);
-  const showJumpNext = useMemo(() => totalPage > 7 && (current < totalPage - 3 || current < 6), [current, totalPage]);
+  const showJumpPre = useMemo(() => totalPage > 6 && current > 5, [current]);
+  const showJumpNext = useMemo(() => totalPage > 6 && (current < totalPage - 3 || current < 6), [current, totalPage]);
 
   const pagerList = useMemo(() => {
     let numList;
@@ -155,4 +160,4 @@ Pagination.defaultProps = {
   disabled: false
 };
 
-export default Pagination;
+export default memo(Pagination);

@@ -41,7 +41,7 @@
     "build:sass": "sass ./src/components/style/index.scss ./dist/index.css",
     "test": "react-scripts test",
     "coverage": "yarn test --coverage --watchAll=false",
-    "coverage:dev": "yarn test --coverage --watchAll",
+    "coverage:dev": "yarn test --coverage",
     "test:ci": "cross-env CI=true yarn test --passWithNoTests",
     "lint": "eslint --ext js,jsx,ts,tsx src",
     "lint:fix": "eslint --ext js,jsx,ts,tsx src --fix",
