@@ -32,7 +32,7 @@ describe('Pagination', () => {
     expect(getByTitle('1')).toHaveClass('alan-pagination-active');
   });
 
-  it('should jump to 2 when click next button and disabled when jump to 3', () => {
+  it('should jump to next page when click next button and disabled when jump to end page', () => {
     const { getByTitle, getByRole } = render(<PaginationTester total={50} defaultCurrent={2} />);
     const nextButton = getByRole('list').lastElementChild;
     expect(nextButton).not.toHaveClass('alan-pagination-disabled');
@@ -42,7 +42,7 @@ describe('Pagination', () => {
     expect(nextButton).toHaveClass('alan-pagination-disabled');
   });
 
-  it('should jump to 1 when click prev button and disabled when jump to 1', () => {
+  it('should jump to prev page when click prev button and disabled when jump to start page', () => {
     const { getByTitle, getByRole } = render(<PaginationTester total={50} defaultCurrent={2} />);
     const prevButton = getByRole('list').firstElementChild;
     expect(prevButton).not.toHaveClass('alan-pagination-disabled');
@@ -90,7 +90,7 @@ describe('Pagination', () => {
     expect(getByTitle('<<')).toBeInTheDocument();
   });
 
-  it('should jump 5 pages when click jumpNext/jumpPrev, when less than 5, jump to start/end page', () => {
+  it('should jump 5 pages when click jumpNext/jumpPrev', () => {
     const { getByTitle } = render(<PaginationTester total={300} defaultCurrent={10} />);
     expect(getByTitle('10')).toHaveClass('alan-pagination-active');
     fireEvent.click(getByTitle('<<'));
