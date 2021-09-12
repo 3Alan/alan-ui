@@ -39,7 +39,7 @@ describe('Button', () => {
     );
     expect(container.firstChild).toHaveClass('alan-btn-small');
   });
-  it('shouldwhen size changed', () => {
+  it('small size', () => {
     const { container } = render(
       <Button size="small" type="standard">
         small button

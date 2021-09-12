@@ -1,0 +1,37 @@
+$prefix-cls: alan-pagination;
+
+.#{$prefix-cls} {
+  display: flex;
+
+  li {
+    font-size: 12px;
+    list-style: none;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px;
+    user-select: none;
+    color: #4b5563;
+
+    &.#{$prefix-cls}-active {
+      color: #3b82f6;
+    }
+
+    &.#{$prefix-cls}-disabled {
+      color: #9CA3AF;
+      cursor: not-allowed;
+    }
+
+    &.#{$prefix-cls}-active-disabled {
+      color: #6B7280;
+    }
+
+    &.#{$prefix-cls}-jump {
+      width: 15px;
+      color: #9CA3AF;
+    }
+  }
+}
