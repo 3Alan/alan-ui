@@ -61,17 +61,15 @@ export const Button: FC<
   );
 
   const onEnterEffect = useCallback(() => {
-    if (disabled) {
-      return;
+    if (!disabled) {
+      setFillStyle('zigzag');
     }
-    setFillStyle('zigzag');
   }, [disabled]);
 
   const onLeaveEffect = useCallback(() => {
-    if (disabled) {
-      return;
+    if (!disabled) {
+      setFillStyle(drawnStyle);
     }
-    setFillStyle(drawnStyle);
   }, [disabled, drawnStyle]);
 
   return (

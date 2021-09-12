@@ -32,7 +32,7 @@ export const Pagination: FC<PaginationProps> = (props) => {
   const totalPage = useMemo(() => Math.ceil(total / pageSize), [total, pageSize]);
 
   const showJumpPre = useMemo(() => totalPage > 6 && current > 5, [current]);
-  const showJumpNext = useMemo(() => totalPage > 6 && (current < totalPage - 3 || current < 6), [current, totalPage]);
+  const showJumpNext = useMemo(() => totalPage > 6 && (current < totalPage - 4 || current < 6), [current, totalPage]);
 
   const pagerList = useMemo(() => {
     let numList;
@@ -41,12 +41,7 @@ export const Pagination: FC<PaginationProps> = (props) => {
       if (showJumpNext) {
         numList = [1, '<<', current - 1, current, current + 1, '>>', totalPage];
       } else {
-        let arr;
-        if (totalPage - current < 5) {
-          arr = [...generateRange(totalPage - 4, current), ...generateRange(current, totalPage)];
-        } else {
-          arr = generateRange(current, totalPage);
-        }
+        const arr = [...generateRange(totalPage - 4, current), ...generateRange(current, totalPage)];
         numList = [1, '<<', ...uniqueArray(arr)];
       }
     } else if (showJumpNext) {
@@ -104,9 +99,9 @@ export const Pagination: FC<PaginationProps> = (props) => {
   const onPagerClick = (item: number | string) => {
     let onChangePageSize;
     if (item === '<<') {
-      onChangePageSize = current - 5 > 0 ? current - 5 : 1;
+      onChangePageSize = current - 5;
     } else if (item === '>>') {
-      onChangePageSize = current + 5 > totalPage ? totalPage : current + 5;
+      onChangePageSize = current + 5;
     } else {
       onChangePageSize = item;
     }
@@ -134,6 +129,7 @@ export const Pagination: FC<PaginationProps> = (props) => {
             [`${cls}-jump`]: item === '<<' || item === '>>'
           })}
           key={item}
+          title={item}
           customElement="li"
           shap="rectTangle"
           shapProps={{ ...activeProps(item), roughness: 0.5 }}
