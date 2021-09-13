@@ -38,6 +38,7 @@ import '@3alan/ui/dist/index.css';
 - [ ] awesome icon
 - [x] Tooltip
 - [x] Guide
+- [x] Pagination
 - [ ] exclude third library in build file
 
 
