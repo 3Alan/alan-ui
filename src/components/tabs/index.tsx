@@ -1,7 +1,6 @@
-import { FC } from 'react';
+import Tabs from './Tabs';
+import TabPane from './components/Pane';
 
-export const Tabs: FC = () => {
-  return <div>123</div>;
-};
+export { TabPane };
 
 export default Tabs;

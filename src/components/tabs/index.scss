@@ -1,0 +1,25 @@
+$prefix-cls: alan-tabs;
+
+.#{$prefix-cls} {
+  &-nav-wrap {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+  }
+
+  &-nav-item {
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  &-nav-active {
+    color: rebeccapurple;
+  }
+
+  &-pane {
+    display: none;
+  }
+
+  &-pane-active {
+    display: block;
+  }
+}

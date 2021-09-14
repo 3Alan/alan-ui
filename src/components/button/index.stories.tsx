@@ -27,16 +27,9 @@ export default {
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args}>awesome</Button>;
 
-export const DefaultSize = Template.bind({});
-DefaultSize.args = {
+export const button = Template.bind({});
+button.args = {
   type: 'primary',
   disabled: false,
   size: 'default'
-};
-
-export const SmallSize = Template.bind({});
-SmallSize.args = {
-  type: 'primary',
-  disabled: false,
-  size: 'small'
 };
