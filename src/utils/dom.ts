@@ -92,3 +92,29 @@ export const getPopoverPath = (width = 0, height = 0, placement: PlacementsType)
   };
   return pathMap[placement] as Point[];
 };
+
+export interface TabsNavInfo {
+  canvasSize: { width: number; height: number };
+  path: Point[];
+}
+
+export const getTabsNavInfo = (parentSelector: string, activeSelector: string): TabsNavInfo => {
+  const parentEl = document.querySelector(parentSelector) as HTMLElement;
+  const activeEl = document.querySelector(activeSelector) as HTMLElement;
+  const height = activeEl.offsetHeight;
+  const width = activeEl.offsetWidth;
+  const leftStart = activeEl.offsetLeft || 2;
+  const leftEnd = activeEl.offsetLeft + width;
+
+  return {
+    canvasSize: { width: parentEl.offsetWidth, height: parentEl.offsetHeight + 2 },
+    path: [
+      [2, height],
+      [leftStart, height],
+      [leftStart, 1],
+      [leftEnd, 1],
+      [leftEnd, height],
+      [parentEl.offsetWidth, height]
+    ] as Point[]
+  };
+};
