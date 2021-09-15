@@ -3,16 +3,30 @@ $prefix-cls: alan-tabs;
 .#{$prefix-cls} {
   &-nav-wrap {
     display: flex;
-    border-bottom: 1px solid #ccc;
+    position: relative;
+
+    svg, canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 0;
+    }
   }
 
   &-nav-item {
     cursor: pointer;
     padding: 8px;
+    z-index: $z-70;
+    color: #4B5563;
   }
 
   &-nav-active {
-    color: rebeccapurple;
+    color: #1F2937;
+  }
+
+  &-nav-disabled {
+    color: #D1D5DB;
+    cursor: not-allowed;
   }
 
   &-pane {
@@ -21,5 +35,9 @@ $prefix-cls: alan-tabs;
 
   &-pane-active {
     display: block;
+  }
+
+  &-content {
+    padding-top: 15px;
   }
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import { TabPaneProps } from './components/Pane';
 
-export interface Tab extends TabPaneProps {
-  key: string;
+export interface Tab {
   node: React.ReactNode;
+  props: TabPaneProps;
 }
 
 export interface TabContextProps {

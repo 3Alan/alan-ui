@@ -1,4 +1,5 @@
 import { ComponentStory } from '@storybook/react';
+import { useState } from 'react';
 import Tabs from './index';
 import TabPane from './components/Pane';
 import { Button } from '../button';
@@ -13,9 +14,10 @@ export default {
   }
 };
 
-const Template: ComponentStory<typeof Tabs> = (args) => {
+const Template: ComponentStory<typeof Tabs> = () => {
+  const [key, setKey] = useState('1');
   return (
-    <Tabs {...args}>
+    <Tabs activeKey={key} onChange={(k) => setKey(k)}>
       <TabPane title="pane 1" tabKey="1">
         <div>pane 1 content</div>
         <p>It is a Tab component</p>
@@ -25,14 +27,13 @@ const Template: ComponentStory<typeof Tabs> = (args) => {
       </TabPane>
       <TabPane title="pane 2" tabKey="2">
         <p>pane 2 content</p>
-
         <Button type="standard">standard button</Button>
+      </TabPane>
+      <TabPane title="disabled pane" tabKey="3" disabled>
+        <p>disabled content</p>
       </TabPane>
     </Tabs>
   );
 };
 
 export const tabs = Template.bind({});
-tabs.args = {
-  defaultActiveKey: '1'
-};

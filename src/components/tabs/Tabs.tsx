@@ -26,7 +26,7 @@ const cls = 'alan-tabs';
 function parseTabList(children: ReactNode) {
   return React.Children.map(React.Children.toArray(children), (node) => {
     if (isValidElement(node)) {
-      return { key: String(node.props.tabKey), ...node.props, node };
+      return { props: node.props, node };
     }
     return null;
   }).filter((tab) => tab);
@@ -39,13 +39,15 @@ export const Tabs: FC<TabsProps> = (props) => {
   const { children, defaultActiveKey, activeKey, onTabClick, onChange } = props;
   const tabs = parseTabList(children);
 
-  const [activeIndex, setActiveIndex] = useState(activeKey || defaultActiveKey || tabs[0].key);
+  const [activeIndex, setActiveIndex] = useState(activeKey || defaultActiveKey || tabs[0].props.tabKey);
 
-  const innerOnTabClick = useCallback((key: string) => {
-    onTabClick?.(key);
-    onChange?.(key);
-    if (!activeKey) {
-      setActiveIndex(key);
+  const innerOnTabClick = useCallback((key: string, disabled: boolean) => {
+    if (!disabled) {
+      onTabClick?.(key);
+      onChange?.(key);
+      if (!activeKey) {
+        setActiveIndex(key);
+      }
     }
   }, []);
 
@@ -60,12 +62,13 @@ export const Tabs: FC<TabsProps> = (props) => {
       <div>
         <TabNav onTabClick={innerOnTabClick} />
 
-        <div>
+        <div className={`${cls}-content`}>
           {tabs.map((item) => {
             return React.cloneElement(item.node, {
-              key: item.tabKey,
-              tabKey: item.tabKey,
-              active: item.tabKey === activeIndex
+              tabKey: item.props.tabKey,
+              active: item.props.tabKey === activeIndex,
+              testId: `pane-${item.props.tabKey}`,
+              ...item.props
             });
           })}
         </div>

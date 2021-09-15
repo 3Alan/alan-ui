@@ -1,8 +1,8 @@
-import { FC, memo, ReactNode, useEffect, useRef, useState } from 'react';
+import { FC, memo, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useDebounceFn } from 'ahooks';
 
-import { annotate } from 'rough-notation/';
+import { annotate } from 'rough-notation';
 import { RoughAnnotation } from 'rough-notation/lib/model.d';
 import { getPoverPostion, isElementVisible } from '../../utils';
 import Button from '../button';
@@ -72,6 +72,7 @@ export const Guide: FC<GuideProps> = (props) => {
     annotation.current.show();
 
     const isVisible = isElementVisible(selector);
+
     if (!isVisible) {
       e.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -104,6 +105,14 @@ export const Guide: FC<GuideProps> = (props) => {
     onClose?.(finished);
   };
 
+  const onPrevClick = useCallback(() => {
+    setCurrentIndex(currentIndex - 1);
+  }, [currentIndex]);
+
+  const onNextClick = useCallback(() => {
+    setCurrentIndex(currentIndex + 1);
+  }, [currentIndex]);
+
   const PopoverContent = () => {
     return (
       <PopoverWrap
@@ -126,29 +135,13 @@ export const Guide: FC<GuideProps> = (props) => {
             </span>
 
             {currentIndex !== 0 && (
-              <Button
-                type="standard"
-                size="small"
-                onClick={() => {
-                  if (currentIndex < steps.length && currentIndex > 0) {
-                    setCurrentIndex(currentIndex - 1);
-                  }
-                }}
-              >
+              <Button type="standard" size="small" onClick={onPrevClick}>
                 Prev
               </Button>
             )}
 
             {currentIndex !== steps.length - 1 && (
-              <Button
-                type="standard"
-                size="small"
-                onClick={() => {
-                  if (currentIndex < steps.length - 1) {
-                    setCurrentIndex(currentIndex + 1);
-                  }
-                }}
-              >
+              <Button type="standard" size="small" onClick={onNextClick}>
                 Next
               </Button>
             )}
