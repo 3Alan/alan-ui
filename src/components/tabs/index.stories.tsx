@@ -1,9 +1,10 @@
 import { ComponentStory } from '@storybook/react';
 import { useState } from 'react';
 import Tabs from './index';
-import TabPane from './components/Pane';
 import { Button } from '../button';
 import { ToolTip } from '../tooltip';
+
+const { TabPane } = Tabs;
 
 export default {
   title: 'Components/Tabs',

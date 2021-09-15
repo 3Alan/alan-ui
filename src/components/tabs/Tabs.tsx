@@ -1,4 +1,5 @@
 import React, { FC, isValidElement, ReactNode, useCallback, useEffect, useState } from 'react';
+import { TabPane, TabPaneProps } from './components/Pane';
 import TabNav from './components/Nav';
 import TabContext from './TabContext';
 
@@ -35,7 +36,7 @@ function parseTabList(children: ReactNode) {
 /**
  * 既可以当作受控组件也可以当作非受控组件
  */
-export const Tabs: FC<TabsProps> = (props) => {
+export const Tabs: FC<TabsProps> & { TabPane: FC<TabPaneProps> } = (props) => {
   const { children, defaultActiveKey, activeKey, onTabClick, onChange } = props;
   const tabs = parseTabList(children);
 
@@ -76,5 +77,7 @@ export const Tabs: FC<TabsProps> = (props) => {
     </TabContext.Provider>
   );
 };
+
+Tabs.TabPane = TabPane;
 
 export default Tabs;
