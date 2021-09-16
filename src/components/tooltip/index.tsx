@@ -18,6 +18,9 @@ export interface ToolTipProps {
   children: React.ReactElement;
 }
 
+/**
+ * 目前仅支持上下左右四个方位
+ */
 export const ToolTip: FC<ToolTipProps> = (props) => {
   const { children, placement, content, trigger = 'hover' } = props;
 
