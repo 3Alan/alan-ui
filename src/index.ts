@@ -11,3 +11,7 @@ export { default as Guide } from './components/guide';
 export { default as Pagination } from './components/pagination';
 
 export { default as Tabs } from './components/tabs';
+
+export { default as Paper } from './components/paper';
+
+export { default as Icon } from './components/icon';

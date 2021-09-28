@@ -51,5 +51,8 @@ export interface CurveProps extends Options {
 }
 
 export interface PathProps extends Options {
+  /**
+   * svg中path对应
+   */
   d: string;
 }

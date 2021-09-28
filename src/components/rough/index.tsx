@@ -12,6 +12,7 @@ interface RoughProps {
   width?: number;
   height?: number;
   config?: Config;
+  svgViewBox?: string;
   renderer?: Renderer;
 }
 
@@ -19,7 +20,15 @@ interface RoughCompProps extends RoughProps {
   forwardedRef?: RefObject<unknown>;
 }
 
-export const ReactRoughComp: FC<RoughCompProps> = ({ config, width, height, renderer, forwardedRef, children }) => {
+export const ReactRoughComp: FC<RoughCompProps> = ({
+  config,
+  width,
+  height,
+  renderer,
+  svgViewBox,
+  forwardedRef,
+  children
+}) => {
   const svgRef = React.useRef<SVGSVGElement>();
   const canvasRef = React.useRef<HTMLCanvasElement>();
 
@@ -48,7 +57,7 @@ export const ReactRoughComp: FC<RoughCompProps> = ({ config, width, height, rend
           ref: svgRef as SvgRef
         }}
       >
-        <svg width={width} height={height} ref={svgRef as SvgRef}>
+        <svg width={width} height={height} ref={svgRef as SvgRef} viewBox={svgViewBox}>
           {children}
         </svg>
       </RoughContext.Provider>

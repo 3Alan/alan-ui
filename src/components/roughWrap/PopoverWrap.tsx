@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { useImperativeHandle, AllHTMLAttributes, forwardRef, CSSProperties, useRef, LegacyRef, memo } from 'react';
 import { Options } from 'roughjs/bin/core';
 import { useSize } from 'ahooks';
+import { FaTimes } from 'react-icons/fa';
 import { getPopoverPath, getSafeSize } from '../../utils';
 import Icon from '../icon';
 import ReactRough, { Polygon } from '../rough';
@@ -33,7 +34,11 @@ export const PopoverWrap = forwardRef<unknown, PopoverWrapProps>((props, ref) =>
       className={classNames(cls, `${cls}-popover-wrap`, `${cls}-${placement}`, wrapClassName)}
       style={style}
     >
-      {closeable && <Icon type="close" className={`${cls}-close`} onClick={onClose} />}
+      {closeable && (
+        <div onClick={onClose} className={`${cls}-close`}>
+          <Icon item={FaTimes} width={12} height={12} />
+        </div>
+      )}
 
       <div className={classNames(`${cls}-popover`, className)}>{children}</div>
 

@@ -1,0 +1,9 @@
+$prefix-cls: alan-paper;
+
+.#{$prefix-cls} {
+  &-wrap {
+    min-height: 600px;
+    width: 400px;
+    padding: 20px;
+  }
+}
