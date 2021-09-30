@@ -7,7 +7,11 @@ export default {
   component: Checkbox,
   argTypes: {
     checked: { control: false },
-    value: { control: false }
+    value: {
+      table: {
+        disable: true
+      }
+    }
   }
 };
 
