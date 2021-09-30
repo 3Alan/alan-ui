@@ -1,12 +1,13 @@
 import { AllHTMLAttributes, createElement, forwardRef, memo, MutableRefObject, useRef } from 'react';
 import classNames from 'classnames';
 import { useSize } from 'ahooks';
+import { Options } from 'roughjs/bin/core';
 import ReactRough, { Rectangle, Ellipse } from '../rough';
 
 export interface RoughWrapProps extends AllHTMLAttributes<HTMLElement> {
   customElement: string;
-  shap: 'rectTangle' | 'ellipse';
-  shapProps?: any;
+  shape: 'rectTangle' | 'ellipse';
+  shapeProps?: Options;
   className?: string;
 }
 
@@ -19,19 +20,19 @@ const Shapes = {
 const cls = 'alan-rough-wrap';
 
 export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapProps, ref) => {
-  const { children, customElement, shap, shapProps, className, ...resetProps } = props;
+  const { children, customElement, shape, shapeProps, className, ...resetProps } = props;
   const innerElement = useRef<HTMLElement>();
   const element = (ref || innerElement) as MutableRefObject<HTMLElement>;
   const { width = 0, height = 0 } = useSize(element);
-  const ShapeComponent = Shapes[shap];
+  const ShapeComponent = Shapes[shape];
 
   const childrenElement = (
     <>
       <div className={`${cls}-child`}>{children}</div>
 
-      {/* 注意childre和ReactRough的层级（z-index）关系 */}
+      {/* 注意children和ReactRough的层级（z-index）关系 */}
       <ReactRough width={width + 4} height={height + 4} renderer="svg">
-        <ShapeComponent x={2} y={2} width={width} height={height} {...shapProps} />
+        <ShapeComponent x={2} y={2} width={width} height={height} {...shapeProps} />
       </ReactRough>
     </>
   );
@@ -49,7 +50,7 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapPr
 
 RoughWrap.defaultProps = {
   className: '',
-  shapProps: {}
+  shapeProps: {}
 };
 
 export default memo(RoughWrap);

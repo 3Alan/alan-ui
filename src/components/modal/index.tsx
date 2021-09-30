@@ -46,7 +46,7 @@ export const Modal: FC<ModalProps> = (props) => {
       <>
         {mask && <Mask />}
         <div className={classNames(cls, `${cls}-wrap`)}>
-          <RoughWrap ref={modalRef} customElement="div" shap="rectTangle" className={classNames(`${cls}-content`)}>
+          <RoughWrap ref={modalRef} customElement="div" shape="rectTangle" className={classNames(`${cls}-content`)}>
             {children}
             <Button onClick={() => onClose()} type="standard">
               Close

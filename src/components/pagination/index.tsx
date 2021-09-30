@@ -113,9 +113,9 @@ export const Pagination: FC<PaginationProps> = (props) => {
       <RoughWrap
         className={classNames({ [`${cls}-disabled`]: disabled || current === 1 })}
         onClick={onPrev}
-        shapProps={{ ...buttonProps(current === 1), roughness: 0.5 }}
+        shapeProps={{ ...buttonProps(current === 1), roughness: 0.5 }}
         customElement="li"
-        shap="rectTangle"
+        shape="rectTangle"
       >
         {'<'}
       </RoughWrap>
@@ -131,8 +131,8 @@ export const Pagination: FC<PaginationProps> = (props) => {
           key={item}
           title={item}
           customElement="li"
-          shap="rectTangle"
-          shapProps={{ ...activeProps(item), roughness: 0.5 }}
+          shape="rectTangle"
+          shapeProps={{ ...activeProps(item), roughness: 0.5 }}
           onClick={() => onPagerClick(item)}
         >
           {item}
@@ -142,9 +142,9 @@ export const Pagination: FC<PaginationProps> = (props) => {
       <RoughWrap
         onClick={onNext}
         className={classNames({ [`${cls}-disabled`]: disabled || current === totalPage })}
-        shapProps={{ ...buttonProps(current === totalPage), roughness: 0.5 }}
+        shapeProps={{ ...buttonProps(current === totalPage), roughness: 0.5 }}
         customElement="li"
-        shap="rectTangle"
+        shape="rectTangle"
       >
         {'>'}
       </RoughWrap>

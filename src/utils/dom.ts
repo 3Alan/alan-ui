@@ -7,7 +7,7 @@ export const canUseDom = () => {
 };
 
 // 返回guide组件中popover对应的位置
-export const getPoverPostion = (targetEl: string, popoverEl: MutableRefObject<HTMLElement | null | undefined>) => {
+export const getPopoverPosition = (targetEl: string, popoverEl: MutableRefObject<HTMLElement | null | undefined>) => {
   if (!popoverEl || !popoverEl.current) {
     return {
       top: 0,

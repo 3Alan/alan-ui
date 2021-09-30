@@ -4,7 +4,7 @@ import { useDebounceFn } from 'ahooks';
 
 import { annotate } from 'rough-notation';
 import { RoughAnnotation } from 'rough-notation/lib/model.d';
-import { getPoverPostion, isElementVisible } from '../../utils';
+import { getPopoverPosition, isElementVisible } from '../../utils';
 import Button from '../button';
 import Mask from '../mask';
 import PopoverWrap from '../roughWrap/PopoverWrap';
@@ -55,7 +55,7 @@ export const Guide: FC<GuideProps> = (props) => {
 
   const computePopoverStyles = () => {
     const { selector } = steps[currentIndex];
-    const { top, left } = getPoverPostion(selector, popoverRef);
+    const { top, left } = getPopoverPosition(selector, popoverRef);
     setPopoverStyle({ top: top + 20, left });
   };
 

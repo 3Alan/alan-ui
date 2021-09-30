@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { Button } from '../../button';
 import Guide, { StepItem } from '../index';
 
+// @ts-ignore
 if (!SVGElement.prototype.getTotalLength) {
+  // @ts-ignore
   SVGElement.prototype.getTotalLength = () => 1;
 }
 
