@@ -1,0 +1,14 @@
+$prefix-cls: alan-checkbox;
+
+.#{$prefix-cls} {
+  &-content {
+    padding-left: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  &-disabled * {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+}

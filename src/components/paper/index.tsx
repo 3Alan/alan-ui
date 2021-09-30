@@ -9,7 +9,7 @@ export interface PaperProps {}
 const Paper: FC<PaperProps> = (props) => {
   const { children } = props;
   return (
-    <RoughWrap className={`${cls}-wrap`} customElement="div" shap="rectTangle">
+    <RoughWrap className={`${cls}-wrap`} customElement="div" shape="rectTangle">
       {children}
     </RoughWrap>
   );
