@@ -34,4 +34,14 @@ describe('Checkbox', () => {
     fireEvent.click(getByText('checkbox'));
     expect(getByRole('checkbox')).not.toBeChecked();
   });
+
+  it('should not checkable when disabled', () => {
+    const { getByText, getByRole } = render(
+      <Checkbox disabled checked>
+        checkbox
+      </Checkbox>
+    );
+    fireEvent.click(getByText('checkbox'));
+    expect(getByRole('checkbox')).toBeChecked();
+  });
 });

@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 import { FC, useContext, useMemo, useState } from 'react';
+import ReactRough, { LinearPath } from '../rough';
+import { RoughWrap } from '../roughWrap';
 import GroupContext from './GroupContext';
 
 interface CheckboxProps {
@@ -53,6 +55,37 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       <span>
         <input type="checkbox" checked={checked} onChange={onChange} disabled={disabled} value={value} />
       </span>
+
+      <RoughWrap
+        shapeProps={{
+          bowing: 1,
+          roughness: 0.5,
+          stroke: disabled ? '#9CA3AF' : '#374151',
+          fill: disabled ? '#F3F4F6' : '#fff',
+          fillStyle: 'solid'
+        }}
+        className={`${cls}-box`}
+        customElement="span"
+        shape="rectTangle"
+      />
+
+      {checked && (
+        <div className={`${cls}-icon`}>
+          <ReactRough width={14} height={14} renderer="svg">
+            <LinearPath
+              points={[
+                [0, 7],
+                [6, 13],
+                [14, 1]
+              ]}
+              roughness={0.5}
+              bowing={0}
+              strokeWidth={2}
+              stroke={disabled ? '#9CA3AF' : '#3B82F6'}
+            />
+          </ReactRough>
+        </div>
+      )}
 
       <span className={`${cls}-content`}>{children}</span>
     </label>
