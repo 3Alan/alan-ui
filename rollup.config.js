@@ -35,7 +35,7 @@ export default {
   ],
   plugins: [
     // 由于roughjs只有es模块
-    resolve({ resolveOnly: ['roughjs'] }),
+    resolve({ resolveOnly: ['roughjs', 'path-data-parser', 'points-on-curve', 'points-on-path'] }),
     commonjs(),
     typescript({
       tsconfig: './tsconfig.build.json',
