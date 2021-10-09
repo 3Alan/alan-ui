@@ -16,7 +16,7 @@ export default {
 };
 
 export const checkbox: ComponentStory<typeof Checkbox> = (args) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked);

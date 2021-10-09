@@ -1,6 +1,8 @@
 $prefix-cls: alan-checkbox;
 
 .#{$prefix-cls} {
+  position: relative;
+
   &-content {
     padding-left: 5px;
     cursor: pointer;
@@ -10,5 +12,30 @@ $prefix-cls: alan-checkbox;
   &-disabled * {
     color: #ccc;
     cursor: not-allowed;
+  }
+
+  input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+  }
+
+  &-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+  }
+
+  &-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
   }
 }
