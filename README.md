@@ -31,15 +31,7 @@ import '@3alan/ui/dist/index.css';
 ```
 
 ## TODO
-- [x] support `cjs` and `esm`
 - [ ] lerna
-- [x] git hook husky
-- [x] Button
-- [x] Modal
-- [ ] awesome icon
-- [x] Tooltip
-- [x] Guide
-- [x] Pagination
 - [ ] exclude third library in build file
 
 
