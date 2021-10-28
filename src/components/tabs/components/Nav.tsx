@@ -22,7 +22,7 @@ export const TabNav: FC<TabNavProps> = (props) => {
   return (
     <div className={`${cls}-nav-wrap`}>
       <ReactRough width={canvasInfo.canvasSize.width} height={canvasInfo.canvasSize.height} renderer="svg">
-        <LinearPath points={canvasInfo.path} />
+        <LinearPath points={canvasInfo.path} bowing={0.5} roughness={0.8} />
       </ReactRough>
 
       {tabs.map(({ props }) => (
