@@ -38,12 +38,12 @@
   "scripts": {
     "start": "react-scripts start",
     "clean": "rimraf ./dist",
-    "build": "yarn clean && rollup -c && yarn build:sass",
+    "build": "pnpm clean && rollup -c && pnpm build:sass",
     "build:sass": "sass ./src/components/style/index.scss ./dist/index.css --style compressed",
     "test": "react-scripts test",
-    "coverage": "yarn test --coverage --watchAll=false",
-    "coverage:dev": "yarn test --coverage",
-    "test:ci": "cross-env CI=true yarn test --passWithNoTests",
+    "coverage": "pnpm test --coverage --watchAll=false",
+    "coverage:dev": "pnpm test --coverage",
+    "test:ci": "cross-env CI=true pnpm test --passWithNoTests",
     "lint": "eslint --ext js,jsx,ts,tsx src",
     "lint:fix": "eslint --ext js,jsx,ts,tsx src --fix",
     "eject": "react-scripts eject",
@@ -51,7 +51,7 @@
     "build-storybook": "build-storybook -s public",
     "build-storybook-static": "build-storybook -o sb_build",
     "build-storybook-docs": "build-storybook --docs",
-    "prepublishOnly": "yarn test:ci && yarn lint && yarn build",
+    "prepublishOnly": "pnpm test:ci && pnpm lint && pnpm build",
     "prepare": "husky install"
   },
   "browserslist": {
@@ -87,6 +87,7 @@
     "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
+    "babel-jest": "^27.3.1",
     "coveralls": "^3.1.1",
     "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
@@ -115,8 +116,8 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "yarn lint",
-      "yarn test:ci"
+      "pnpm lint",
+      "pnpm test:ci"
     ]
   },
   "jest": {
