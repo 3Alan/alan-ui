@@ -38,12 +38,12 @@
   "scripts": {
     "start": "react-scripts start",
     "clean": "rimraf ./dist",
-    "build": "pnpm clean && rollup -c && pnpm build:sass",
+    "build": "npm run clean && rollup -c && npm run build:sass",
     "build:sass": "sass ./src/components/style/index.scss ./dist/index.css --style compressed",
     "test": "react-scripts test",
-    "coverage": "pnpm test --coverage --watchAll=false",
-    "coverage:dev": "pnpm test --coverage",
-    "test:ci": "cross-env CI=true pnpm test --passWithNoTests",
+    "coverage": "npm run test --coverage --watchAll=false",
+    "coverage:dev": "npm run test --coverage",
+    "test:ci": "cross-env CI=true npm run test --passWithNoTests",
     "lint": "eslint --ext js,jsx,ts,tsx src",
     "lint:fix": "eslint --ext js,jsx,ts,tsx src --fix",
     "eject": "react-scripts eject",
@@ -51,7 +51,7 @@
     "build-storybook": "build-storybook -s public",
     "build-storybook-static": "build-storybook -o sb_build",
     "build-storybook-docs": "build-storybook --docs",
-    "prepublishOnly": "pnpm test:ci && pnpm lint && pnpm build",
+    "prepublishOnly": "npm run test:ci && npm run lint && npm run build",
     "prepare": "husky install"
   },
   "browserslist": {
@@ -112,12 +112,13 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-visualizer": "^5.5.2",
     "sass": "^1.38.0",
+    "tslib": "^2.3.1",
     "typescript": "~4.3.5"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "pnpm lint",
-      "pnpm test:ci"
+      "npm run lint",
+      "npm run test:ci"
     ]
   },
   "jest": {

@@ -52,6 +52,7 @@ specifiers:
   rough-notation: ^0.5.1
   roughjs: ^4.4.1
   sass: ^1.38.0
+  tslib: ^2.3.1
   typescript: ~4.3.5
   use-deep-compare-effect: ^1.6.1
 
@@ -69,7 +70,7 @@ devDependencies:
   '@commitlint/config-conventional': 13.2.0
   '@rollup/plugin-commonjs': 20.0.0_rollup@2.58.3
   '@rollup/plugin-node-resolve': 13.0.6_rollup@2.58.3
-  '@rollup/plugin-typescript': 8.3.0_rollup@2.58.3+typescript@4.3.5
+  '@rollup/plugin-typescript': 8.3.0_6e46f0e3b8bb6c596b4a793b713f03dd
   '@storybook/addon-actions': 6.3.12_14fc3c4d570feae7d722fbbd1b906730
   '@storybook/addon-essentials': 6.3.12_f3e7ae34c3d8f77763af68801fecb1da
   '@storybook/addon-links': 6.3.12_react-dom@17.0.2+react@17.0.2
@@ -110,6 +111,7 @@ devDependencies:
   rollup-plugin-terser: 7.0.2_rollup@2.58.3
   rollup-plugin-visualizer: 5.5.2_rollup@2.58.3
   sass: 1.43.4
+  tslib: 2.3.1
   typescript: 4.3.5
 
 packages:
@@ -4469,7 +4471,7 @@ packages:
       rollup: 1.32.1
     dev: true
 
-  /@rollup/plugin-typescript/8.3.0_rollup@2.58.3+typescript@4.3.5:
+  /@rollup/plugin-typescript/8.3.0_6e46f0e3b8bb6c596b4a793b713f03dd:
     resolution: {integrity: sha512-I5FpSvLbtAdwJ+naznv+B4sjXZUcIvLLceYpITAn7wAP8W0wqc5noLdGIp9HGVntNhRWXctwPYrSSFQxtl0FPA==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
@@ -4480,6 +4482,7 @@ packages:
       '@rollup/pluginutils': 3.1.0_rollup@2.58.3
       resolve: 1.20.0
       rollup: 2.58.3
+      tslib: 2.3.1
       typescript: 4.3.5
     dev: true
 
