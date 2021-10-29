@@ -38,12 +38,12 @@
   "scripts": {
     "start": "react-scripts start",
     "clean": "rimraf ./dist",
-    "build": "npm run clean && rollup -c && npm run build:sass",
+    "build": "pnpm clean && rollup -c && pnpm build:sass",
     "build:sass": "sass ./src/components/style/index.scss ./dist/index.css --style compressed",
     "test": "react-scripts test",
-    "coverage": "npm run test --coverage --watchAll=false",
-    "coverage:dev": "npm run test --coverage",
-    "test:ci": "cross-env CI=true npm run test --passWithNoTests",
+    "coverage": "react-scripts test --coverage --watchAll=false",
+    "coverage:dev": "react-scripts test --coverage",
+    "test:ci": "cross-env CI=true react-scripts test --passWithNoTests",
     "lint": "eslint --ext js,jsx,ts,tsx src",
     "lint:fix": "eslint --ext js,jsx,ts,tsx src --fix",
     "eject": "react-scripts eject",
@@ -51,7 +51,7 @@
     "build-storybook": "build-storybook -s public",
     "build-storybook-static": "build-storybook -o sb_build",
     "build-storybook-docs": "build-storybook --docs",
-    "prepublishOnly": "npm run test:ci && npm run lint && npm run build",
+    "prepublishOnly": "pnpm test:ci && pnpm lint && pnpm build",
     "prepare": "husky install"
   },
   "browserslist": {
@@ -117,8 +117,8 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "npm run lint",
-      "npm run test:ci"
+      "pnpm lint",
+      "pnpm test:ci"
     ]
   },
   "jest": {
