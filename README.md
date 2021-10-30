@@ -31,7 +31,7 @@ import '@3alan/ui/dist/index.css';
 ```
 
 ## TODO
-- [ ] lerna
+- [ ] monorepo
 - [ ] exclude third library in build file
 
 
