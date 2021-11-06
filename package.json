@@ -52,7 +52,8 @@
     "build-storybook-static": "build-storybook -o sb_build",
     "build-storybook-docs": "build-storybook --docs",
     "prepublishOnly": "pnpm test:ci && pnpm lint && pnpm build",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "preinstall": "node ./scripts/preinstall.js"
   },
   "browserslist": {
     "production": [
