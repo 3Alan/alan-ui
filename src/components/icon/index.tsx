@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { IconType } from 'react-icons';
+import GlobalRoughContext from '../config-provider/context';
 import ReactRough, { Path } from '../rough';
 import { PathProps } from '../rough/RoughComponentProps';
 
@@ -15,13 +16,15 @@ export interface IconProps extends Partial<PathProps> {
 
 export const Icon: FC<IconProps> = (props) => {
   const { item, width, height, ...resetProps } = props;
+  const globalContext = useContext(GlobalRoughContext);
+  const roughOptions = { ...globalContext, ...resetProps };
 
   const { viewBox } = item({}).props.attr;
   const { d } = item({}).props.children[0].props;
 
   return (
     <ReactRough width={width} height={height} renderer="svg" svgViewBox={viewBox}>
-      <Path {...resetProps} d={d} />
+      <Path {...roughOptions} d={d} />
     </ReactRough>
   );
 };

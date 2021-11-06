@@ -134,7 +134,8 @@
       "!src/utils/**",
       "!src/components/style/**",
       "!src/components/rough/**",
-      "!src/roughOptions/**"
+      "!src/roughOptions/**",
+      "!src/components/config-provider/**"
     ]
   }
 }
