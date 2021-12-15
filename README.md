@@ -32,6 +32,7 @@ import '@3alan/ui/dist/index.css';
 
 ## TODO
 - [ ] monorepo
+- [ ] vite
 - [ ] exclude third library in build file
 
 
