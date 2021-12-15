@@ -1,0 +1,19 @@
+$namespace: image-cropper-tool-bar;
+
+.#{$namespace} {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px 20px;
+
+  &-edit {
+    button:first-child {
+      margin-right: 10px;
+    }
+  }
+
+  &-complete {
+    button:last-child {
+      margin-left: 10px;
+    }
+  }
+}

@@ -25,7 +25,9 @@
   "dependencies": {
     "ahooks": "^2.10.9",
     "classnames": "^2.3.1",
+    "compressorjs": "^1.1.1",
     "rc-trigger": "^5.2.10",
+    "react-cropper": "^2.1.8",
     "react-icons": "^4.2.0",
     "rough-notation": "^0.5.1",
     "roughjs": "^4.4.1",

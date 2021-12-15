@@ -1,0 +1,56 @@
+$namespace: image-cropper;
+
+.#{$namespace} {
+  .ab-modal-content {
+    border-radius: 4px;
+  }
+
+  .cropper-modal {
+    opacity: 0.7;
+  }
+
+  &-img-container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  &-white-board {
+    width: 100%;
+    margin: 8px 0;
+    border-radius: 2px;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &-preview {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    visibility: hidden;
+    overflow: hidden;
+    width: 100%;
+    height: 300px;
+    margin: 28px 0 8px 0;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  &-is-preview-crop {
+    visibility: hidden;
+  }
+
+  &-is-preview {
+    visibility: visible;
+  }
+}
