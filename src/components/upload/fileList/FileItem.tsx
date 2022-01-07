@@ -3,7 +3,6 @@ import { FC, memo, useEffect, useMemo, useState } from 'react';
 import { UploadFile, UploadStatus } from '../interface';
 import { getBase64 } from '../utils';
 import Modal from '../../modal';
-import './index.scss';
 
 interface FileItemProps {
   item: UploadFile;

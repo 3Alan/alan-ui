@@ -1,7 +1,6 @@
 import { FC, memo } from 'react';
 import { UploadFile } from '../interface';
 import FileItem from './FileItem';
-import './index.scss';
 
 interface FileListProps {
   items?: UploadFile[];

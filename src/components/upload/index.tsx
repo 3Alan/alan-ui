@@ -3,7 +3,6 @@ import React, { ChangeEvent, FC, memo, MouseEvent, useMemo, useRef } from 'react
 import { UploadFile, UploadStatus } from './interface';
 import FileList from './fileList/FileList';
 import { getUid, verifyMIME } from './utils';
-import './index.scss';
 import useStateFromProp from './useStateFromProps';
 import Dragger from './Dragger';
 import { isEmptyArray } from '../../utils';
@@ -35,7 +34,7 @@ interface UploaderProps {
 
 const cls = 'alan-upload';
 
-const Uploader: FC<UploaderProps> = (props) => {
+export const Uploader: FC<UploaderProps> = (props) => {
   const {
     children,
     accept,
