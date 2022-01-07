@@ -1,8 +1,8 @@
-import { Icon, LoadingContainer, Modal } from '@autobest-ui/components';
 import classNames from 'classnames';
-import { FC, Fragment, memo, useEffect, useMemo, useState } from 'react';
+import { FC, memo, useEffect, useMemo, useState } from 'react';
 import { UploadFile, UploadStatus } from '../interface';
 import { getBase64 } from '../utils';
+import Modal from '../../modal';
 import './index.scss';
 
 interface FileItemProps {
@@ -11,7 +11,7 @@ interface FileItemProps {
   onRemove: () => void;
 }
 
-const cls = 'uploader-fl';
+const cls = 'upload-fl';
 
 const FileItem: FC<FileItemProps> = (props) => {
   const { item, onRemove, className } = props;
@@ -24,7 +24,7 @@ const FileItem: FC<FileItemProps> = (props) => {
 
   useEffect(() => {
     if (uploading) {
-      getBase64(item.rawFile).then((res) => setPreviewImage(res));
+      getBase64(item.rawFile as File).then((res) => setPreviewImage(res));
     }
   }, [item, uploading]);
 
@@ -37,31 +37,21 @@ const FileItem: FC<FileItemProps> = (props) => {
   };
 
   return (
-    <LoadingContainer
-      loading={uploading}
+    <div
       className={classNames(className, `${cls}-fi`, {
         [`${cls}-error`]: uploadFailed
       })}
     >
-      <>
-        {uploading && <img src={previewImage} alt="" />}
-        {uploadFailed ? <div className={`${cls}-error-info`}>error</div> : <img src={url} alt="" onClick={onPreview} />}
-        <div className={`${cls}-delete`} onClick={onRemove}>
-          <Icon name="close" color="#f9f9fa" width={0.1} height={0.1} />
-        </div>
+      {uploading && <img src={previewImage} alt="" />}
+      {uploadFailed ? <div className={`${cls}-error-info`}>error</div> : <img src={url} alt="" onClick={onPreview} />}
+      <div className={`${cls}-delete`} onClick={onRemove}>
+        delete
+      </div>
 
-        <Modal
-          width="400px"
-          height="auto"
-          closable={false}
-          className={`${cls}-preview-modal`}
-          visible={isPreviewVisible}
-          onClose={onPreviewModalClose}
-        >
-          <img src={url} alt="" />
-        </Modal>
-      </>
-    </LoadingContainer>
+      <Modal maskClosable={false} visible={isPreviewVisible} onClose={onPreviewModalClose}>
+        <img src={url} alt="" />
+      </Modal>
+    </div>
   );
 };
 

@@ -33,7 +33,7 @@ interface UploaderProps {
   beforeUpload?: (fileList: File[]) => File[] | Promise<File[]>;
 }
 
-const cls = 'ab-uploader';
+const cls = 'alan-upload';
 
 const Uploader: FC<UploaderProps> = (props) => {
   const {
@@ -160,6 +160,8 @@ const Uploader: FC<UploaderProps> = (props) => {
       status: UploadStatus.UPLOADING,
       rawFile: file
     }));
+
+    console.log(newTasks);
 
     if (!isCountExceed(newTasks.length)) {
       setInternalFileList((prev) => [...prev, ...newTasks]);

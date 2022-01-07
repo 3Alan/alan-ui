@@ -1,15 +1,14 @@
-import { Icon } from '@autobest-ui/components';
-import React, { FC, memo, MouseEvent, useRef } from 'react';
+import { FC, memo, MouseEvent, useRef, DragEvent } from 'react';
 
 interface DraggerProps {
   onAdd?: (e: MouseEvent) => void;
-  onDrop?: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDrop?: (e: DragEvent<HTMLDivElement>) => void;
 }
 
-const cls = 'ab-uploader';
+const cls = 'alan-upload';
 
 const Dragger: FC<DraggerProps> = (props) => {
-  const addElement = useRef<HTMLDivElement>();
+  const addElement = useRef<HTMLDivElement>(null);
   const { onAdd, onDrop } = props;
 
   const onDragEnter = () => {
@@ -24,11 +23,11 @@ const Dragger: FC<DraggerProps> = (props) => {
     }
   };
 
-  const onDropEffect = (e) => {
+  const onDropEffect = (e: DragEvent<HTMLDivElement>) => {
     if (addElement.current) {
       addElement.current.style.borderColor = '#d9d9d9';
     }
-    onDrop(e);
+    onDrop?.(e);
   };
 
   return (
@@ -41,8 +40,7 @@ const Dragger: FC<DraggerProps> = (props) => {
       onDragOver={(e) => e.preventDefault()}
       onDrop={onDropEffect}
     >
-      <Icon name="plus" width={0.12} color="#7c7c7c" />
-      <div>Upload</div>
+      +<div>Upload</div>
     </div>
   );
 };

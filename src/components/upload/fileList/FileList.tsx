@@ -1,4 +1,4 @@
-import React, { FC, Fragment, memo } from 'react';
+import { FC, memo } from 'react';
 import { UploadFile } from '../interface';
 import FileItem from './FileItem';
 import './index.scss';
@@ -8,10 +8,10 @@ interface FileListProps {
   onRemove: (file: UploadFile) => void;
 }
 
-const cls = 'uploader-fl';
+const cls = 'upload-fl';
 
 const FileList: FC<FileListProps> = (props) => {
-  const { items, onRemove } = props;
+  const { items = [], onRemove } = props;
 
   return (
     <>

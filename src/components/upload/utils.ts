@@ -1,6 +1,6 @@
-import { v4 as uuid } from 'uuid';
+let index = 1;
 
-export const getUid = () => `uploader-${uuid()}`;
+export const getUid = () => `uploader-${index++}`;
 
 export const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
