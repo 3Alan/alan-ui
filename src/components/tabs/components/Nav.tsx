@@ -25,17 +25,17 @@ export const TabNav: FC<TabNavProps> = (props) => {
         <LinearPath points={canvasInfo.path} bowing={0.5} roughness={0.8} />
       </ReactRough>
 
-      {tabs.map(({ props }) => (
+      {tabs.map(({ props: { title, tabKey, disabled } }) => (
         <div
-          title={props.title}
-          className={classNames(`${cls}-nav-item-${props.tabKey}`, `${cls}-nav-item`, {
-            [`${cls}-nav-active`]: activeKey === props.tabKey,
-            [`${cls}-nav-disabled`]: props.disabled
+          title={title}
+          className={classNames(`${cls}-nav-item-${tabKey}`, `${cls}-nav-item`, {
+            [`${cls}-nav-active`]: activeKey === tabKey,
+            [`${cls}-nav-disabled`]: disabled
           })}
-          key={props.tabKey}
-          onClick={() => onTabClick(props.tabKey, props.disabled || false)}
+          key={tabKey}
+          onClick={() => onTabClick(tabKey, disabled || false)}
         >
-          {props.title}
+          {title}
         </div>
       ))}
     </div>
