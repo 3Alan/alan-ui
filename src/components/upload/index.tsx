@@ -37,19 +37,19 @@ const cls = 'alan-upload';
 export const Uploader: FC<UploaderProps> = (props) => {
   const {
     children,
-    accept,
+    accept = 'image/*',
     multiple,
     disabled,
-    action,
-    maxCount,
-    fileList,
+    action = 'https://run.mocky.io/v3/ef7967a7-4733-43ad-b37e-dc446998556a',
+    maxCount = 6,
+    fileList = [],
     className,
     beforeUpload,
     onChange,
     onCountExceed,
     customRequest
   } = props;
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useMemo(() => {
     // 初始化时添加uid和status
@@ -66,7 +66,7 @@ export const Uploader: FC<UploaderProps> = (props) => {
   const [internalFileList, setInternalFileList] = useStateFromProp(fileList);
   const showAdd = useMemo(() => internalFileList.length < maxCount, [internalFileList, maxCount]);
 
-  const post = async (file): Promise<ResponseData> => {
+  const post = async (file: File): Promise<ResponseData> => {
     const form = new FormData();
     form.append(file.name, file);
     let data;
@@ -84,15 +84,15 @@ export const Uploader: FC<UploaderProps> = (props) => {
   };
 
   const updateStatus = (currentTask: UploadFile, status?: string, url?: string) => {
-    let newFileList;
-    let currentFile;
+    let newFileList: UploadFile[] = [];
+    let currentFile = {};
 
     setInternalFileList((prev) => {
       newFileList = prev.map((task) => {
         if (task.uid !== currentTask.uid) return task;
 
         currentFile = {
-          name: currentTask.rawFile.name,
+          name: currentTask.rawFile?.name,
           uid: currentTask.uid,
           url,
           status
@@ -111,12 +111,12 @@ export const Uploader: FC<UploaderProps> = (props) => {
     await Promise.all(
       tasks.map(async (currentTask) => {
         try {
-          const result = await post(currentTask.rawFile);
+          const result = await post(currentTask.rawFile as File);
           updateStatus(currentTask, UploadStatus.DONE, result.url);
-          alert(`${currentTask.rawFile.name} success!`);
+          alert(`${currentTask.rawFile?.name} success!`);
         } catch (e) {
           updateStatus(currentTask, UploadStatus.ERROR, '');
-          alert(`${currentTask.rawFile.name} failed!`);
+          alert(`${currentTask.rawFile?.name} failed!`);
           throw e;
         }
       })
@@ -136,7 +136,7 @@ export const Uploader: FC<UploaderProps> = (props) => {
   };
 
   const handleVerifiedFiles = (files: File[]) => {
-    const verifiedFiles = [];
+    const verifiedFiles: File[] = [];
     files.forEach((item) => {
       if (verifyMIME(item, accept)) {
         verifiedFiles.push(item);
@@ -172,7 +172,7 @@ export const Uploader: FC<UploaderProps> = (props) => {
     e.persist();
     const { files: rawFiles } = e.target;
     if (!rawFiles) return;
-    let files = [].slice.call(rawFiles);
+    let files: File[] = [].slice.call(rawFiles);
     files = handleVerifiedFiles(files);
 
     if (isEmptyArray(files)) return;
@@ -183,7 +183,7 @@ export const Uploader: FC<UploaderProps> = (props) => {
     e.target.value = '';
   };
 
-  const onRemove = (file) => {
+  const onRemove = (file: UploadFile) => {
     const removedFileList = internalFileList.filter((item) => item.uid !== file.uid);
     if (onChange) {
       onChange({
@@ -204,7 +204,7 @@ export const Uploader: FC<UploaderProps> = (props) => {
   const onFileDrop = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
 
-    let files = [].slice.call(e.dataTransfer.files);
+    let files: File[] = [].slice.call(e.dataTransfer.files);
     if (!multiple) {
       files = files.slice(0, 1);
     }
@@ -232,13 +232,6 @@ export const Uploader: FC<UploaderProps> = (props) => {
       </span>
     </div>
   );
-};
-
-Uploader.defaultProps = {
-  action: 'https://run.mocky.io/v3/ef7967a7-4733-43ad-b37e-dc446998556a',
-  fileList: [],
-  maxCount: 6,
-  accept: 'image/*'
 };
 
 export default memo<UploaderProps>(Uploader);

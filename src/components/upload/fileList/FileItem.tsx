@@ -15,7 +15,7 @@ const cls = 'upload-fl';
 const FileItem: FC<FileItemProps> = (props) => {
   const { item, onRemove, className } = props;
   const { url, status } = item;
-  const [previewImage, setPreviewImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState<any>(null);
   const [isPreviewVisible, setIsPreviewVisible] = useState(false);
 
   const uploadFailed = useMemo(() => status === UploadStatus.ERROR, [status]);
