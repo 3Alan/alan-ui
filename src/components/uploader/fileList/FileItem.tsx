@@ -1,6 +1,6 @@
 import { Icon, LoadingContainer, Modal } from '@autobest-ui/components';
 import classNames from 'classnames';
-import React, { FC, Fragment, memo, useEffect, useMemo, useState } from 'react';
+import { FC, Fragment, memo, useEffect, useMemo, useState } from 'react';
 import { UploadFile, UploadStatus } from '../interface';
 import { getBase64 } from '../utils';
 import './index.scss';

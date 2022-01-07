@@ -1,13 +1,12 @@
-import { isEmptyArray } from '@autobest-ui/utils';
 import classNames from 'classnames';
 import React, { ChangeEvent, FC, memo, MouseEvent, useMemo, useRef } from 'react';
-import Alert from '../alert';
 import { UploadFile, UploadStatus } from './interface';
 import FileList from './fileList/FileList';
 import { getUid, verifyMIME } from './utils';
 import './index.scss';
 import useStateFromProp from './useStateFromProps';
 import Dragger from './Dragger';
+import { isEmptyArray } from '../../utils';
 
 interface OnChangeEvent {
   file: UploadFile;
@@ -115,10 +114,10 @@ const Uploader: FC<UploaderProps> = (props) => {
         try {
           const result = await post(currentTask.rawFile);
           updateStatus(currentTask, UploadStatus.DONE, result.url);
-          Alert.Info(`${currentTask.rawFile.name} success!`);
+          alert(`${currentTask.rawFile.name} success!`);
         } catch (e) {
           updateStatus(currentTask, UploadStatus.ERROR, '');
-          Alert.Error(`${currentTask.rawFile.name} failed!`);
+          alert(`${currentTask.rawFile.name} failed!`);
           throw e;
         }
       })
@@ -143,7 +142,7 @@ const Uploader: FC<UploaderProps> = (props) => {
       if (verifyMIME(item, accept)) {
         verifiedFiles.push(item);
       } else {
-        Alert.Warn('Select the correct format file');
+        alert('Select the correct format file');
       }
     });
 
