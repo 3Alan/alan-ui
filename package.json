@@ -38,7 +38,7 @@
   "scripts": {
     "start": "react-scripts start",
     "clean": "rimraf ./dist",
-    "build": "pnpm clean && rollup -c && pnpm build:sass",
+    "build": "yarn clean && rollup -c && yarn build:sass",
     "build:sass": "sass ./src/components/style/index.scss ./dist/index.css --style compressed",
     "test": "react-scripts test",
     "coverage": "react-scripts test --coverage --watchAll=false",
@@ -51,9 +51,8 @@
     "build-storybook": "build-storybook -s public",
     "build-storybook-static": "build-storybook -o sb_build",
     "build-storybook-docs": "build-storybook --docs",
-    "prepublishOnly": "pnpm test:ci && pnpm lint && pnpm build",
-    "prepare": "husky install",
-    "preinstall": "node ./scripts/preinstall.js"
+    "prepublishOnly": "yarn test:ci && yarn lint && yarn build",
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
@@ -118,8 +117,8 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "pnpm lint",
-      "pnpm test:ci"
+      "yarn lint",
+      "yarn test:ci"
     ]
   },
   "jest": {
