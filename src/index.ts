@@ -17,3 +17,5 @@ export { default as Paper } from './components/paper';
 export { default as Icon } from './components/icon';
 
 export { default as Checkbox, CheckboxGroup } from './components/checkbox';
+
+export { default as Input } from './components/input';

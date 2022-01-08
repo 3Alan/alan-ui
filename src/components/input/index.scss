@@ -1,0 +1,32 @@
+$prefix-cls: alan-input;
+
+.#{$prefix-cls} {
+  display: inline-block;
+  padding: 2px;
+
+  input {
+    border: none;
+    box-sizing: border-box;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    display: inline-block;
+    padding: 1px 8px;
+    color: #000000d9;
+    font-size: 14px;
+    line-height: 1.5715;
+    background-color: #fff;
+    background-image: none;
+    outline: 0;
+
+    &[type=number] {
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+      }
+  
+      -moz-appearance: textfield;
+    }
+  }
+}
