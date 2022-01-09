@@ -1,8 +1,20 @@
+@import './fileList/index.scss';
+
 $namespace: alan-upload;
 
 .#{$namespace} {
-  &-flex {
+  &-flex-picture {
     display: flex;
+
+    & > span {
+      order: 9;
+    }
+  }
+
+  &-flex-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   input {
@@ -32,7 +44,7 @@ $namespace: alan-upload;
     background-color: #00000080;
     width: 74px;
     height: 74px;
-    transition: all .3s;
+    transition: all 0.3s;
     color: #ffffffd9;
     display: flex;
     align-items: center;
@@ -49,7 +61,6 @@ $namespace: alan-upload;
 
   &-add {
     background-color: #fafafa;
-    border: 1px dashed #d9d9d9;
     border-radius: 2px;
     width: 86px;
     height: 86px;
@@ -58,15 +69,11 @@ $namespace: alan-upload;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: border-color .3s;
+    transition: border-color 0.3s;
     color: #7c7c7c;
 
-    .ab-icon {
-      margin-bottom: 8px;
-    }
-
-    &:hover {
-      border-color: #1890ff !important;
+    & > div {
+      margin-top: 4px;
     }
   }
 
@@ -81,7 +88,7 @@ $namespace: alan-upload;
 
   &-error-info {
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
     width: 70px;
     height: 100%;

@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/prop-types */
-import useDeepCompareEffect from 'use-deep-compare-effect';
+import { useDeepCompareEffect } from 'ahooks';
 import React, { useContext, FC, memo } from 'react';
 import { RoughSVG } from 'roughjs/bin/svg';
 import { Drawable } from 'roughjs/bin/core';

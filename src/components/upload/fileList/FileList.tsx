@@ -1,21 +1,33 @@
 import { FC, memo } from 'react';
-import { UploadFile } from '../interface';
-import FileItem from './FileItem';
+import { ListType, UploadFile } from '../interface';
+import PictureItem from './PictureItem';
+import TextItem from './TextItem';
 
 interface FileListProps {
   items?: UploadFile[];
+  type?: 'picture' | 'text';
   onRemove: (file: UploadFile) => void;
 }
 
-const cls = 'upload-fl';
+const cls = 'alan-upload-fl';
 
 const FileList: FC<FileListProps> = (props) => {
-  const { items = [], onRemove } = props;
+  const { items = [], type = ListType.PICTURE, onRemove } = props;
+
+  if (type === ListType.TEXT) {
+    return (
+      <>
+        {items.map((item) => (
+          <TextItem item={item} key={item.uid} onRemove={() => onRemove(item)} />
+        ))}
+      </>
+    );
+  }
 
   return (
     <>
       {items.map((item) => (
-        <FileItem item={item} key={item.uid} className={`${cls}-fileList-item`} onRemove={() => onRemove(item)} />
+        <PictureItem item={item} key={item.uid} className={`${cls}-picture-item`} onRemove={() => onRemove(item)} />
       ))}
     </>
   );

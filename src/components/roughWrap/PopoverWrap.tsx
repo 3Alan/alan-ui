@@ -21,8 +21,9 @@ interface PopoverWrapProps extends Options, AllHTMLAttributes<HTMLElement> {
 
 export const PopoverWrap = forwardRef<unknown, PopoverWrapProps>((props, ref) => {
   const { children, className, wrapClassName, placement = 'top', style, closeable, onClose, ...roughOptions } = props;
-  const element = useRef<HTMLElement>();
-  const { width, height } = useSize(element);
+  const element = useRef<HTMLElement>(null);
+  const size = useSize(element);
+  const { width = 0, height = 0 } = size || {};
   const placementPath = getPopoverPath(width, height, placement);
   const { width: safeWidth, height: safeHeight } = getSafeSize(placement, width, height);
 

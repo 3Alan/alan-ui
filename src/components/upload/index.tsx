@@ -2,14 +2,15 @@ import classNames from 'classnames';
 import React, { ChangeEvent, FC, memo, MouseEvent, useMemo, useRef } from 'react';
 import { UploadFile, UploadStatus } from './interface';
 import FileList from './fileList/FileList';
-import { getUid, verifyMIME } from './utils';
+import { getBase64, getUid, verifyMIME } from './utils';
 import useStateFromProp from './useStateFromProps';
 import Dragger from './Dragger';
 import { isEmptyArray } from '../../utils';
+import axios from 'axios';
 
 interface OnChangeEvent {
   file: UploadFile;
-  fileList: UploadFile[];
+  fileList?: UploadFile[];
 }
 
 interface ResponseData {
@@ -17,7 +18,7 @@ interface ResponseData {
   [key: string]: any;
 }
 
-interface UploaderProps {
+export interface UploadProps {
   action?: string;
   accept?: string;
   multiple?: boolean;
@@ -25,31 +26,33 @@ interface UploaderProps {
   className?: string;
   fileList?: UploadFile[];
   maxCount?: number;
+  listType?: 'picture' | 'text';
   onCountExceed?: (exceed: number) => void;
-  customRequest?: (formData: FormData) => Promise<UploadFile[]>;
+  customRequest?: (formData: FormData) => Promise<ResponseData>;
   onChange?: (e: OnChangeEvent) => void;
   /** 返回 [] 会中断上传 */
-  beforeUpload?: (fileList: File[]) => File[] | Promise<File[]>;
+  beforeUpload?: (fileList: File[]) => File[] | Promise<File[]> | Boolean;
 }
 
 const cls = 'alan-upload';
 
-export const Uploader: FC<UploaderProps> = (props) => {
-  const {
-    children,
-    accept = 'image/*',
-    multiple,
-    disabled,
-    action = 'https://run.mocky.io/v3/ef7967a7-4733-43ad-b37e-dc446998556a',
-    maxCount = 6,
-    fileList = [],
-    className,
-    beforeUpload,
-    onChange,
-    onCountExceed,
-    customRequest
-  } = props;
+export const Upload: FC<UploadProps> = ({
+  children,
+  accept = 'image/*',
+  multiple,
+  disabled,
+  action = 'https://run.mocky.io/v3/69430982-338a-4fda-9a8b-f5cb9c789146',
+  maxCount = 6,
+  fileList = [],
+  listType = 'picture',
+  className,
+  beforeUpload,
+  onChange,
+  onCountExceed,
+  customRequest
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const shouldUploadRef = useRef(true);
 
   useMemo(() => {
     // 初始化时添加uid和status
@@ -67,23 +70,22 @@ export const Uploader: FC<UploaderProps> = (props) => {
   const showAdd = useMemo(() => internalFileList.length < maxCount, [internalFileList, maxCount]);
 
   const post = async (file: File): Promise<ResponseData> => {
-    const form = new FormData();
-    form.append(file.name, file);
-    let data;
+    const formData = new FormData();
+    formData.append(file.name, file);
+    let data: ResponseData;
 
     if (customRequest) {
-      data = await customRequest(form);
+      data = await customRequest(formData);
     } else {
-      data = await fetch(action, {
-        method: 'POST',
-        body: form
-      }).then((res) => res.json());
+      // TODO: 上传进度
+      const res = await axios.post(action, formData);
+      data = res.data;
     }
 
     return data;
   };
 
-  const updateStatus = (currentTask: UploadFile, status?: string, url?: string) => {
+  const updateStatus = (currentTask: UploadFile, status?: string, url?: string | ArrayBuffer) => {
     let newFileList: UploadFile[] = [];
     let currentFile = {};
 
@@ -102,12 +104,23 @@ export const Uploader: FC<UploaderProps> = (props) => {
       return newFileList;
     });
 
-    if (onChange) {
-      onChange({ file: { ...currentFile, rawFile: currentTask.rawFile }, fileList: newFileList });
-    }
+    onChange?.({ file: { ...currentFile, rawFile: currentTask.rawFile }, fileList: newFileList });
   };
 
   const upload = async (tasks: UploadFile[]) => {
+    // 中断上传
+    if (!shouldUploadRef.current) {
+      tasks.map(async (currentTask) => {
+        let previewImage: string | ArrayBuffer = '';
+        if ((accept = 'image/*')) {
+          previewImage = (await getBase64(currentTask.rawFile as File)) || '';
+        }
+
+        updateStatus(currentTask, UploadStatus.CANCELED, previewImage);
+      });
+      return;
+    }
+
     await Promise.all(
       tasks.map(async (currentTask) => {
         try {
@@ -149,18 +162,23 @@ export const Uploader: FC<UploaderProps> = (props) => {
   };
 
   const handleUploadTasks = async (files: File[]) => {
+    let handledFiles = files;
     if (beforeUpload) {
-      files = await beforeUpload(files);
+      const shouldUpload = await beforeUpload(files);
+      if (shouldUpload) {
+        handledFiles = shouldUpload as File[];
+      } else {
+        shouldUploadRef.current = false;
+      }
     }
 
     // 添加状态
-    const newTasks: UploadFile[] = files.map((file) => ({
+    const newTasks: UploadFile[] = handledFiles.map((file) => ({
       uid: getUid(),
       status: UploadStatus.UPLOADING,
+      name: file.name,
       rawFile: file
     }));
-
-    console.log(newTasks);
 
     if (!isCountExceed(newTasks.length)) {
       setInternalFileList((prev) => [...prev, ...newTasks]);
@@ -216,9 +234,7 @@ export const Uploader: FC<UploaderProps> = (props) => {
   };
 
   return (
-    <div className={classNames(cls, className, `${cls}-flex`)}>
-      <FileList onRemove={onRemove} items={internalFileList} />
-
+    <div className={classNames(cls, className, `${cls}-flex-${listType}`)}>
       <span onClick={onOpenResource}>
         <input
           ref={inputRef}
@@ -230,8 +246,10 @@ export const Uploader: FC<UploaderProps> = (props) => {
         />
         {children || (showAdd && <Dragger onDrop={onFileDrop} onAdd={onOpenResource} />)}
       </span>
+
+      <FileList type={listType} onRemove={onRemove} items={internalFileList} />
     </div>
   );
 };
 
-export default memo<UploaderProps>(Uploader);
+export default memo<UploadProps>(Upload) as FC<UploadProps>;

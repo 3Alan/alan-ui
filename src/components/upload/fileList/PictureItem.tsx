@@ -3,16 +3,19 @@ import { FC, memo, useEffect, useMemo, useState } from 'react';
 import { UploadFile, UploadStatus } from '../interface';
 import { getBase64 } from '../utils';
 import Modal from '../../modal';
+import Icon from '../../icon';
+import { FaTimes } from 'react-icons/fa';
+import { RoughWrap } from '../../roughWrap';
 
-interface FileItemProps {
+interface PictureItemProps {
   item: UploadFile;
   className?: string;
   onRemove: () => void;
 }
 
-const cls = 'upload-fl';
+const cls = 'alan-upload-fl';
 
-const FileItem: FC<FileItemProps> = (props) => {
+const PictureItem: FC<PictureItemProps> = (props) => {
   const { item, onRemove, className } = props;
   const { url, status } = item;
   const [previewImage, setPreviewImage] = useState<any>(null);
@@ -20,6 +23,13 @@ const FileItem: FC<FileItemProps> = (props) => {
 
   const uploadFailed = useMemo(() => status === UploadStatus.ERROR, [status]);
   const uploading = useMemo(() => status === UploadStatus.UPLOADING, [status]);
+
+  const roughProps = useMemo(
+    () => ({
+      stroke: uploadFailed ? '#ff4d4f' : '#d9d9d9'
+    }),
+    [status]
+  );
 
   useEffect(() => {
     if (uploading) {
@@ -36,22 +46,19 @@ const FileItem: FC<FileItemProps> = (props) => {
   };
 
   return (
-    <div
-      className={classNames(className, `${cls}-fi`, {
-        [`${cls}-error`]: uploadFailed
-      })}
-    >
-      {uploading && <img src={previewImage} alt="" />}
-      {uploadFailed ? <div className={`${cls}-error-info`}>error</div> : <img src={url} alt="" onClick={onPreview} />}
-      <div className={`${cls}-delete`} onClick={onRemove}>
-        delete
-      </div>
-
+    <>
+      <RoughWrap customElement="div" className={classNames(className, `${cls}-picture-fi`)} roughProps={roughProps}>
+        {uploading && <img src={previewImage} alt="" />}
+        {uploadFailed ? <div className={`${cls}-error-info`}>error</div> : <img src={url} alt="" onClick={onPreview} />}
+        <div className={`${cls}-picture-delete`} onClick={onRemove}>
+          <Icon fill="#fff" item={FaTimes} width={8} height={8} />
+        </div>
+      </RoughWrap>
       <Modal maskClosable={false} visible={isPreviewVisible} onClose={onPreviewModalClose}>
-        <img src={url} alt="" />
+        <img className={`${cls}-preview-img`} src={url} alt="" />
       </Modal>
-    </div>
+    </>
   );
 };
 
-export default memo(FileItem);
+export default memo(PictureItem);
