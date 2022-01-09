@@ -23,7 +23,7 @@ describe('Modal', () => {
     fireEvent.click(getByTestId('open'));
     expect(getByText('modal content')).toBeInTheDocument();
 
-    fireEvent.click(getByText('Close'));
+    fireEvent.click(getByTestId('close'));
     expect(queryByText('modal content')).toBeFalsy();
   });
 

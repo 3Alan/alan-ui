@@ -48,7 +48,7 @@ export const Modal: FC<ModalProps> = (props) => {
         <RoughWrap className={cls} ref={modalRef} customElement="div" shape="rectTangle">
           <div className={`${cls}-content`}>{children}</div>
 
-          <div className={`${cls}-close`} onClick={onClose}>
+          <div data-testid="close" className={`${cls}-close`} onClick={onClose}>
             <Icon item={FaTimes} />
           </div>
         </RoughWrap>
