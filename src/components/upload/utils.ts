@@ -1,6 +1,9 @@
 let index = 1;
 
-export const getUid = () => `uploader-${index++}`;
+export const getUid = () => {
+  index += 1;
+  return `uploader-${Date.now}-${index}`;
+};
 
 export const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {

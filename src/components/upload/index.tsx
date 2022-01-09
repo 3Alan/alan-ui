@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import React, { ChangeEvent, FC, memo, MouseEvent, useMemo, useRef } from 'react';
+import axios from 'axios';
 import { UploadFile, UploadStatus } from './interface';
 import FileList from './fileList/FileList';
 import { getBase64, getUid, verifyMIME } from './utils';
 import useStateFromProp from './useStateFromProps';
 import Dragger from './Dragger';
 import { isEmptyArray } from '../../utils';
-import axios from 'axios';
 
 interface OnChangeEvent {
   file: UploadFile;
@@ -31,7 +31,7 @@ export interface UploadProps {
   customRequest?: (formData: FormData) => Promise<ResponseData>;
   onChange?: (e: OnChangeEvent) => void;
   /** 返回 [] 会中断上传 */
-  beforeUpload?: (fileList: File[]) => File[] | Promise<File[]> | Boolean;
+  beforeUpload?: (fileList: File[]) => File[] | Promise<File[]> | boolean;
 }
 
 const cls = 'alan-upload';
@@ -58,9 +58,11 @@ export const Upload: FC<UploadProps> = ({
     // 初始化时添加uid和status
     fileList.forEach((file) => {
       if (!file.uid) {
+        // eslint-disable-next-line no-param-reassign
         file.uid = getUid();
       }
       if (!file.status) {
+        // eslint-disable-next-line no-param-reassign
         file.status = UploadStatus.DONE;
       }
     });
@@ -112,7 +114,7 @@ export const Upload: FC<UploadProps> = ({
     if (!shouldUploadRef.current) {
       tasks.map(async (currentTask) => {
         let previewImage: string | ArrayBuffer = '';
-        if ((accept = 'image/*')) {
+        if (accept === 'image/*') {
           previewImage = (await getBase64(currentTask.rawFile as File)) || '';
         }
 

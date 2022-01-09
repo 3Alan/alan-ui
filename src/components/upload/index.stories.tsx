@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { ComponentStory } from '@storybook/react';
 import { Button } from '../button';
 import Upload, { UploadProps } from '../upload';
@@ -13,7 +14,10 @@ export default {
 const Template: ComponentStory<typeof Upload> = (args) => {
   const beforeUpload = async (fileList: File[]) => {
     console.log(fileList);
-    return await Promise.all(fileList.map((item) => Promise.resolve(new File([item], 'hello', { type: item.type }))));
+    const list = await Promise.all(
+      fileList.map((item) => Promise.resolve(new File([item], 'hello', { type: item.type })))
+    );
+    return list;
   };
 
   return (

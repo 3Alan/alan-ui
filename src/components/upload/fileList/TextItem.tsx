@@ -15,7 +15,6 @@ const cls = 'alan-upload-fl';
 const TextItem: FC<TextItemProps> = (props) => {
   const { item, onRemove, className } = props;
   const { status, name } = item;
-  console.log(item);
 
   const uploadFailed = useMemo(() => status === UploadStatus.ERROR, [status]);
   const uploadSuccess = useMemo(() => status === UploadStatus.DONE, [status]);

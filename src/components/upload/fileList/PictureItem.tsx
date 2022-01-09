@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { FC, memo, useEffect, useMemo, useState } from 'react';
+import { FaTimes } from 'react-icons/fa';
 import { UploadFile, UploadStatus } from '../interface';
 import { getBase64 } from '../utils';
 import Modal from '../../modal';
 import Icon from '../../icon';
-import { FaTimes } from 'react-icons/fa';
 import { RoughWrap } from '../../roughWrap';
 
 interface PictureItemProps {
@@ -17,7 +17,7 @@ const cls = 'alan-upload-fl';
 
 const PictureItem: FC<PictureItemProps> = (props) => {
   const { item, onRemove, className } = props;
-  const { url, status } = item;
+  const { url = '', status } = item;
   const [previewImage, setPreviewImage] = useState<any>(null);
   const [isPreviewVisible, setIsPreviewVisible] = useState(false);
 
