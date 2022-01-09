@@ -1,10 +1,10 @@
 import { FC, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import classNames from 'classnames';
+import { FaTimes } from 'react-icons/fa';
 import Mask from '../mask';
 import RoughWrap from '../roughWrap';
-import Button from '../button';
 import { useOnClickOutside } from '../../utils/hooks';
+import Icon from '../icon';
 
 const cls = 'alan-modal';
 
@@ -45,14 +45,13 @@ export const Modal: FC<ModalProps> = (props) => {
     return (
       <>
         {mask && <Mask />}
-        <div className={classNames(cls, `${cls}-wrap`)}>
-          <RoughWrap ref={modalRef} customElement="div" shape="rectTangle" className={classNames(`${cls}-content`)}>
-            {children}
-            <Button onClick={() => onClose()} type="standard">
-              Close
-            </Button>
-          </RoughWrap>
-        </div>
+        <RoughWrap className={cls} ref={modalRef} customElement="div" shape="rectTangle">
+          <div className={`${cls}-content`}>{children}</div>
+
+          <div data-testid="close" className={`${cls}-close`} onClick={onClose}>
+            <Icon item={FaTimes} />
+          </div>
+        </RoughWrap>
       </>
     );
   };

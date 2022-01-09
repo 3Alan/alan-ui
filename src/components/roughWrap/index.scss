@@ -3,26 +3,30 @@ $prefix-cls: alan-rough-wrap;
 .#{$prefix-cls} {
   position: relative;
 
-  svg, canvas {
+  & > svg,
+  & > canvas {
     position: absolute;
     left: -2px;
     top: -2px;
     z-index: 0;
   }
 
-  &-child, &-popover {
+  &-child,
+  &-popover {
     position: relative;
     z-index: $z-10;
   }
 
   &-right {
-    &>svg, &>canvas {
+    & > svg,
+    & > canvas {
       left: -5px;
     }
   }
 
   &-bottom {
-    &>svg, &>canvas {
+    & > svg,
+    & > canvas {
       top: -5px;
     }
   }

@@ -50,7 +50,7 @@ export const Button: FC<
     className
   );
 
-  const shapeProps = useMemo(
+  const roughProps = useMemo(
     () => ({
       fill: disabled ? '#D1D5DB' : typeStyle[type].fill,
       stroke: disabled ? '#9CA3AF' : typeStyle[type].stroke,
@@ -76,7 +76,7 @@ export const Button: FC<
     <RoughWrap
       customElement="button"
       shape="rectTangle"
-      shapeProps={shapeProps}
+      roughProps={roughProps}
       className={classes}
       style={{ color: disabled ? '#9CA3AF' : typeStyle[type].stroke }}
       disabled={disabled}

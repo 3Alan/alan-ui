@@ -57,7 +57,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       </span>
 
       <RoughWrap
-        shapeProps={{
+        roughProps={{
           bowing: 1,
           roughness: 0.5,
           stroke: disabled ? '#9CA3AF' : '#374151',

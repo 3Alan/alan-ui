@@ -1,0 +1,100 @@
+@import './fileList/index.scss';
+
+$namespace: alan-upload;
+
+.#{$namespace} {
+  &-flex-picture {
+    display: flex;
+
+    & > span {
+      order: 9;
+    }
+  }
+
+  &-flex-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  input {
+    display: none;
+  }
+
+  &-fi {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6px;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    width: 86px;
+    height: 86px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &-actions {
+    position: absolute;
+    border-radius: 1px;
+    opacity: 0;
+    background-color: #00000080;
+    width: 74px;
+    height: 74px;
+    transition: all 0.3s;
+    color: #ffffffd9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &-delete {
+    cursor: pointer;
+  }
+
+  &-add {
+    background-color: #fafafa;
+    border-radius: 2px;
+    width: 86px;
+    height: 86px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    color: #7c7c7c;
+
+    & > div {
+      margin-top: 4px;
+    }
+  }
+
+  &-fileList-item {
+    margin-right: 10px;
+  }
+
+  &-error {
+    border-color: #ff4d4f;
+    border-style: solid;
+  }
+
+  &-error-info {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 70px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ff4d4f;
+  }
+}
