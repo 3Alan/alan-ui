@@ -6,6 +6,7 @@ import { getBase64 } from '../utils';
 import Modal from '../../modal';
 import Icon from '../../icon';
 import { RoughWrap } from '../../roughWrap';
+import Progress from '../../progress';
 
 interface PictureItemProps {
   item: UploadFile;
@@ -17,7 +18,7 @@ const cls = 'alan-upload-fl';
 
 const PictureItem: FC<PictureItemProps> = (props) => {
   const { item, onRemove, className } = props;
-  const { url = '', status } = item;
+  const { url = '', status, percent = 0 } = item;
   const [previewImage, setPreviewImage] = useState<any>(null);
   const [isPreviewVisible, setIsPreviewVisible] = useState(false);
 
@@ -48,7 +49,14 @@ const PictureItem: FC<PictureItemProps> = (props) => {
   return (
     <>
       <RoughWrap customElement="div" className={classNames(className, `${cls}-picture-fi`)} roughProps={roughProps}>
-        {uploading && <img src={previewImage} alt="" />}
+        {uploading && (
+          <div className={`${cls}-picture-progress`}>
+            <img src={previewImage} alt="" />
+            <div className={`${cls}-picture-progress-mask`}>
+              <Progress percent={percent} showText={false} height={5} />
+            </div>
+          </div>
+        )}
         {uploadFailed ? <div className={`${cls}-error-info`}>error</div> : <img src={url} alt="" onClick={onPreview} />}
         <div className={`${cls}-picture-delete`} onClick={onRemove}>
           <Icon fill="#fff" item={FaTimes} width={8} height={8} />

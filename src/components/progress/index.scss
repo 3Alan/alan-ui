@@ -1,0 +1,18 @@
+$prefix-cls: alan-progress;
+
+.#{$prefix-cls} {
+  display: flex;
+  width: 100%;
+
+  &-outer {
+    width: 100%;
+    flex: 1;
+  }
+
+  &-inner {
+  }
+
+  &-text {
+    margin-left: 10px;
+  }
+}

@@ -3,6 +3,7 @@ export interface UploadFile {
   uid?: string;
   status?: string;
   url?: string;
+  percent?: number;
   rawFile?: File;
 }
 

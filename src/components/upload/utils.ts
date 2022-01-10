@@ -2,7 +2,7 @@ let index = 1;
 
 export const getUid = () => {
   index += 1;
-  return `uploader-${Date.now}-${index}`;
+  return `uploader-${Date.now()}-${index}`;
 };
 
 export const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>

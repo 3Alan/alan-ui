@@ -5,7 +5,7 @@ const cls = 'alan-paper';
 
 export interface PaperProps {}
 
-// TODO:
+// TODO: 信纸？
 const Paper: FC<PaperProps> = (props) => {
   const { children } = props;
   return (

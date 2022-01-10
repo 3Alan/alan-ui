@@ -64,6 +64,23 @@ $namespace: alan-upload-fl;
     }
   }
 
+  &-picture-progress {
+    position: relative;
+
+    &-mask {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+    }
+  }
+
   &-text-delete {
     cursor: pointer;
     padding: 2px;

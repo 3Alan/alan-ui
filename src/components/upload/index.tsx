@@ -71,23 +71,35 @@ export const Upload: FC<UploadProps> = ({
   const [internalFileList, setInternalFileList] = useStateFromProp(fileList);
   const showAdd = useMemo(() => internalFileList.length < maxCount, [internalFileList, maxCount]);
 
-  const post = async (file: File): Promise<ResponseData> => {
+  const post = async (currentTask: UploadFile): Promise<ResponseData> => {
     const formData = new FormData();
-    formData.append(file.name, file);
+    const { rawFile } = currentTask;
+    if (!rawFile) throw new Error('no rawFile');
+
+    formData.append(rawFile.name, rawFile);
     let data: ResponseData;
 
     if (customRequest) {
       data = await customRequest(formData);
     } else {
-      // TODO: 上传进度
-      const res = await axios.post(action, formData);
+      const res = await axios.post(action, formData, {
+        onUploadProgress: (e: ProgressEvent) => {
+          updateStatus(currentTask, {
+            status: UploadStatus.UPLOADING,
+            percent: Math.round((e.loaded * 100) / e.total)
+          });
+        }
+      });
       data = res.data;
     }
 
     return data;
   };
 
-  const updateStatus = (currentTask: UploadFile, status?: string, url?: string | ArrayBuffer) => {
+  const updateStatus = (
+    currentTask: UploadFile,
+    info: { status?: string; url?: string | ArrayBuffer; percent?: number }
+  ) => {
     let newFileList: UploadFile[] = [];
     let currentFile = {};
 
@@ -96,10 +108,10 @@ export const Upload: FC<UploadProps> = ({
         if (task.uid !== currentTask.uid) return task;
 
         currentFile = {
+          ...task,
           name: currentTask.rawFile?.name,
           uid: currentTask.uid,
-          url,
-          status
+          ...info
         };
         return currentFile;
       });
@@ -118,7 +130,7 @@ export const Upload: FC<UploadProps> = ({
           previewImage = (await getBase64(currentTask.rawFile as File)) || '';
         }
 
-        updateStatus(currentTask, UploadStatus.CANCELED, previewImage);
+        updateStatus(currentTask, { status: UploadStatus.CANCELED, url: previewImage });
       });
       return;
     }
@@ -126,11 +138,11 @@ export const Upload: FC<UploadProps> = ({
     await Promise.all(
       tasks.map(async (currentTask) => {
         try {
-          const result = await post(currentTask.rawFile as File);
-          updateStatus(currentTask, UploadStatus.DONE, result.url);
+          const result = await post(currentTask);
+          updateStatus(currentTask, { status: UploadStatus.DONE, url: result.url });
           alert(`${currentTask.rawFile?.name} success!`);
         } catch (e) {
-          updateStatus(currentTask, UploadStatus.ERROR, '');
+          updateStatus(currentTask, { status: UploadStatus.ERROR, url: '' });
           alert(`${currentTask.rawFile?.name} failed!`);
           throw e;
         }

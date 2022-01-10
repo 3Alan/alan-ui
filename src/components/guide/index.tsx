@@ -17,6 +17,7 @@ export interface StepItem {
    * 高亮效果
    */
   spotType?: 'underline' | 'box' | 'circle' | 'highlight' | 'strike-through' | 'crossed-off' | 'bracket';
+  /** 高亮颜色 */
   spotColor?: string;
   multiline?: boolean;
   content: ReactNode;
