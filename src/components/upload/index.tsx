@@ -30,7 +30,7 @@ export interface UploadProps {
   onCountExceed?: (exceed: number) => void;
   customRequest?: (formData: FormData) => Promise<ResponseData>;
   onChange?: (e: OnChangeEvent) => void;
-  /** 返回 [] 会中断上传 */
+  /** 返回 false 会中断上传 */
   beforeUpload?: (fileList: File[]) => File[] | Promise<File[]> | boolean;
 }
 
