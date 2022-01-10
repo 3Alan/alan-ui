@@ -19,15 +19,23 @@ interface ResponseData {
 }
 
 export interface UploadProps {
+  /** 上传地址 */
   action?: string;
+  /** 可选的文件类型 */
   accept?: string;
+  /** 文件是否多选 */
   multiple?: boolean;
   disabled?: boolean;
   className?: string;
+  /** 展示的file文件 */
   fileList?: UploadFile[];
+  /** 最大文件选择数目 */
   maxCount?: number;
+  /** 文件展示类型 */
   listType?: 'picture' | 'text';
+  /** 超出最大选择文件数时的回调 */
   onCountExceed?: (exceed: number) => void;
+  /** 自定义请求方法 */
   customRequest?: (formData: FormData) => Promise<ResponseData>;
   onChange?: (e: OnChangeEvent) => void;
   /** 返回 false 会中断上传 */
