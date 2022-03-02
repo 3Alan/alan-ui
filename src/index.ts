@@ -21,3 +21,5 @@ export { default as Checkbox, CheckboxGroup } from './components/checkbox';
 export { default as Input } from './components/input';
 
 export { default as Upload } from './components/upload';
+
+export { default as Timeline } from './components/timeline';
