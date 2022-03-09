@@ -7,29 +7,29 @@ import { terser } from 'rollup-plugin-terser';
 import { visualizer } from 'rollup-plugin-visualizer';
 // 拷贝静态资源
 import copy from 'rollup-plugin-copy';
+import multiInput from 'rollup-plugin-multi-input';
 
 // 将package.json中的依赖打包
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import pkg from './package.json';
 
 const copyRight = `/*!
 Copyright (c) 2021 3Alan.
 Licensed under the MIT License (MIT)
 */`;
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
-  input: './src/index.ts',
+const bundlePathMap = {
+  cjs: 'dist/lib',
+  es: 'dist/es'
+};
+
+// 由于 @rollup/plugin-typescript 无法处理多 output 情况，所以打包两次
+const tasks = Object.keys(bundlePathMap).map((formatKey) => ({
+  input: ['src/**/*.{js,ts,tsx}', '!src/**/**.stories.**', '!src/**/__tests__/**'],
   output: [
     {
-      file: pkg.main,
-      format: 'cjs',
-      footer: copyRight
-    },
-    {
-      file: pkg.module,
-      format: 'esm',
+      dir: bundlePathMap[formatKey],
+      format: formatKey,
       footer: copyRight
     }
   ],
@@ -37,11 +37,12 @@ export default {
     // 由于roughjs只有es模块
     resolve({ resolveOnly: ['roughjs', 'path-data-parser', 'points-on-curve', 'points-on-path'] }),
     commonjs(),
+    multiInput(),
     typescript({
       tsconfig: './tsconfig.build.json',
       // 生成d.ts文件以及生成路径
       declaration: true,
-      declarationDir: 'types'
+      declarationDir: bundlePathMap[formatKey]
     }),
     copy({
       targets: [{ src: 'src/components/style/*.ttf', dest: 'dist' }]
@@ -50,4 +51,6 @@ export default {
     terser(),
     visualizer()
   ]
-};
+}));
+
+export default tasks;

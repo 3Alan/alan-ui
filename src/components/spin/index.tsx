@@ -4,7 +4,7 @@ import ReactRough, { Path } from '../rough';
 
 const cls = 'alan-spin';
 
-interface SpinProps {
+export interface SpinProps {
   /**
    * 控制显示
    */

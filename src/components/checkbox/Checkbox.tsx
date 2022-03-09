@@ -4,7 +4,7 @@ import ReactRough, { LinearPath } from '../rough';
 import { RoughWrap } from '../roughWrap';
 import GroupContext from './GroupContext';
 
-interface CheckboxProps {
+export interface CheckboxProps {
   /**
    * 默认是否选中
    */
