@@ -1,16 +1,15 @@
 import { ComponentStory } from '@storybook/react';
 import { FaGithub, FaRegCheckCircle } from 'react-icons/fa';
-import Tooltip from '../tooltip';
 import Timeline from '../timeline';
 import { TimelineItem } from './TimelineItem';
 import Icon from '../icon';
 
 export default {
   title: 'Components/Timeline',
-  component: Tooltip,
-  argTypes: {}
+  component: Timeline
 };
-const Template: ComponentStory<typeof Tooltip> = (args) => (
+
+const Template: ComponentStory<typeof Timeline> = () => (
   <Timeline>
     <TimelineItem dot="hi">custom dot</TimelineItem>
     <TimelineItem>

@@ -7,7 +7,7 @@ export interface TimelineItemProps {
   dot?: ReactNode;
 }
 
-export const TimelineItem: FC<TimelineItemProps> = ({ children, dot }) => {
+export const TimelineItem: FC<TimelineItemProps> = memo(({ children, dot }) => {
   return (
     <li>
       <div className={`${cls}-tail`} />
@@ -15,6 +15,6 @@ export const TimelineItem: FC<TimelineItemProps> = ({ children, dot }) => {
       <div className={`${cls}-content`}>{children}</div>
     </li>
   );
-};
+});
 
-export default memo(TimelineItem);
+export default TimelineItem;
