@@ -33,3 +33,5 @@ export { default as Input } from './components/input';
 
 export type { UploadProps } from './components/upload';
 export { default as Upload } from './components/upload';
+
+export { default as Timeline } from './components/timeline';
