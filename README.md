@@ -30,7 +30,6 @@ import '@3alan/ui/dist/index.css';
 
 ## TODO
 - [ ] monorepo
-- [x] vite
 - [ ] exclude third library in build file
 - [ ] Refactor RoughWrap
 - [ ] 移除 react-scripts，测试依赖
