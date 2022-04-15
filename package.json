@@ -58,23 +58,6 @@
       "yarn lint"
     ]
   },
-  "jest": {
-    "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!@roughjs)/"
-    ],
-    "collectCoverageFrom": [
-      "packages/**/*.{ts,tsx}",
-      "!packages/**/*.stories.*",
-      "!packages/utils/**",
-      "!packages/components/style/**",
-      "!packages/components/rough/**",
-      "!packages/roughOptions/**",
-      "!packages/components/config-provider/**"
-    ]
-  },
   "workspaces": [
     "packages/*"
   ]

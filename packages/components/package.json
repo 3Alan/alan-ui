@@ -74,5 +74,27 @@
     "react-scripts": "4.0.3",
     "sass": "^1.38.0"
   },
-  "gitHead": "227f97d66694a3b0e6fa9aff764237385f00702f"
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn lint",
+      "yarn test:ci"
+    ]
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!@roughjs)/"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!**/*.stories.*",
+      "!style/**",
+      "!rough/**",
+      "!roughOptions/**",
+      "!config-provider/**"
+    ]
+  },
+  "gitHead": "2b601e5f55d36199008c7a53a5a7b214d948d956"
 }
