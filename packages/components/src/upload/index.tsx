@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import React, { ChangeEvent, FC, memo, MouseEvent, useMemo, useRef } from 'react';
 import axios from 'axios';
+import { isEmptyArray } from '@3alan/utils';
 import { UploadFile, UploadStatus } from './interface';
 import FileList from './fileList/FileList';
 import { getBase64, getUid, verifyMIME } from './utils';
 import useStateFromProp from './useStateFromProps';
 import Dragger from './Dragger';
-import { isEmptyArray } from '../../utils';
 
 interface OnChangeEvent {
   file: UploadFile;

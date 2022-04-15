@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { FC, useContext, useEffect, useState } from 'react';
+import { getTabsNavInfo, TabsNavInfo } from '@3alan/utils';
 import TabContext from '../TabContext';
 import ReactRough, { LinearPath } from '../../rough';
-import { getTabsNavInfo, TabsNavInfo } from '../../../utils';
 
 export interface TabNavProps {
   onTabClick: (activeKey: string, disabled: boolean) => void;

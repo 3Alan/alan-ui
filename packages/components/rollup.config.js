@@ -25,7 +25,7 @@ const bundlePathMap = {
 
 // 由于 @rollup/plugin-typescript 无法处理多 output 情况，所以打包两次
 const tasks = Object.keys(bundlePathMap).map((formatKey) => ({
-  input: ['/**/*.{js,ts,tsx}', '!/**/**.stories.**', '!/**/__tests__/**'],
+  input: ['src/**/*.{js,ts,tsx}', '!src/**/**.stories.**', '!src/**/__tests__/**'],
   output: [
     {
       dir: bundlePathMap[formatKey],
@@ -39,13 +39,13 @@ const tasks = Object.keys(bundlePathMap).map((formatKey) => ({
     commonjs(),
     multiInput(),
     typescript({
-      tsconfig: './tsconfig.build.json',
+      tsconfig: './tsconfig.json',
       // 生成d.ts文件以及生成路径
       declaration: true,
       declarationDir: bundlePathMap[formatKey]
     }),
     copy({
-      targets: [{ src: '/style/*.ttf', dest: 'dist' }]
+      targets: [{ src: 'src/style/*.ttf', dest: 'dist' }]
     }),
     postcss(),
     terser(),

@@ -4,7 +4,7 @@ import { useDebounceFn } from 'ahooks';
 
 import { annotate } from 'rough-notation';
 import { RoughAnnotation } from 'rough-notation/lib/model';
-import { getPopoverPosition, isElementVisible } from '../../utils';
+import { getPopoverPosition, isElementVisible } from '@3alan/utils';
 import Button from '../button';
 import Mask from '../mask';
 import PopoverWrap from '../roughWrap/PopoverWrap';

@@ -3,7 +3,7 @@ import { useImperativeHandle, AllHTMLAttributes, forwardRef, CSSProperties, useR
 import { Options } from 'roughjs/bin/core';
 import { useSize } from 'ahooks';
 import { FaTimes } from 'react-icons/fa';
-import { getPopoverPath, getSafeSize } from '../../utils';
+import { getPopoverPath, getSafeSize } from '@3alan/utils';
 import Icon from '../icon';
 import ReactRough, { Polygon } from '../rough';
 import { PlacementsType } from '../tooltip/constants';

@@ -1,6 +1,6 @@
 import { ComponentStory } from '@storybook/react';
 import { FaGithub } from 'react-icons/fa';
-import RoughOptions from '../../roughOptions';
+import RoughOptions from '../roughOptions';
 import Icon from './index';
 
 export default {

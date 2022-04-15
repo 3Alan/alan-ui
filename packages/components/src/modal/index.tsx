@@ -1,9 +1,9 @@
 import { FC, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { FaTimes } from 'react-icons/fa';
+import { useOnClickOutside } from '@3alan/utils';
 import Mask from '../mask';
 import RoughWrap from '../roughWrap';
-import { useOnClickOutside } from '../../utils/hooks';
 import Icon from '../icon';
 
 const cls = 'alan-modal';
