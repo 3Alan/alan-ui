@@ -10,7 +10,8 @@
     "lint": "eslint --ext js,jsx,ts,tsx packages",
     "lint:fix": "eslint --ext js,jsx,ts,tsx packages --fix",
     "pub": "lerna publish",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean"
   },
   "devDependencies": {
     "lerna": "^4.0.0",
