@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -16,5 +17,9 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["packages"]
+  "paths": {
+    "@3alan/ui": ["packages/components/index.ts"],
+    "@3alan/utils": ["packages/utils/index.ts"]
+  },
+  "include": ["packages", "rollup.config.js"]
 }
