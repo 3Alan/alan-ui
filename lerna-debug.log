@@ -1,0 +1,17 @@
+33 error Error: Command failed with exit code 1: git commit -F /private/var/folders/nt/tlbvslxs74x24vk4s5h0mr4h0000gn/T/a1ed15a0-2ee8-4ffa-b80c-7ce0faa09842/lerna-commit.txt
+33 error → No staged files match any configured task.
+33 error ⧗   input: Publish
+33 error
+33 error  - @3alan/ui@0.3.4
+33 error  - @3alan/utils@0.0.1
+33 error ✖   subject may not be empty [subject-empty]
+33 error ✖   type may not be empty [type-empty]
+33 error
+33 error ✖   found 2 problems, 0 warnings
+33 error ⓘ   Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
+33 error
+33 error husky - commit-msg hook exited with code 1 (error)
+33 error     at makeError (/Users/alan/github/alan-ui/node_modules/execa/lib/error.js:60:11)
+33 error     at handlePromise (/Users/alan/github/alan-ui/node_modules/execa/index.js:118:26)
+33 error     at processTicksAndRejections (internal/process/task_queues.js:95:5)
+33 error     at async Promise.all (index 0)
