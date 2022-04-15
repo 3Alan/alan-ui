@@ -71,7 +71,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "sass": "^1.38.0"
+    "sass": "^1.38.0",
+    "babel-jest": "^27.3.1"
   },
-  "gitHead": "c612aea1f3c39a7425e1c6947f03669f9ac123da"
+  "gitHead": "227f97d66694a3b0e6fa9aff764237385f00702f"
 }
