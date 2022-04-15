@@ -1,5 +1,5 @@
-export * from './dom';
+export * from './src/dom';
 
-export * from './array';
+export * from './src/array';
 
-export * from './object';
+export * from './src/object';

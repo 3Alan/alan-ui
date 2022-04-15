@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FC, memo, useCallback, useMemo } from 'react';
-import { generateRange, uniqueArray } from '../../utils';
+import { generateRange, uniqueArray } from '../../../utils';
 import { RoughWrap } from '../roughWrap';
 
 const cls = 'alan-pagination';

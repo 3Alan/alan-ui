@@ -1,6 +1,6 @@
 import { MutableRefObject } from 'react';
 import { Point } from 'roughjs/bin/geometry';
-import { PlacementsType } from '../components/tooltip/constants';
+import { PlacementsType } from '../../components/src/tooltip/constants';
 
 export const canUseDom = () => {
   return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
