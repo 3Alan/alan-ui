@@ -68,6 +68,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "babel-jest": "^27.3.1",
+    "babel-loader": "8.1.0",
     "postcss": "^8.3.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -96,5 +97,5 @@
       "!config-provider/**"
     ]
   },
-  "gitHead": "2b601e5f55d36199008c7a53a5a7b214d948d956"
+  "gitHead": "7232bafacc024dd6ec85d13a27554c682d5c911b"
 }
