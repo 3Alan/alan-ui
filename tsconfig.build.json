@@ -1,10 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "exclude": [
-    "src/**/*.stories.*",
-    "src/**/stories",
-    "src/**/__tests__",
-    "src/components/style",
-    "src/setupTests.ts"
+    "packages/**/*.stories.*",
+    "packages/**/stories",
+    "packages/**/__tests__",
+    "packages/components/style",
+    "./setupTests.ts"
   ]
 }
