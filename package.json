@@ -8,8 +8,7 @@
     "build-storybook-docs": "build-storybook --docs",
     "prepare": "husky install",
     "lint": "eslint --ext js,jsx,ts,tsx packages",
-    "lint:fix": "eslint --ext js,jsx,ts,tsx packages --fix",
-    "prepublishOnly": "yarn test:ci && yarn lint && yarn build"
+    "lint:fix": "eslint --ext js,jsx,ts,tsx packages --fix"
   },
   "devDependencies": {
     "lerna": "^4.0.0",
