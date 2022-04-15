@@ -41,7 +41,7 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "build": "yarn clean && rollup -c && yarn build:sass",
-    "build:sass": "sass ./src/components/style/index.scss ./dist/index.css --style compressed",
+    "build:sass": "sass ./style/index.scss ./dist/index.css --style compressed",
     "test": "react-scripts test",
     "coverage": "react-scripts test --coverage --watchAll=false",
     "coverage:dev": "react-scripts test --coverage",
@@ -96,5 +96,5 @@
       "!config-provider/**"
     ]
   },
-  "gitHead": "4d26e24e324fbeb3386b68a72ef4101d9685210c"
+  "gitHead": "85742fcb0d60297d6118ae99d0aaa82a77d8f472"
 }
