@@ -46,7 +46,8 @@
     "coverage": "react-scripts test --coverage --watchAll=false",
     "coverage:dev": "react-scripts test --coverage",
     "test:ci": "cross-env CI=true react-scripts test --passWithNoTests",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepublishOnly": "yarn test:ci && yarn lint && yarn build"
   },
   "browserslist": {
     "production": [
