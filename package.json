@@ -1,90 +1,31 @@
 {
-  "name": "@3alan/ui",
-  "version": "0.3.3",
-  "private": false,
-  "main": "dist/lib/index.js",
-  "module": "dist/es/index.js",
-  "types": "dist/lib/index.d.ts",
-  "license": "MIT",
-  "description": "hand drawn react components",
-  "author": "3Alan",
-  "homepage": "https://alan-ui.vercel.app/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/3Alan/alan-ui"
-  },
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "react",
-    "components",
-    "ui",
-    "hand drawn"
-  ],
-  "dependencies": {
-    "ahooks": "3.1.5",
-    "axios": "0.24.0",
-    "classnames": "2.3.1",
-    "rc-trigger": "5.2.10",
-    "react-icons": "4.2.0",
-    "rough-notation": "0.5.1",
-    "roughjs": "4.4.1"
-  },
-  "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
-  },
+  "name": "root",
+  "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "clean": "rimraf ./dist",
-    "build": "yarn clean && rollup -c && yarn build:sass",
-    "build:sass": "sass ./src/components/style/index.scss ./dist/index.css --style compressed",
-    "test": "react-scripts test",
-    "coverage": "react-scripts test --coverage --watchAll=false",
-    "coverage:dev": "react-scripts test --coverage",
-    "test:ci": "cross-env CI=true react-scripts test --passWithNoTests",
-    "lint": "eslint --ext js,jsx,ts,tsx src",
-    "lint:fix": "eslint --ext js,jsx,ts,tsx src --fix",
-    "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build-storybook-static": "build-storybook -o sb_build",
     "build-storybook-docs": "build-storybook --docs",
-    "prepublishOnly": "yarn test:ci && yarn lint && yarn build",
-    "prepare": "husky install"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "prepare": "husky install",
+    "lint": "eslint --ext js,jsx,ts,tsx packages",
+    "lint:fix": "eslint --ext js,jsx,ts,tsx packages --fix",
+    "prepublishOnly": "yarn test:ci && yarn lint && yarn build"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.1.0",
-    "@commitlint/config-conventional": "^13.1.0",
-    "@rollup/plugin-commonjs": "^20.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.4",
-    "@rollup/plugin-typescript": "^8.2.5",
+    "lerna": "^4.0.0",
     "@storybook/addon-actions": "^6.3.7",
     "@storybook/addon-essentials": "^6.3.7",
     "@storybook/addon-links": "^6.3.7",
     "@storybook/builder-vite": "^0.1.28",
     "@storybook/node-logger": "^6.3.7",
     "@storybook/react": "^6.3.7",
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "babel-jest": "^27.3.1",
@@ -100,11 +41,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.1.2",
-    "postcss": "^8.3.6",
     "prettier": "^2.3.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
     "rimraf": "^3.0.2",
     "rollup": "^2.56.3",
     "rollup-plugin-copy": "^3.4.0",
@@ -112,15 +49,13 @@
     "rollup-plugin-postcss": "^4.0.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-visualizer": "^5.5.2",
-    "sass": "^1.38.0",
     "tslib": "^2.3.1",
     "typescript": "~4.3.5",
     "vite": "^2.9.1"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "yarn lint",
-      "yarn test:ci"
+      "yarn lint"
     ]
   },
   "jest": {
@@ -131,13 +66,16 @@
       "node_modules/(?!@roughjs)/"
     ],
     "collectCoverageFrom": [
-      "src/**/*.{ts,tsx}",
-      "!src/**/*.stories.*",
-      "!src/utils/**",
-      "!src/components/style/**",
-      "!src/components/rough/**",
-      "!src/roughOptions/**",
-      "!src/components/config-provider/**"
+      "packages/**/*.{ts,tsx}",
+      "!packages/**/*.stories.*",
+      "!packages/utils/**",
+      "!packages/components/style/**",
+      "!packages/components/rough/**",
+      "!packages/roughOptions/**",
+      "!packages/components/config-provider/**"
     ]
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
