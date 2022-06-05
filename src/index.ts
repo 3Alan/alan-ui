@@ -35,3 +35,6 @@ export type { UploadProps } from './components/upload';
 export { default as Upload } from './components/upload';
 
 export { default as Timeline } from './components/timeline';
+
+export type { ProgressProps } from './components/progress';
+export { default as Progress } from './components/progress';

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 import { RoughWrap } from '../roughWrap';
 
@@ -8,11 +9,12 @@ export interface ProgressProps {
   height?: number;
   /** 是否显示进度文字 */
   showText?: boolean;
+  className?: string;
 }
 
 const cls = 'alan-progress';
 
-export const Progress: FC<ProgressProps> = ({ percent = 0, showText = true, height = 12 }) => {
+export const Progress: FC<ProgressProps> = ({ percent = 0, showText = true, height = 12, className }) => {
   const safePercent = useMemo(() => {
     if (percent > 100) {
       return 100;
@@ -24,7 +26,7 @@ export const Progress: FC<ProgressProps> = ({ percent = 0, showText = true, heig
   }, [percent]);
 
   return (
-    <div className={cls}>
+    <div className={classNames(cls, className)}>
       <RoughWrap
         customElement="div"
         shape="rectTangle"
