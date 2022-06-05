@@ -25,7 +25,13 @@ const bundlePathMap = {
 
 // 由于 @rollup/plugin-typescript 无法处理多 output 情况，所以打包两次
 const tasks = Object.keys(bundlePathMap).map((formatKey) => ({
-  input: ['src/**/*.{js,ts,tsx}', '!src/**/**.stories.**', '!src/**/__tests__/**'],
+  input: [
+    'src/**/*.{js,ts,tsx}',
+    '!src/**/**.stories.**',
+    '!src/**/__tests__/**',
+    '!**/setupTests.*',
+    '!**/react-app-env.d.*'
+  ],
   output: [
     {
       dir: bundlePathMap[formatKey],
