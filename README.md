@@ -29,10 +29,11 @@ import '@3alan/ui/dist/index.css';
 ```
 
 ## TODO
-- [ ] monorepo
-- [ ] exclude third library in build file
-- [ ] Refactor RoughWrap
-- [ ] 移除 react-scripts，测试依赖
+- [ ] monorepo lerna
+- [ ] 优化打包文件大小
+- [ ] 重构 RoughWrap
+- [ ] 移除 react-scripts、测试依赖
+- [ ] Icon 移除三方库自己实现，可参考 [react-svg](https://github.com/tanem/react-svg)
 
 
 ## ✨✨
