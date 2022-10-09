@@ -3,6 +3,7 @@ $prefix-cls: alan-tabs;
 .#{$prefix-cls} {
   &-nav-wrap {
     display: flex;
+    padding: 8px;
     position: relative;
 
     svg, canvas {
@@ -15,7 +16,7 @@ $prefix-cls: alan-tabs;
 
   &-nav-item {
     cursor: pointer;
-    padding: 8px;
+    padding: 8px 16px;
     z-index: $z-70;
     color: #4B5563;
   }

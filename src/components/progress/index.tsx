@@ -27,29 +27,34 @@ export const Progress: FC<ProgressProps> = ({ percent = 0, showText = true, heig
 
   return (
     <div className={classNames(cls, className)}>
+      {/* TODO： 每次都会重新渲染 */}
       <RoughWrap
         customElement="div"
-        shape="rectTangle"
+        shape="roundedRectTangle"
+        radius="5 5 5 5"
         className={`${cls}-outer`}
         style={{ height }}
         roughProps={{
+          roughness: 0,
           stroke: '#6B7280',
-          strokeWidth: 1.5
+          strokeWidth: 2
         }}
       >
         <RoughWrap
           customElement="div"
-          shape="rectTangle"
+          shape="roundedRectTangle"
+          radius="5 5 5 5"
           className={`${cls}-inner`}
           data-testid="inner"
           style={{
             width: `${safePercent}%`,
-            height
+            height: height - 2
           }}
           roughProps={{
-            fill: 'rgb(0, 120, 212)',
-            stroke: 'none',
-            fillWeight: 2.5
+            roughness: 0,
+            fill: '#93C5FD',
+            fillStyle: 'solid',
+            stroke: 'none'
           }}
         />
       </RoughWrap>

@@ -21,6 +21,22 @@ export default {
     },
     roughness: {
       control: { type: 'range', min: 0, max: 3, step: 0.1 }
+    },
+    showShadow: {
+      control: 'boolean'
+    },
+    radius: {
+      description: '边框圆角半径',
+      table: {
+        type: {
+          summary: 'string',
+          detail: 'tl tr br bl'
+        },
+        defaultValue: {
+          summary: '0 0 0 0'
+        }
+      },
+      control: { type: 'text' }
     }
   }
 };
@@ -31,5 +47,6 @@ export const button = Template.bind({});
 button.args = {
   type: 'primary',
   disabled: false,
-  size: 'default'
+  size: 'default',
+  radius: '0 0 0 0'
 };

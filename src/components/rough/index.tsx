@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/require-default-props */
-import React, { FC, MutableRefObject, RefObject } from 'react';
+import React, { CSSProperties, FC, MutableRefObject, RefObject } from 'react';
 import { Config } from 'roughjs/bin/core';
 import RoughContext from './RoughContext';
 
@@ -18,6 +18,8 @@ interface RoughProps {
 
 interface RoughCompProps extends RoughProps {
   forwardedRef?: RefObject<unknown>;
+  className?: string;
+  style?: CSSProperties;
 }
 
 export const ReactRoughComp: FC<RoughCompProps> = ({
@@ -27,6 +29,8 @@ export const ReactRoughComp: FC<RoughCompProps> = ({
   renderer,
   svgViewBox,
   forwardedRef,
+  className,
+  style,
   children
 }) => {
   const svgRef = React.useRef<SVGSVGElement>();
@@ -57,7 +61,12 @@ export const ReactRoughComp: FC<RoughCompProps> = ({
           ref: svgRef as SvgRef
         }}
       >
-        <svg width={width} height={height} ref={svgRef as SvgRef} viewBox={svgViewBox}>
+        <svg
+          className={className}
+          style={{ ...style, width, height }}
+          ref={svgRef as SvgRef}
+          viewBox={svgViewBox || `0 0 ${width} ${height}`}
+        >
           {children}
         </svg>
       </RoughContext.Provider>
@@ -74,7 +83,7 @@ export const ReactRoughComp: FC<RoughCompProps> = ({
         ref: canvasRef as CanvasRef
       }}
     >
-      <canvas width={width} height={height} ref={canvasRef as CanvasRef}>
+      <canvas className={className} style={style} width={width} height={height} ref={canvasRef as CanvasRef}>
         {children}
       </canvas>
     </RoughContext.Provider>

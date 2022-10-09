@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { FC, useContext, useMemo, useState } from 'react';
-import ReactRough, { LinearPath } from '../rough';
-import { RoughWrap } from '../roughWrap';
+import ReactRough, { Path } from '../rough';
 import GroupContext from './GroupContext';
 
 export interface CheckboxProps {
@@ -56,35 +55,30 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         <input type="checkbox" checked={checked} onChange={onChange} disabled={disabled} value={value} />
       </span>
 
-      <RoughWrap
-        roughProps={{
-          bowing: 1,
-          roughness: 0.5,
-          stroke: disabled ? '#9CA3AF' : '#374151',
-          fill: disabled ? '#F3F4F6' : '#fff',
-          fillStyle: 'solid'
-        }}
-        className={`${cls}-box`}
-        customElement="span"
-        shape="rectTangle"
-      />
+      <ReactRough className={`${cls}-box`} width={20} height={20} renderer="svg" svgViewBox="0 0 512 512">
+        <Path
+          d="M405.333 64H106.667C83.198 64 64 83.198 64 106.667v298.666C64 428.802 83.198 448 106.667 448h298.666C428.802 448 448 428.802 448 405.333V106.667C448 83.198 428.802 64 405.333 64"
+          roughness={0}
+          strokeWidth={5}
+          stroke={disabled ? '#9CA3AF' : '#1F2937'}
+          // eslint-disable-next-line no-nested-ternary
+          fill={disabled ? '#F3F4F6' : checked ? '#34D399' : '#fff'}
+          fillStyle="solid"
+        />
+      </ReactRough>
 
       {checked && (
-        <div className={`${cls}-icon`}>
-          <ReactRough width={14} height={14} renderer="svg">
-            <LinearPath
-              points={[
-                [0, 7],
-                [6, 13],
-                [14, 1]
-              ]}
-              roughness={0.5}
-              bowing={0}
-              strokeWidth={2}
-              stroke={disabled ? '#9CA3AF' : '#3B82F6'}
-            />
-          </ReactRough>
-        </div>
+        <ReactRough className={`${cls}-icon`} width={20} height={20} renderer="svg" svgViewBox="0 0 512 512">
+          <Path
+            d="M213.333 362.667 106.667 256 136.531 226.136 213.333 302.938 375.469 140.802 405.333 170.667 213.333 362.667"
+            roughness={0}
+            bowing={0}
+            strokeWidth={1}
+            stroke={disabled ? '#9CA3AF' : 'none'}
+            fill="#fff"
+            fillStyle="solid"
+          />
+        </ReactRough>
       )}
 
       <span className={`${cls}-content`}>{children}</span>

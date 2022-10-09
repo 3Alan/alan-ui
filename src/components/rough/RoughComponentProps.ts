@@ -15,6 +15,10 @@ export interface RectangleProps extends Options {
   height: number;
 }
 
+export interface RoundedRectTangleProps extends RectangleProps {
+  radius: string;
+}
+
 export interface EllipseProps extends Options {
   x: number;
   y: number;

@@ -17,9 +17,7 @@ yarn add @3alan/ui
 ```jsx
 import { Button } from '@3alan/ui';
 
-const App = () => (
-  <Button>awesome</Button>
-);
+const App = () => <Button>awesome</Button>;
 ```
 
 And import style manually:
@@ -29,14 +27,17 @@ import '@3alan/ui/dist/index.css';
 ```
 
 ## TODO
+
 - [ ] monorepo lerna
 - [ ] 优化打包文件大小
 - [ ] 重构 RoughWrap
 - [ ] 移除 react-scripts、测试依赖
 - [ ] Icon 移除三方库自己实现，可参考 [react-svg](https://github.com/tanem/react-svg)
 
-
 ## ✨✨
+
+https://dribbble.com/sultonhand
+
 https://github.com/rough-stuff
 
 https://github.com/ooade/react-rough
