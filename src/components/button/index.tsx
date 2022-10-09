@@ -1,10 +1,10 @@
 import React, { FC, useMemo, useState, useCallback, memo } from 'react';
 import classNames from 'classnames';
 
-import RoughWrap from '../roughWrap';
+import RoughWrap, { RoughWrapProps } from '../roughWrap';
 
-export interface ButtonProps {
-  size?: 'small' | 'default';
+export interface ButtonProps extends Pick<RoughWrapProps, 'showShadow' | 'radius'> {
+  size?: 'small' | 'default' | 'large';
   type?: 'standard' | 'primary';
   disabled?: boolean;
   className?: string;
@@ -23,12 +23,14 @@ const cls = 'alan-btn';
 
 export const typeStyle = {
   primary: {
-    fill: '#BFDBFE',
-    stroke: '#3B82F6'
+    fill: '#DDD6FE',
+    stroke: '#374151',
+    color: '#374151'
   },
   standard: {
-    fill: '#9CA3AF',
-    stroke: '#1F2937'
+    fill: '#1F2937',
+    stroke: '#1F2937',
+    color: '#F3F4F6'
   }
 };
 
@@ -38,8 +40,9 @@ export const typeStyle = {
 export const Button: FC<
   ButtonProps & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'type' | 'disabled'>
 > = (props) => {
-  const { children, type = 'primary', className, size, disabled, drawnStyle, roughness, ...restProps } = props;
+  const { children, type = 'primary', className, size, disabled, drawnStyle, roughness, radius, ...restProps } = props;
   const [fillStyle, setFillStyle] = useState(drawnStyle);
+  const [showShadow, setShowShadow] = useState(false);
 
   const classes = classNames(
     cls,
@@ -55,31 +58,34 @@ export const Button: FC<
       fill: disabled ? '#D1D5DB' : typeStyle[type].fill,
       stroke: disabled ? '#9CA3AF' : typeStyle[type].stroke,
       fillStyle,
-      roughness
+      roughness,
+      strokeWidth: 1
     }),
     [type, fillStyle, disabled]
   );
 
   const onEnterEffect = useCallback(() => {
     if (!disabled) {
-      setFillStyle('zigzag');
+      // setShowShadow(true);
     }
   }, [disabled]);
 
   const onLeaveEffect = useCallback(() => {
     if (!disabled) {
-      setFillStyle(drawnStyle);
+      // setShowShadow(false);
     }
   }, [disabled, drawnStyle]);
 
   return (
     <RoughWrap
       customElement="button"
-      shape="rectTangle"
+      shape="roundedRectTangle"
+      radius={radius}
       roughProps={roughProps}
       className={classes}
-      style={{ color: disabled ? '#9CA3AF' : typeStyle[type].stroke }}
+      style={{ color: disabled ? '#9CA3AF' : typeStyle[type].color }}
       disabled={disabled}
+      showShadow={showShadow}
       onMouseEnter={onEnterEffect}
       onMouseLeave={onLeaveEffect}
       {...restProps}
@@ -92,8 +98,8 @@ export const Button: FC<
 Button.defaultProps = {
   type: 'primary',
   size: 'default',
-  drawnStyle: 'hachure',
-  roughness: 1,
+  drawnStyle: 'solid',
+  roughness: 0,
   disabled: false,
   className: ''
 };

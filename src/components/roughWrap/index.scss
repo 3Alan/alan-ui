@@ -3,11 +3,15 @@ $prefix-cls: alan-rough-wrap;
 .#{$prefix-cls} {
   position: relative;
 
-  & > svg,
-  & > canvas {
+  &-svg, svg, canvas {
     position: absolute;
-    left: -2px;
-    top: -2px;
+    left: 0;
+    top: 0;
+    z-index: 2;
+  }
+
+  svg.#{$prefix-cls}-shadow, &-shadow {
+    position: absolute;
     z-index: 0;
   }
 

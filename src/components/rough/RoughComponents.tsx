@@ -8,6 +8,7 @@ import { Drawable } from 'roughjs/bin/core';
 import { RoughCanvas } from 'roughjs/bin/canvas';
 import RoughContext from './RoughContext';
 import * as Props from './RoughComponentProps';
+import { getRoundedRectPath } from '../../utils/svg';
 
 type RoughRenderer = RoughSVG | RoughCanvas;
 type RoughOutput = Node | Drawable;
@@ -66,6 +67,16 @@ export const Rectangle: FC<Props.RectangleProps> = memo(({ x, y, width, height, 
   return <Renderer render={(rc: RoughRenderer): RoughOutput => renderProps(rc)} />;
 });
 Rectangle.displayName = 'Rectangle';
+
+export const RoundedRectTangle: FC<Props.RoundedRectTangleProps> = memo(({ x, y, width, height, radius, ...props }) => {
+  const renderProps = React.useCallback(
+    (rc: RoughRenderer) => rc.path(getRoundedRectPath(width, height, radius, radius, radius, radius, x, y), props),
+    [x, y, width, height, props]
+  );
+
+  return <Renderer render={(rc: RoughRenderer): RoughOutput => renderProps(rc)} />;
+});
+RoundedRectTangle.displayName = 'RoundedRectTangle';
 
 export const Ellipse: FC<Props.EllipseProps> = memo(({ x, y, width, height, ...props }) => {
   const renderProps = React.useCallback(

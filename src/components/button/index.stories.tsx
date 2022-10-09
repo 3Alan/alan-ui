@@ -21,6 +21,21 @@ export default {
     },
     roughness: {
       control: { type: 'range', min: 0, max: 3, step: 0.1 }
+    },
+    showShadow: {
+      control: 'boolean'
+    },
+    radius: {
+      description: '边框圆角半径',
+      table: {
+        type: {
+          summary: 'number'
+        },
+        defaultValue: {
+          summary: 0
+        }
+      },
+      control: { type: 'number', min: 0 }
     }
   }
 };
