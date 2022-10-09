@@ -69,8 +69,9 @@ export const Rectangle: FC<Props.RectangleProps> = memo(({ x, y, width, height, 
 Rectangle.displayName = 'Rectangle';
 
 export const RoundedRectTangle: FC<Props.RoundedRectTangleProps> = memo(({ x, y, width, height, radius, ...props }) => {
+  const [tl, tr, br, bl] = radius.split(' ').map((s) => Number(s));
   const renderProps = React.useCallback(
-    (rc: RoughRenderer) => rc.path(getRoundedRectPath(width, height, radius, radius, radius, radius, x, y), props),
+    (rc: RoughRenderer) => rc.path(getRoundedRectPath(width, height, tl, tr, br, bl, x, y), props),
     [x, y, width, height, props]
   );
 

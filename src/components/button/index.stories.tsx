@@ -29,13 +29,14 @@ export default {
       description: '边框圆角半径',
       table: {
         type: {
-          summary: 'number'
+          summary: 'string',
+          detail: 'tl tr br bl'
         },
         defaultValue: {
-          summary: 0
+          summary: '0 0 0 0'
         }
       },
-      control: { type: 'number', min: 0 }
+      control: { type: 'text' }
     }
   }
 };
@@ -46,5 +47,6 @@ export const button = Template.bind({});
 button.args = {
   type: 'primary',
   disabled: false,
-  size: 'default'
+  size: 'default',
+  radius: '0 0 0 0'
 };

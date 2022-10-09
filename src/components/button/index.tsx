@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState, useCallback, memo } from 'react';
+import React, { FC, useMemo, useCallback, memo } from 'react';
 import classNames from 'classnames';
 
 import RoughWrap, { RoughWrapProps } from '../roughWrap';
@@ -16,6 +16,8 @@ export interface ButtonProps extends Pick<RoughWrapProps, 'showShadow' | 'radius
    * 潦草程度 推荐：0-10
    */
   roughness?: number;
+  /** 边框宽度 */
+  borderWidth?: number;
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
@@ -40,9 +42,19 @@ export const typeStyle = {
 export const Button: FC<
   ButtonProps & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'type' | 'disabled'>
 > = (props) => {
-  const { children, type = 'primary', className, size, disabled, drawnStyle, roughness, radius, ...restProps } = props;
-  const [fillStyle, setFillStyle] = useState(drawnStyle);
-  const [showShadow, setShowShadow] = useState(false);
+  const {
+    children,
+    type = 'primary',
+    className,
+    size,
+    disabled,
+    drawnStyle,
+    roughness,
+    radius,
+    borderWidth,
+    showShadow,
+    ...restProps
+  } = props;
 
   const classes = classNames(
     cls,
@@ -57,22 +69,22 @@ export const Button: FC<
     () => ({
       fill: disabled ? '#D1D5DB' : typeStyle[type].fill,
       stroke: disabled ? '#9CA3AF' : typeStyle[type].stroke,
-      fillStyle,
+      fillStyle: drawnStyle,
       roughness,
-      strokeWidth: 1
+      strokeWidth: borderWidth
     }),
-    [type, fillStyle, disabled]
+    [type, drawnStyle, disabled]
   );
 
   const onEnterEffect = useCallback(() => {
     if (!disabled) {
-      // setShowShadow(true);
+      // TODO: hover effect
     }
   }, [disabled]);
 
   const onLeaveEffect = useCallback(() => {
     if (!disabled) {
-      // setShowShadow(false);
+      /// TODO: hover effect
     }
   }, [disabled, drawnStyle]);
 
@@ -101,7 +113,8 @@ Button.defaultProps = {
   drawnStyle: 'solid',
   roughness: 0,
   disabled: false,
-  className: ''
+  className: '',
+  borderWidth: 1
 };
 
 export default memo(Button);

@@ -9,8 +9,11 @@ export interface RoughWrapProps extends AllHTMLAttributes<HTMLElement> {
   shape?: 'rectTangle' | 'roundedRectTangle' | 'ellipse';
   roughProps?: Options;
   showShadow?: boolean;
+  /** 内容的class */
+  contentClassName?: string;
   className?: string;
-  radius?: number;
+  /** 缩写 'tl tr br bl' */
+  radius?: string;
 }
 
 // 适用于矩形和椭圆（靠长宽和起点确定形状的图形）
@@ -30,7 +33,8 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapPr
     roughProps,
     showShadow = false,
     className,
-    radius = 0,
+    contentClassName,
+    radius = '0 0 0 0',
     ...resetProps
   } = props;
   const mountRef = useRef<HTMLElement>();
@@ -43,7 +47,7 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapPr
 
   const childrenElement = (
     <>
-      <div className={`${cls}-child`}>{children}</div>
+      <div className={classNames(contentClassName, `${cls}-child`)}>{children}</div>
 
       {/* 注意children和ReactRough的层级（z-index）关系 */}
       <ReactRough
@@ -53,7 +57,7 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapPr
         renderer="svg"
       >
         <ShapeComponent
-          radius={radius as number}
+          radius={radius as string}
           x={borderWidth}
           y={borderWidth}
           width={width}
@@ -71,7 +75,7 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapPr
           style={{ left: 4, top: 4 }}
         >
           <ShapeComponent
-            radius={radius as number}
+            radius={radius as string}
             x={borderWidth}
             y={borderWidth}
             width={width}
