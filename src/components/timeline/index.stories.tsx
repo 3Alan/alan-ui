@@ -1,8 +1,6 @@
 import { ComponentStory } from '@storybook/react';
-import { FaGithub, FaRegCheckCircle } from 'react-icons/fa';
 import Timeline from '../timeline';
 import { TimelineItem } from './TimelineItem';
-import Icon from '../icon';
 
 export default {
   title: 'Components/Timeline',
@@ -11,15 +9,15 @@ export default {
 
 const Template: ComponentStory<typeof Timeline> = () => (
   <Timeline>
-    <TimelineItem dot="hi">custom dot</TimelineItem>
+    <TimelineItem color="#34D399">alan-ui</TimelineItem>
+    <TimelineItem color="#FBBF24">https://github.com/3Alan/alan-ui</TimelineItem>
+    <TimelineItem color="#F87171">2022-9-20</TimelineItem>
     <TimelineItem>
       <div>
-        <div style={{ paddingBottom: 10 }}>default dot</div>
-        <div>hello</div>
+        <div style={{ paddingBottom: 10 }}>2022-10-20</div>
+        <div>new ui style</div>
       </div>
     </TimelineItem>
-    <TimelineItem dot={<Icon item={FaGithub} width={16} />}>https://github.com/3Alan/alan-ui</TimelineItem>
-    <TimelineItem dot={<Icon item={FaRegCheckCircle} width={16} fill="green" />}>4214</TimelineItem>
   </Timeline>
 );
 

@@ -5,7 +5,8 @@ describe('Timeline', () => {
   it('render correctly', () => {
     render(
       <Timeline>
-        <TimelineItem dot="hi">custom dot</TimelineItem>
+        <TimelineItem>custom dot</TimelineItem>
+        <TimelineItem color="#374151">custom dot</TimelineItem>
       </Timeline>
     );
   });

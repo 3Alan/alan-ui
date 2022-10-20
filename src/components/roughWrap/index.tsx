@@ -37,47 +37,41 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapPr
     radius = '0 0 0 0',
     ...resetProps
   } = props;
-  const mountRef = useRef<HTMLElement>();
-  const element = (ref || mountRef) as MutableRefObject<HTMLElement>;
-  const size = useSize(element);
+  const mountRef = useRef<HTMLDivElement>(null);
+  const isEllipse = shape === 'ellipse';
+  const size = useSize(mountRef);
   const { width = 0, height = 0 } = size || {};
   const ShapeComponent = Shapes[shape];
   const borderWidth = 1;
   const allBorderWidth = borderWidth * 2;
+  const wrapWidth = width + allBorderWidth;
+  const wrapHeight = height + allBorderWidth;
+  const x = isEllipse ? wrapWidth / 2 : borderWidth;
+  const y = isEllipse ? wrapHeight / 2 : borderWidth;
 
   const childrenElement = (
     <>
-      <div className={classNames(contentClassName, `${cls}-child`)}>{children}</div>
+      <div ref={mountRef} className={classNames(contentClassName, `${cls}-child`)}>
+        {children}
+      </div>
 
       {/* 注意children和ReactRough的层级（z-index）关系 */}
-      <ReactRough
-        className={`${cls}-svg`}
-        width={width + allBorderWidth}
-        height={height + allBorderWidth}
-        renderer="svg"
-      >
-        <ShapeComponent
-          radius={radius as string}
-          x={borderWidth}
-          y={borderWidth}
-          width={width}
-          height={height}
-          {...roughProps}
-        />
+      <ReactRough className={`${cls}-svg`} width={wrapWidth} height={wrapHeight} renderer="svg">
+        <ShapeComponent radius={radius as string} x={x} y={y} width={width} height={height} {...roughProps} />
       </ReactRough>
 
       {showShadow && (
         <ReactRough
           className={`${cls}-shadow`}
-          width={width + allBorderWidth}
-          height={height + allBorderWidth}
+          width={wrapWidth}
+          height={wrapHeight}
           renderer="svg"
           style={{ left: 4, top: 4 }}
         >
           <ShapeComponent
             radius={radius as string}
-            x={borderWidth}
-            y={borderWidth}
+            x={x}
+            y={y}
             width={width}
             height={height}
             {...roughProps}
@@ -91,7 +85,7 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapPr
   return createElement(
     customElement,
     {
-      ref: element,
+      ref: mountRef,
       className: classNames(cls, className),
       ...resetProps
     },
