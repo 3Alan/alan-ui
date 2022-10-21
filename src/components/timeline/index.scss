@@ -7,7 +7,6 @@ $prefix-cls: alan-timeline;
     display: flex;
     position: relative;
     align-items: flex-start;
-    padding-bottom: 20px;
 
     &:last-child {
       .#{$prefix-cls}-tail {
@@ -19,21 +18,20 @@ $prefix-cls: alan-timeline;
   &-content {
     min-height: 40px;
     padding-left: 20px;
-  }
-
-  &-tail {
-    position: absolute;
-    top: 11px;
-    left: 4.5px;
-    height: calc(100% - 12px);
-    border-left: 1px solid #4FC3F7;
+    padding-bottom: 20px;
   }
 
   &-dot {
-    width: 10px;
-    height: 10px;
-    border: 1px solid #1565C0;
-    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &-dot-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
   &-header {
