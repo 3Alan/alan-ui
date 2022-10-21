@@ -15,6 +15,7 @@ export const modal = () => {
       <Button onClick={() => setVisible(true)}>open</Button>
       <Modal visible={visible} onClose={() => setVisible(false)}>
         awesome modal
+        <Button>button</Button>
       </Modal>
     </>
   );

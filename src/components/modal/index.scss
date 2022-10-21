@@ -6,30 +6,28 @@ $prefix-cls: alan-modal;
   left: 50%;
   transform: translate(-50%);
   padding: 30px;
-  background-color: #fff;
   outline: 0;
   z-index: $z-60;
   text-align: center;
   display: flex;
   justify-content: center;
-  width: 450px;
+  width: 400px;
   max-height: 400px;
-  overflow: auto;
 
   &-content {
-    overflow: auto;
     background-color: #fff;
     height: 100%;
+    width: 100%;
   }
 
   &-close {
     position: absolute;
-    right: 5px;
+    right: 35px;
     top: 5px;
     cursor: pointer;
   }
 
-  .alan-rough-wrap-child {
+  > .alan-rough-wrap-child {
     position: initial;
   }
 }

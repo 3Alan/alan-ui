@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { FaTimes } from 'react-icons/fa';
+import { BiX } from 'react-icons/bi';
 import Mask from '../mask';
 import RoughWrap from '../roughWrap';
 import { useOnClickOutside } from '../../utils/hooks';
@@ -45,11 +45,18 @@ export const Modal: FC<ModalProps> = (props) => {
     return (
       <>
         {mask && <Mask />}
-        <RoughWrap className={cls} ref={modalRef} customElement="div" shape="rectTangle">
+        <RoughWrap
+          roughProps={{ roughness: 0, fill: '#fff', fillStyle: 'solid', stroke: '#374151' }}
+          className={cls}
+          ref={modalRef}
+          customElement="div"
+          shape="roundedRectTangle"
+          radius="12 12 12 12"
+        >
           <div className={`${cls}-content`}>{children}</div>
 
           <div data-testid="close" className={`${cls}-close`} onClick={onClose}>
-            <Icon item={FaTimes} />
+            <Icon item={BiX} fillStyle="solid" roughness={0} fill="#374151" />
           </div>
         </RoughWrap>
       </>
