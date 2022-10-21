@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useImperativeHandle, AllHTMLAttributes, forwardRef, CSSProperties, useRef, LegacyRef, memo } from 'react';
 import { Options } from 'roughjs/bin/core';
 import { useSize } from 'ahooks';
-import { FaTimes } from 'react-icons/fa';
+import { BiX } from 'react-icons/bi';
 import { getPopoverPath, getSafeSize } from '../../utils';
 import Icon from '../icon';
 import ReactRough, { Polygon } from '../rough';
@@ -37,7 +37,7 @@ export const PopoverWrap = forwardRef<unknown, PopoverWrapProps>((props, ref) =>
     >
       {closeable && (
         <div onClick={onClose} className={`${cls}-close`}>
-          <Icon item={FaTimes} width={12} height={12} />
+          <Icon item={BiX} width={16} height={16} fillStyle="solid" roughness={0} fill="#374151" />
         </div>
       )}
 
@@ -45,7 +45,7 @@ export const PopoverWrap = forwardRef<unknown, PopoverWrapProps>((props, ref) =>
 
       {/* +15为小箭头的安全大小 */}
       <ReactRough width={safeWidth} height={safeHeight} renderer="svg">
-        <Polygon points={placementPath} {...roughOptions} />
+        <Polygon points={placementPath} {...{ roughness: 0, fill: '#fff', fillStyle: 'solid' }} {...roughOptions} />
       </ReactRough>
     </div>
   );

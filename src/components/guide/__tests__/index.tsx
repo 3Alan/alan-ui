@@ -12,7 +12,6 @@ if (!SVGElement.prototype.getTotalLength) {
 const steps: StepItem[] = [
   {
     selector: '#one',
-    spotType: 'box',
     spotColor: 'red',
     content: 'step1'
   },

@@ -15,13 +15,6 @@ export default {
         disable: true
       }
     },
-    drawnStyle: {
-      options: ['hachure', 'solid', 'zigzag', 'cross-hatch', 'dots', 'sunburst', 'dashed', 'zigzag-line'],
-      control: { type: 'select' }
-    },
-    roughness: {
-      control: { type: 'range', min: 0, max: 3, step: 0.1 }
-    },
     showShadow: {
       control: 'boolean'
     },

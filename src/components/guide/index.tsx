@@ -122,9 +122,6 @@ export const Guide: FC<GuideProps> = (props) => {
         onClose={handleClose}
         placement="bottom"
         style={popoverStyle}
-        roughness={0.5}
-        fill="#fff"
-        fillStyle="solid"
         wrapClassName={`${cls}-wrap`}
         className={`${cls}-popover-content`}
       >

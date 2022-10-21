@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useCallback, memo } from 'react';
 import classNames from 'classnames';
-
+import { Options } from 'roughjs/bin/core';
 import RoughWrap, { RoughWrapProps } from '../roughWrap';
 
 export interface ButtonProps extends Pick<RoughWrapProps, 'showShadow' | 'radius'> {
@@ -8,16 +8,8 @@ export interface ButtonProps extends Pick<RoughWrapProps, 'showShadow' | 'radius
   type?: 'standard' | 'primary';
   disabled?: boolean;
   className?: string;
-  /**
-   * 手绘风格
-   */
-  drawnStyle?: 'hachure' | 'solid' | 'zigzag' | 'cross-hatch' | 'dots' | 'sunburst' | 'dashed' | 'zigzag-line';
-  /**
-   * 潦草程度 推荐：0-10
-   */
-  roughness?: number;
-  /** 边框宽度 */
-  borderWidth?: number;
+  /** roughjs 相关参数 */
+  roughProps?: Options;
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
@@ -42,19 +34,7 @@ export const typeStyle = {
 export const Button: FC<
   ButtonProps & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'type' | 'disabled'>
 > = (props) => {
-  const {
-    children,
-    type = 'primary',
-    className,
-    size,
-    disabled,
-    drawnStyle,
-    roughness,
-    radius,
-    borderWidth,
-    showShadow,
-    ...restProps
-  } = props;
+  const { children, type = 'primary', className, size, disabled, radius, showShadow, roughProps, ...restProps } = props;
 
   const classes = classNames(
     cls,
@@ -65,15 +45,17 @@ export const Button: FC<
     className
   );
 
-  const roughProps = useMemo(
+  const finalRoughProps = useMemo(
     () => ({
+      fillStyle: 'solid',
+      roughness: 0,
+      strokeWidth: 1,
+      ...roughProps,
       fill: disabled ? '#D1D5DB' : typeStyle[type].fill,
       stroke: disabled ? '#9CA3AF' : typeStyle[type].stroke,
-      fillStyle: drawnStyle,
-      roughness,
-      strokeWidth: borderWidth
+      radius: '4 4 4 4'
     }),
-    [type, drawnStyle, disabled]
+    [type, disabled]
   );
 
   const onEnterEffect = useCallback(() => {
@@ -86,14 +68,14 @@ export const Button: FC<
     if (!disabled) {
       /// TODO: hover effect
     }
-  }, [disabled, drawnStyle]);
+  }, [disabled]);
 
   return (
     <RoughWrap
       customElement="button"
       shape="roundedRectTangle"
       radius={radius}
-      roughProps={roughProps}
+      roughProps={finalRoughProps}
       className={classes}
       style={{ color: disabled ? '#9CA3AF' : typeStyle[type].color }}
       disabled={disabled}
@@ -110,11 +92,8 @@ export const Button: FC<
 Button.defaultProps = {
   type: 'primary',
   size: 'default',
-  drawnStyle: 'solid',
-  roughness: 0,
   disabled: false,
-  className: '',
-  borderWidth: 1
+  className: ''
 };
 
 export default memo(Button);

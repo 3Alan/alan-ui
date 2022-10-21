@@ -37,9 +37,10 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapPr
     radius = '0 0 0 0',
     ...resetProps
   } = props;
-  const mountRef = useRef<HTMLDivElement>(null);
+  const mountRef = useRef<HTMLElement>();
+  const element = (ref || mountRef) as MutableRefObject<HTMLElement>;
+  const size = useSize(element);
   const isEllipse = shape === 'ellipse';
-  const size = useSize(mountRef);
   const { width = 0, height = 0 } = size || {};
   const ShapeComponent = Shapes[shape];
   const borderWidth = 1;
@@ -51,9 +52,7 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapPr
 
   const childrenElement = (
     <>
-      <div ref={mountRef} className={classNames(contentClassName, `${cls}-child`)}>
-        {children}
-      </div>
+      <div className={classNames(contentClassName, `${cls}-child`)}>{children}</div>
 
       {/* 注意children和ReactRough的层级（z-index）关系 */}
       <ReactRough className={`${cls}-svg`} width={wrapWidth} height={wrapHeight} renderer="svg">
@@ -85,7 +84,7 @@ export const RoughWrap = forwardRef<unknown, RoughWrapProps>((props: RoughWrapPr
   return createElement(
     customElement,
     {
-      ref: mountRef,
+      ref: element,
       className: classNames(cls, className),
       ...resetProps
     },
