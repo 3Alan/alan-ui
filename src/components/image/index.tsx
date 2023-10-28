@@ -8,7 +8,7 @@ export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   onError?: (e: SyntheticEvent<HTMLImageElement>) => void;
 }
 
-const isSupportRawLazyLoading = !('loading' in HTMLImageElement.prototype);
+const isSupportRawLazyLoading = 'loading' in HTMLImageElement.prototype;
 
 const Image: FC<ImageProps> = ({ src, alt, width, height, lazy }) => {
   if (lazy && !isSupportRawLazyLoading) {
