@@ -8,7 +8,8 @@ type LazyImageProps = Omit<ImageProps, 'lazy'>;
 
 const LazyImage: FC<LazyImageProps> = ({ src, alt, width, height, onError }) => {
   const imgRef = useRef<HTMLImageElement>(null);
-  const [isIntersecting] = useInViewport(imgRef);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isIntersecting, _, disconnect] = useInViewport(imgRef);
 
   useEffect(() => {
     if (isIntersecting) {
@@ -17,6 +18,7 @@ const LazyImage: FC<LazyImageProps> = ({ src, alt, width, height, onError }) => 
       if (isBlank(src)) {
         imgRef.current?.setAttribute('src', dataSrc as string);
         imgRef.current?.removeAttribute('data-src');
+        disconnect();
       }
     }
   }, [isIntersecting]);

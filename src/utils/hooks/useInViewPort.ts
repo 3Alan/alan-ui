@@ -1,25 +1,30 @@
-import { RefObject, useEffect, useState } from 'react';
+import { RefObject, useEffect, useState, useRef } from 'react';
 
 export default function useInViewport(target: RefObject<Element>, options?: IntersectionObserverInit) {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [intersectionRatio, setIntersectionRatio] = useState(0);
+  const io = useRef<IntersectionObserver>();
 
   useEffect(() => {
     if (!target.current) {
       return () => {};
     }
 
-    const intersectionObserver = new IntersectionObserver((entries) => {
+    io.current = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         setIsIntersecting(entry.isIntersecting);
         setIntersectionRatio(entry.intersectionRatio);
       });
     }, options);
-    intersectionObserver.observe(target.current);
+    io.current.observe(target.current);
     return () => {
-      intersectionObserver.disconnect();
+      io.current?.disconnect();
     };
   }, [target.current, options]);
 
-  return [isIntersecting, intersectionRatio] as const;
+  const disconnect = () => {
+    io.current?.disconnect();
+  };
+
+  return [isIntersecting, intersectionRatio, disconnect] as const;
 }
